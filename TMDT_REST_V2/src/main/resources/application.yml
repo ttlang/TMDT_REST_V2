@@ -1,0 +1,29 @@
+#config jwt
+app : 
+  name : tmdt_rest
+jwt:
+  header: Authorization
+  secret: mySecret
+  prefix: Bearer
+  expiration: 600
+  mobile_expires_in: 600
+  cookie : AUTH-TOKEN
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
+#config email      
+email:
+  from: ttlang162@gmail.com
+
+#aes  
+aes : 
+  key: Bar12345Bar12345
+  initVector : RandomInitVector     
+  
+#front-end
+front_end :
+  scheme: http
+  server_name: localhost
+  server_port : 4200
+     
