@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		<mapper namespace="com.spring.mapper.UserMapper">
+		
 		<resultMap type="com.spring.domain.User" id="user_result_1">
 		<id column="ma_nguoi_dung" javaType="java.lang.String" property="userID" />
 		<result column="ten_nguoi_dung" javaType="java.lang.String" property="userName"/>
@@ -17,6 +18,16 @@
 		</resultMap>
 		
 		
+		
+		<resultMap type="com.spring.domain.User" id="user_result_2">
+			<id column="ma_nguoi_dung" javaType="java.lang.String" property="userID"/>
+			<result column="ten_nguoi_dung" javaType="java.lang.String" property="userName"/>	
+			<result column="email" javaType="java.lang.String" property="email"/>
+			<result column="anh_dai_dien" javaType="java.lang.String" property="avatar"/>
+			<result column="dia_chi" javaType="java.lang.String" property="address"/>
+			<result column="sdt" javaType="java.lang.String" property="phoneNumber"/>
+		</resultMap>
+		
 		<!-- QUERY data -->
 		
 		
@@ -28,9 +39,15 @@
 			{call get_nguoi_dung_by_email(#{email,mode=IN})}
 		</select>
 		
+		<select id="getUserByUserID2" parameterType="java.lang.String" resultMap="user_result_2">
+			select * from nguoi_dung n where n.ma_nguoi_dung = #{userID}
+		</select>
+		
 		<insert id="createUser" statementType="CALLABLE" parameterType="java.util.Map">
 			{call create_nguoi_dung(#{userName,mode=IN}, #{email,mode=IN}, #{password,mode=IN}, #{result,jdbcType=INTEGER,mode=OUT})}
 		</insert>
+		
+		
 		<insert id="changeUserStatus" statementType="CALLABLE" parameterType="java.util.Map">
 			{call change_trang_thai_nguoi_dung(#{userID,mode=IN},#{newStatus,mode=IN},#{result,jdbcType=INTEGER,mode=OUT})}
 		</insert>
@@ -38,6 +55,7 @@
 		<insert id="changeUserPassword" statementType="CALLABLE" parameterType="java.util.Map">
 			{call change_mat_khau_nguoi_dung(#{userID,mode=IN},#{newPassword,mode=IN},#{result,jdbcType=INTEGER,mode=OUT})}
 		</insert>
+		
 		
 		
 		

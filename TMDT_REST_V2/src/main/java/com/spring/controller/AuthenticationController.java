@@ -59,7 +59,7 @@ public class AuthenticationController {
 			userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
 
 		} catch (Exception e) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "user not found");
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, e.getMessage());
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
 

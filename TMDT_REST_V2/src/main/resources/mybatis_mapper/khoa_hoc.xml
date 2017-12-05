@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.spring.mapper.CourseMapper">
-
-
-</mapper>
+		<mapper namespace="com.spring.mapper.CourseMapper">
+			<resultMap type="com.spring.domain.Course" id="course_result_1">
+				<id column="ma_khoa_hoc" javaType="java.lang.String" property="courseID"/>
+				<result column="tieu_de" javaType="java.lang.String" property="courseTitle"/>
+				<result column="mo_ta" javaType="java.lang.String" property="courseDescription"/>
+				<result column="ngay_tao" typeHandler="com.spring.config.mybatis.LocalDateTimeTypeHandle" property="createDate"/>
+				<result column="don_gia" javaType="java.lang.Integer" property="price"/>
+				<result column="trang_thai" javaType="java.lang.Integer" property="statut"/>
+				<result column="ngay_duyet" typeHandler="com.spring.config.mybatis.LocalDateTimeTypeHandle" property="confirmedDate"/>
+				<result column="luot_truy_cap" javaType="java.lang.Integer" property="views"/>
+				<result column="anh_dai_dien" javaType="java.lang.String" property="courseAvatar"/>
+				<result column="chi_tiet_khoa_hoc" javaType="java.lang.String" property="courseDetail"/>
+				<association property="confirmedBy" column="id_admin_duyet" select="com.spring.mapper.UserMapper.getUserByUserID2"></association>
+				<association property="author" column="ma_nguoi_dung" select="com.spring.mapper.UserMapper.getUserByUserID2"></association>
+				<association property="courseType" column="ma_loai_khoa_hoc" select="com.spring.mapper.CourseTypeMapper.getCourseTypeByID"></association>
+			</resultMap>
+			
+		<!-- query data -->
+		<select id="getCourseByCourseID" resultMap="course_result_1" >
+			select * from khoa_hoc k where k.ma_khoa_hoc =#{courseID}
+		</select>
+		
+		</mapper>

@@ -35,6 +35,19 @@ public class User {
 	}
 	
 	
+	
+	public User(String userID, String userName, String email, String avatar, String address, String phoneNumber) {
+		super();
+		this.userID = userID;
+		this.userName = userName;
+		this.email = email;
+		this.avatar = avatar;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+	}
+
+
+
 	public User() {
 		super();
 	}
@@ -121,6 +134,9 @@ public class User {
 				+ ", status=" + status + ", address=" + address + ", phoneNumber=" + phoneNumber + ", permission="
 				+ permission + ", lastPasswordResetDate=" + lastPasswordResetDate + "]";
 	}
+	
+	
+	
 	
 
 }
