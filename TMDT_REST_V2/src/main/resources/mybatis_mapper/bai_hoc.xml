@@ -10,9 +10,7 @@
 		<collection column="ma_bai_hoc" property="listOfComments" select="com.spring.mapper.CommentMapper.getCommentByLessonID"></collection>
 	</resultMap>
 	
-	
 		<select id="getLessonBychapterID" resultMap="lesson_result_1"  resultType="java.util.List" parameterType="java.lang.String" >
 			select * from bai_hoc b where  b.ma_chuong_muc = #{chapterID}
 		</select>
-		
 	</mapper>
