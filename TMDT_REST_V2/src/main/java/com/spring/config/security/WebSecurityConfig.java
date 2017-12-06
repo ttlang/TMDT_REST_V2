@@ -88,6 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// disable page caching
 		httpSecurity.headers().cacheControl();
+		httpSecurity.csrf().disable();
 	}
 
 	@Bean
@@ -109,8 +110,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers(HttpMethod.POST, "/auth");
-		web.ignoring().antMatchers(HttpMethod.GET, "/", "/jsondoc", // vao json doc,
-				"/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
+		web.ignoring().antMatchers(HttpMethod.GET, 
+				"/",
+				"/jsondoc", // vao json doc,
+				"/webjars/**"
+				, "/*.html", 
+				"/favicon.ico",
+				"/**/*.html", 
+				"/**/*.css", 
+				"/**/*.js");
 
 		web.ignoring().antMatchers(HttpMethod.POST, "/user");
 		web.ignoring().antMatchers(HttpMethod.PATCH, "/user/register_status/**");
