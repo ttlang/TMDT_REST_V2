@@ -93,3 +93,88 @@ insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, i
  0, 'NCO', 'ND1', 'CD2', 1, 1700, 'https://drive.google.com/open?id=19irqb2vz_7xTxJ4ePfRg3VQER-5ROx02', 'Sau khi hoàn thành khóa học các bạn có thể nắm được các kiến thức
  về Fragment, Tab, ViewPager, Content Provider… Và ngoài ra các bạn cũng sẽ biết được cách làm một ứng dụng Gallery đơn giản bằng các class trên. Ngoài ra các bạn có thể kết học
  ViewPager và Tab để làm ra một ứng dụng đọc báo hay tin tức chỉ với 1 cái vuốt nhẹ trên màn hình.');
+ 
+-- select cd.* from chu_de cd limit 10 offset 10;
+-- select * from chu_de c order by convert(substring_index(c.ma_chu_de,'CD',-1),unsigned int) asc limit 10 offset 0;
+insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
+ luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Front-End: Cốt lõi thiết kế website với HTML, CSS, JavaScript , Jquery, Responsive, Bootstrap, dàn layout từ Photoshop',
+ 'Hiện nay, thiết kế website là rất cần thiết cho doanh nghiệp, website mang đến những thông tin cập nhật nhanh nhất về các dịch vụ của doanh nghiệp. Với sự phát triển của cơ sở
+ hạ tầng, băng thông mạnh hơn hẳn, các phần mềm cũng dẫn chuyển sang nền tảng web.', 'ND2', 0, 'NCO', 'ND1', 'CD3', 1, 1300, 'https://drive.google.com/open?id=1cE8dHR4FOswwH0INT4S5db06ofMztEUN',
+ 'Khoá học cũng mang đến cho các bạn những khái niệm cơ bản và quan trọng của các thẻ HTML, CSS, javascript, jquery,…, trong từng bài học, tôi cố gắng trình bày kèm theo nhiều ví dụ trực quan,
+ một số layout dạng thực tế để các bạn dễ tiếp cận và vận dụng. Một trong những khái niệm và kỹ thuật quan trọng như boostrap web, responsive web là gì cũng được tôi trình bày và vận dụng trong khoá học này.');
+ insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
+ luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Lập trình ASP.NET MVC5 toàn tập qua dự án Web bán hàng', 'Đây là một trong những đề tài rất hot hiện nay nhờ vào sự hỗ
+ trợ mạnh mẽ của Microsoft với ASP.NET cùng với mô hình lập trình kinh điển MVC, mà nay đã được Microsoft tích hợp và nâng cấp thành một framework với phiên bản thứ 5, hỗ trợ rất
+ nhiều tính năng và tiện ích cho người lập trình.', 'ND1', 600000, 'CO', 'ND4', 'CD3', 1, 1000, 'https://drive.google.com/open?id=1jYY66NPMAiEwerxafbKFrSsniWJcj0lo', 'Đây hứa hẹn
+ sẽ là một sản phẩm cực kì có lợi cho các bạn học viên khi các bạn đi tìm việc làm. Các bạn sẽ có những sản phẩm thực tế để show cho nhà tuyển dụng để chứng minh khả năng của mình.');
+ insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
+ luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Làm dự án thực tế với ASP.NET MVC, WebAPI và AngularJS', 'Với một khóa học tổng hợp và chuyên sâu các kỹ năng cần thiết để làm
+ dự án các bạn được học cả backend với C#, Entity Framework, các design pattern đồng thời cả những kiến thức frontend như Jquery, AngularJs.', 'ND4', 1000000, 'CO', 'ND2', 'CD3', 1, 1500,
+ 'https://drive.google.com/open?id=1NWoNxLYPHp5FzyIQ-X9h1YqtLl21tSEA', 'Với mong muốn tạo ra giá trị cao nhất cho các bạn khi tham gia khóa học này, mình đã cố gắng đưa những best practices
+ vào dự án giúp các bạn dễ dàng thích nghi với môi trường công việc, dễ dàng mở rộng cũng như đáp ứng các nhu cầu khác nhau của khách hàng trong tương lai.');
+ insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
+ luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Lập trình php căn bản đến nâng cao - web bán hàng', 'PHP là một ngôn ngữ kịch bản phía máy chủ nguồn mở  được sử dụng để phát triển
+ các trang web. PHP cho sử dụng miễn phí và tương thích với các nền tảng khác nhau bao gồm cả Linux, UNIX, Windows, và Mac OS X.', 'ND2', 0, 'NCO', 'ND3', 'CD3', 1, 1500,
+ 'https://drive.google.com/open?id=1TwIKDlIhA6B918DXYvplEWtueSvq6OvT', 'Trong khóa học này, bên cạnh cung cấp các kiến thức nền tảng, giảng viên cung cấp đầy đủ các kiến thực lập trình nâng
+ cao của PHP. Cuối cùng, giảng viên cũng hướng dẫn đầy đủ các thao tác từ việc thiết kế cơ sở dữ liệu, thiết kế website, chọn template, xử lý bootstrap, responsive web, xây dựng hầu hết các
+ tính năng của một website bán hàng theo xu thế hiện nay.');
+  insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
+ luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Front-End: Làm dự án thực tế với Angular 2 + Web API - Restful Service', 'Angular 2 đã phát hành và được nhiều công ty sử dụng. Việc nắm rõ
+ Angular 2 giúp bạn thực hiện được các dự án lớn và khả năng tìm được việc làm rất lớn.', 'ND3', 1200000, 'CO', 'ND1', 'CD3', 1, 2500, 'https://drive.google.com/open?id=1xPdwqRs8cQxSqfJPidX6gsCncUWgN2i2',
+ 'Khóa học Angular 2 sẽ giúp các bạn nắm rõ các kiến thức từ căn bản đến chuyên sâu về Angular. Trong khóa học cũng sử dụng công nghệ Web Service - Web API để các bạn tương tác với backend như một phần của hệ thống.');
+ 
+ -- insert into chuong_muc
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH3', 'Làm quen với Visual Studio 2010', 'Làm quen với Visual Studio 2010', 'Làm quen với Visual Studio 2010');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH3', 'Kiểu dữ liệu và biến', 'Kiểu dữ liệu và biến', 'Kiểu dữ liệu và biến');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH3', 'Các câu lệnh điều kiện', 'Các câu lệnh điều kiện', 'Các câu lệnh điều kiện');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH4', 'Source code và slide C/C++', 'Source code và slide C/C++', 'Source code và slide C/C++');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH4', 'Làm quen với C/C++', 'Làm quen với C/C++', 'Làm quen với C/C++');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH5', 'Giới thiệu Công Cụ JsBin', 'Giới thiệu Công Cụ JsBin', 'Giới thiệu Công Cụ JsBin');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH6', 'Giới thiệu và cài đặt', 'Giới thiệu và cài đặt', 'Giới thiệu và cài đặt');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH6', 'Làm quen với Java', 'Làm quen với Java', 'Làm quen với Java');
+ /*insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
+ insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');*/
+ 
+ --  insert into bai_hoc
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Giới thiệu khóa học', 'Giới thiệu khóa học', 'KH3CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Giới thiệu Visual C# 2010 và tạo chương trình Winform đầu tiên', 'Giới thiệu Visual C# 2010 và tạo chương trình Winform đầu tiên', 'KH3CH5', '700');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Thuộc tính của form và một số control cơ bản', 'Thuộc tính của form và một số control cơ bản', 'KH3CH5', '500');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Kiểu dữ liệu đã tích hợp sẵn (built-in) trong C#', 'Kiểu dữ liệu đã tích hợp sẵn (built-in) trong C#', 'KH3CH6', '800');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Biến (variable) trong C#', 'Biến (variable) trong C#', 'KH3CH6', '700');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Các toán tử (operator) phổ biến trong C#', 'Các toán tử (operator) phổ biến trong C#', 'KH3CH6', '466');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Câu lệnh điều kiện if', 'Câu lệnh điều kiện if', 'KH3CH7', '560');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Câu lệnh điều kiện if - else', 'Câu lệnh điều kiện if - else', 'KH3CH7', '900');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Câu lệnh điều kiện if - else if', 'Câu lệnh điều kiện if - else if', 'KH3CH7', '1000');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Slide bài giảng C/C++ ', 'Slide bài giảng C/C++ ', 'KH4CH8', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Source code C/C++ ', 'Source code C/C++ ', 'KH4CH8', '1200');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Làm quen với cấu trúc C/C++', 'Làm quen với cấu trúc C/C++', 'KH4CH9', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Các bài tập C/C++ cơ bản', 'Các bài tập C/C++ cơ bản', 'KH4CH9', '700');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Tìm hiểu cấu trúc if else và switch case', 'Tìm hiểu cấu trúc if else và switch case', 'KH4CH9', '1400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values(' Giới thiệu công cụ JsBin', ' Giới thiệu công cụ JsBin', 'KH5CH10', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Hướng dẫn cách khai báo biến (Varriable)', 'Hướng dẫn cách khai báo biến (Varriable)', 'KH5CH10', '500');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values(' Hướng dẫn sử dụng thẻ Input ', ' Hướng dẫn sử dụng thẻ Input ', 'KH5CH10', '600');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Cài đặt chương trình và Tạo ứng dụng “Helloworld” đầu tiên', 'Cài đặt chương trình và Tạo ứng dụng “Helloworld” đầu tiên', 'KH6CH11', '1000');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Biến và kiểu dữ liệu', 'Biến và kiểu dữ liệu', 'KH6CH12', '500');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Toán tử toán học trong Java', 'Toán tử toán học trong Java', 'KH6CH12', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Thực hành toán tử điều kiện IF', 'Thực hành toán tử điều kiện IF', 'KH6CH12', '800');
+ /*insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');*/
