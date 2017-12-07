@@ -51,7 +51,7 @@ public class UserRest {
 			return new ResponseEntity<Object>(user, HttpStatus.OK);
 
 		} else {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "token invalid");
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.UNAUTHORIZED, "token invalid");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
 
