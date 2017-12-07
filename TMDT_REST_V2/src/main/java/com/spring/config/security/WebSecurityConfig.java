@@ -81,6 +81,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				httpSecurity.csrf()
 				.ignoringAntMatchers("/auth/login")
 				.ignoringAntMatchers("/user/password_reset")
+				.ignoringAntMatchers("/user/register_status/*")
+				.ignoringAntMatchers("/user/token_reset_password")
+				.ignoringAntMatchers("/auth/logout")
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 
 		// Custom JWT based security filter

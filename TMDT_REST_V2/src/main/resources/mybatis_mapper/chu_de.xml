@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.mapper.TopicMapper">
+	<resultMap type="com.spring.domain.Topic" id="topic_result_1">
+		<id column="ma_chu_de" javaType="java.lang.String" property="topicID"/>
+		<result column="tieu_de" javaType="java.lang.String" property="topicName"/>
+		<result column="mo_ta" javaType="java.lang.String" property="topicDescription"/>
+		<result column="trang_thai" javaType="java.lang.Integer" property="topicStatut"/>
+	</resultMap>
+
+	<select id="getTopicByTopicID" resultMap="topic_result_1" parameterType="java.lang.String">
+		select * from chu_de c where c.ma_chu_de=#{topicID}
+	</select>
+	<select id="getAllTopic">
+	
+	</select>
 	<insert id="createTopic" statementType="CALLABLE" parameterType="java.util.Map">
 		{call insert_chu_de(#{topicTitle, mode=IN}, #{topicDescription, mode=IN}, #{topicStatus, mode=IN}, #{result, mode=OUT, jdbcType=INTEGER})}
 	</insert>
+	
+	<select id="getTopicWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="topic_result_1">
+			{ call proc_paging_table(#{page}, #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER}, 'chu_de')}
+	</select>
+	
+	
 </mapper>

@@ -1,4 +1,4 @@
-package com.spring.domain.custom;
+package com.spring.domain.json;
 
 public class PasswordReset {
 	private String newPassword;
