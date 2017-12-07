@@ -90,7 +90,7 @@ public class UserServiceImp implements UserService {
 			Map<String, Object> map = new HashMap<>();
 			try {
 				String linkRegister = this.scheme + "://" + this.serverName + ":" + this.serverPort
-						+ "/#/pages/home-pages/kich-hoat?key=" + userIDEncrypt;
+						+ "/account/register?key=" + userIDEncrypt;
 				map.put("linkRegister", linkRegister);
 				to.add(new InternetAddress(email));
 				mailService.sendMail(to, "Hoàn tất đăng kí 3TPL", "/mail_template/register.html", map, "logo.png");
@@ -151,7 +151,7 @@ public class UserServiceImp implements UserService {
 				Map<String, Object> map = new HashMap<>();
 				try {
 					String linkResetPassword = this.scheme + "://" + this.serverName + ":" + this.serverPort
-							+ "/#/pages/home-pages/kich-hoat?key-change=" + token;
+							+ "/user/password_reset?key=" + token;
 					map.put("linkResetPassword", linkResetPassword);
 					to.add(new InternetAddress(user.getEmail()));
 					mailService.sendMail(to, "Thay đổi mật khẩu 3TPL", "/mail_template/reset_password.html", map,

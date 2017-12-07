@@ -47,9 +47,9 @@ public class AuthenticationController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody UserMapper authenticationRequest,
 			HttpServletResponse response, Device device) throws AuthenticationException, IOException {
-  
+
 		final UserDetails userDetails;
-  System.out.println(authenticationRequest.getEmail() + "  " +authenticationRequest.getPassword());
+
 		try {
 			final Authentication authentication = authenticationManager
 					.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(),
@@ -59,8 +59,8 @@ public class AuthenticationController {
 			userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
 
 		} catch (Exception e) {
-			  return new ResponseEntity("Không tìm thấy not found.",
-		                 HttpStatus.FORBIDDEN);
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, e.getMessage());
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
 
 		String jws = tokenHelper.generateToken(userDetails.getUsername(), device);
