@@ -14,7 +14,7 @@ import com.spring.config.api.ApiMessage;
 import com.spring.service.TopicService;
 
 @RestController
-@RequestMapping(value = "user/topic")
+@RequestMapping(value = "/user/topic")
 public class TopicRest {
 	@Autowired
 	private TopicService topicService;
