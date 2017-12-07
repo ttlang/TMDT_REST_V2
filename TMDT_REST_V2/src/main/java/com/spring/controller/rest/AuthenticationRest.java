@@ -59,7 +59,7 @@ public class AuthenticationRest {
 			userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
 
 		} catch (Exception e) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, e.getMessage());
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.FORBIDDEN, e.getMessage());
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
 
@@ -92,7 +92,7 @@ public class AuthenticationRest {
 			return ResponseEntity.ok(new UserTokenState(refreshedToken, expiresIn));
 		} else {
 			// UserTokenState userTokenState = new UserTokenState();
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "token invalid");
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.FORBIDDEN, "token invalid");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 			// return ResponseEntity.accepted().body(userTokenState);
 		}
