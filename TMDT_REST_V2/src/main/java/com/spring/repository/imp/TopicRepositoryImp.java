@@ -48,7 +48,7 @@ public class TopicRepositoryImp implements TopicRepository {
 		try {
 			param.put("page", page);
 			param.put("size", size);
-			List<Topic> listTopicResult = sqlSession.selectList("com.spring.mapper.TopicMapper.getCourseWithPaging",
+			List<Topic> listTopicResult = sqlSession.selectList("com.spring.mapper.TopicMapper.getTopicWithPaging",
 					param);
 			int numberOfPage = (int) param.get("sumPage");
 

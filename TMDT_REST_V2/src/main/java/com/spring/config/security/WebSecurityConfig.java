@@ -73,6 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll().antMatchers("/auth/**").permitAll().antMatchers(HttpMethod.POST, "/user").permitAll()
 				.antMatchers(HttpMethod.PATCH, "/user/register_status/*").permitAll()
 				.antMatchers(HttpMethod.GET, "/user/token_reset_password").permitAll()
+				.antMatchers(HttpMethod.GET, "/user/**").permitAll()
 				.antMatchers(HttpMethod.PATCH, "/user/password_reset").permitAll().anyRequest().authenticated().and()
 				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
 				.logoutSuccessHandler(logoutSuccess).deleteCookies(AUTH_COOKIE);
@@ -88,9 +89,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// Custom JWT based security filter
 		httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
-
+	
 		// disable page caching
 		httpSecurity.headers().cacheControl();
+		httpSecurity.csrf().disable();
 	}
 
 	@Bean
