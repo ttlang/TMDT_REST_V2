@@ -1,4 +1,4 @@
-package com.spring.controller;
+package com.spring.controller.rest;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -31,7 +31,7 @@ import com.spring.domain.UserMapper;
 
 @RestController
 @RequestMapping(value = "/auth")
-public class AuthenticationController {
+public class AuthenticationRest {
 	@Autowired
 	JwtTokenUtil tokenHelper;
 

@@ -9,5 +9,4 @@
 	<select id="getListRoleByUserID" statementType="CALLABLE" parameterType="java.lang.String"  resultMap="role_result_1">
 		{call get_nguoi_dung_quyen_by_ma_nguoi_dung(#{userID}) }
 	</select>
-	
 </mapper>

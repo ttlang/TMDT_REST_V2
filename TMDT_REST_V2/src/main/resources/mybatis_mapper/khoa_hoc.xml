@@ -12,14 +12,20 @@
 				<result column="luot_truy_cap" javaType="java.lang.Integer" property="views"/>
 				<result column="anh_dai_dien" javaType="java.lang.String" property="courseAvatar"/>
 				<result column="chi_tiet_khoa_hoc" javaType="java.lang.String" property="courseDetail"/>
-				<association property="confirmedBy" column="id_admin_duyet" select="com.spring.mapper.UserMapper.getUserByUserID2"></association>
-				<association property="author" column="ma_nguoi_dung" select="com.spring.mapper.UserMapper.getUserByUserID2"></association>
-				<association property="courseType" column="ma_loai_khoa_hoc" select="com.spring.mapper.CourseTypeMapper.getCourseTypeByID"></association>
+				<association column="id_admin_duyet" property="confirmedBy" select="com.spring.mapper.UserMapper.getUserByUserID2"></association>
+				<association column="ma_nguoi_dung" property="author" select="com.spring.mapper.UserMapper.getUserByUserID2"></association>
+				<association column="ma_loai_khoa_hoc" property="courseType" select="com.spring.mapper.CourseTypeMapper.getCourseTypeByID"></association>
+				<association column="ma_chu_de" property="topic" select="com.spring.mapper.TopicMapper.getTopicByTopicID"></association>
 			</resultMap>
 			
 		<!-- query data -->
 		<select id="getCourseByCourseID" resultMap="course_result_1" >
 			select * from khoa_hoc k where k.ma_khoa_hoc =#{courseID}
 		</select>
+		
+		<select id="getCourseWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
+			{ call proc_paging_table(#{page}, #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER}, 'khoa_hoc')}
+		</select>
+	
 		
 		</mapper>

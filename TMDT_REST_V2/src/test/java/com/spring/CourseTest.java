@@ -24,6 +24,6 @@ public class CourseTest {
 	@Test
 	public void testGetCourseByID() {
 		Optional<Course> result = courseRepository.getCourseByCourseID("KH1");
-		LOGGER.info(result.get().toString());
+		LOGGER.info(result.get().getAuthor().toString());
 	}
 }

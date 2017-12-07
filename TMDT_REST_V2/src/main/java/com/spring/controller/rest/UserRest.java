@@ -1,4 +1,4 @@
-package com.spring.controller;
+package com.spring.controller.rest;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -22,17 +22,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.config.api.ApiMessage;
 import com.spring.config.security.JwtTokenUtil;
 import com.spring.domain.User;
-import com.spring.domain.custom.PasswordReset;
-import com.spring.domain.custom.RegisterKey;
-import com.spring.domain.custom.UserCustom;
+import com.spring.domain.json.PasswordReset;
+import com.spring.domain.json.RegisterKey;
+import com.spring.domain.json.UserCustom;
 import com.spring.service.AES;
 import com.spring.service.UserService;
 
 @RestController
 @RequestMapping(value = "/user")
-public class UserController {
+public class UserRest {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserRest.class);
 
 	@Autowired
 	private UserService userService;
