@@ -24,7 +24,7 @@ public class TopicRest {
 	@Autowired
 	private TopicService topicService;
 
-	@RequestMapping(value = "/user/topic", method = RequestMethod.GET, params = { "page", "size" })
+	@RequestMapping(value = "/users/topic", method = RequestMethod.GET, params = { "page", "size" })
 	public ResponseEntity<?> getTopic(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
 		Map<String, Object> result = this.topicService.getTopicWithPaging(page, size);
@@ -33,6 +33,13 @@ public class TopicRest {
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/users/topic", params = { "topicName" }, method = RequestMethod.GET)
+	public ResponseEntity<?> searchTopicByTopicName(
+			@RequestParam(value = "topicName", required = false) String topicName) {
+		return null;
+
 	}
 
 	@RequestMapping(value = "/admin/topic", method = RequestMethod.POST)
@@ -49,7 +56,7 @@ public class TopicRest {
 
 	}
 
-	@RequestMapping(value = "/topic/{topicID}", method = RequestMethod.GET)
+	@RequestMapping(value = "users/topic/{topicID}", method = RequestMethod.GET)
 	public ResponseEntity<?> getTopicByID(@PathVariable("topicID") String topicID) {
 		Optional<Topic> result = this.topicService.getTopicByID(topicID);
 		if (!result.isPresent()) {
@@ -78,4 +85,5 @@ public class TopicRest {
 		ApiMessage apiMessage = new ApiMessage(HttpStatus.UNPROCESSABLE_ENTITY, "create topic failed");
 		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 	}
+
 }

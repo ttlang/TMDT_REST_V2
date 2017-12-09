@@ -16,5 +16,6 @@ public interface TopicRepository {
 	public int updateTopicStatus(String topicID, int newStatut);
 
 	public int updateTopicWithTopicID(Topic topic);
-
+	
+	public Map<String, Object>searchTopicWithTopicName(int page, int size,String searchKey);
 }
