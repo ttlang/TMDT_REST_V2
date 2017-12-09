@@ -48,6 +48,10 @@ public class TopicTest {
 	public void testGetTopicByID() {
 		assertTrue(this.topicRepository.getTopicByID("CD1").isPresent());
 	}
+	@Test
+	public void testSearchTopicWithTopicName() {
+		assertEquals(2, this.topicRepository.searchTopicWithTopicName(1, 4, "lap trinh"));
+	}
 }
 
 

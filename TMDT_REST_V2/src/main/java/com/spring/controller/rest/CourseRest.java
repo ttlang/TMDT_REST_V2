@@ -17,7 +17,7 @@ import com.spring.domain.Course;
 import com.spring.service.CourseService;
 
 @RestController
-@RequestMapping(value = "/user/course")
+@RequestMapping(value = "/users/course")
 public class CourseRest {
 	@Autowired
 	private CourseService courseService;

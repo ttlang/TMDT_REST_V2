@@ -74,8 +74,52 @@ end $$
 delimiter ;
 
 
-drop procedure if exists `update_topic`
+
+
+-- full text search cho chu_de
+
+
+ALTER TABLE `tmdt`.`chu_de` 
+DROP INDEX `ft_chu_de_tieu_de1` ,
+ADD FULLTEXT INDEX `ft_chu_de_tieu_de` (`tieu_de` ASC);
+
+
+
+
+-- search with paging
+
+drop procedure if exists `proc_paging_query`;
 delimiter $$
+create procedure proc_paging_query(IN p_page_number integer,IN p_size integer,out p_sum_page integer,IN sql_query varchar(255))
+begin
+declare v_start integer;
+declare v_end integer ;
+declare v_total_item integer default 0;
+
+set v_start =(((p_page_number - 1) * p_size));
+set v_end =(v_start+p_size-1)+1;
 
 
+-- caculate number of record in table use input
+set @qr =concat('select count(*) into @total_item from ( ',sql_query,' )');
+prepare stmt from  @qr;
+execute stmt;
+deallocate prepare stmt;  
+select @total_item into v_total_item;
 
+-- caculate number of pages
+
+if (v_total_item mod p_size =0) then
+	set p_sum_page =v_total_item div p_size;
+    else
+    set p_sum_page =(v_total_item div p_size)+1;
+    end if;
+
+-- result of paging
+set @qr2 =concat('select * from ( ',sql_query,' )  limit ',v_start,',',v_end);
+prepare stmt from  @qr2;
+execute stmt;
+deallocate prepare stmt; 
+
+end $$
+delimiter ;

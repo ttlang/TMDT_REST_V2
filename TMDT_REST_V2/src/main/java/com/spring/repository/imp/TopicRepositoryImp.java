@@ -114,4 +114,30 @@ public class TopicRepositoryImp implements TopicRepository {
 		}
 		return Optional.ofNullable(result);
 	}
+
+	@Override
+	public Map<String, Object> searchTopicWithTopicName(int page, int size, String topicNameSearch) {
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+		param.put("size", size);
+		param.put("sumPage", 0);
+		param.put("topicNameSearch", topicNameSearch);
+		SqlSession session = this.sqlSessionFactory.openSession();
+		try {
+			
+			List<Topic> listTopicResult = session.selectList("com.spring.mapper.TopicMapper.searchTopicWithTopicName",
+					param);
+			int numberOfPage = (int) param.get("sumPage");
+
+			result.put("listOfResult", listTopicResult);
+			result.put("numberOfPage", numberOfPage);
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return result;
+	}
 }

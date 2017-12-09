@@ -8,15 +8,26 @@
 		<result column="trang_thai" javaType="java.lang.Integer" property="topicStatus"/>
 	</resultMap>
 
+
+
 	<select id="getTopicByTopicID" resultMap="topic_result_1" parameterType="java.lang.String">
 		select * from chu_de c where c.ma_chu_de=#{topicID} 
 	</select>
-	<select id="getAllTopic">
 	
+	
+	
+	<select id="searchTopicWithTopicName" statementType="CALLABLE" resultMap="topic_result_1" parameterType="java.util.Map">
+		{call proc_paging_query(#{page},
+		 #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER}, concat('select * from chu_de  where match(tieu_de) against("',#{topicNameSearch},'") and trang_thai=1'))}
 	</select>
+	
+	
+	
 	<insert id="createTopic" statementType="CALLABLE" parameterType="java.util.Map">
 		{call insert_chu_de(#{topicTitle, mode=IN}, #{topicDescription, mode=IN}, #{topicStatus, mode=IN}, #{result, mode=OUT, jdbcType=INTEGER})}
 	</insert>
+	
+	
 	
 	<select id="getTopicWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="topic_result_1">
 			{ call proc_paging_table(#{page}, #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER}, 'chu_de')}
