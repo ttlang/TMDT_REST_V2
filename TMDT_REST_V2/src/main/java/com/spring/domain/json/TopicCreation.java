@@ -1,25 +1,17 @@
-package com.spring.domain;
+package com.spring.domain.json;
 
-public class Topic {
-	private String topicID;
+public class TopicCreation {
 	private String topicName;
 	private	String topicDescription;
 	private Integer topicStatus;
-	public Topic(String topicID, String topicName, String topicDescription, Integer topicStatus) {
+	public TopicCreation(String topicName, String topicDescription, Integer topicStatus) {
 		super();
-		this.topicID = topicID;
 		this.topicName = topicName;
 		this.topicDescription = topicDescription;
 		this.topicStatus = topicStatus;
 	}
-	public Topic() {
+	public TopicCreation() {
 		super();
-	}
-	public String getTopicID() {
-		return topicID;
-	}
-	public void setTopicID(String topicID) {
-		this.topicID = topicID;
 	}
 	public String getTopicName() {
 		return topicName;
@@ -41,9 +33,8 @@ public class Topic {
 	}
 	@Override
 	public String toString() {
-		return "Topic [topicID=" + topicID + ", topicName=" + topicName + ", topicDescription=" + topicDescription
-				+ ", topicStatus=" + topicStatus + "]";
+		return "TopicCreation [topicName=" + topicName + ", topicDescription=" + topicDescription + ", topicStatus="
+				+ topicStatus + "]";
 	}
-	
 	
 }

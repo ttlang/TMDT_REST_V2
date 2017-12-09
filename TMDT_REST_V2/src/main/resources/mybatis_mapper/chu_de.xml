@@ -5,11 +5,11 @@
 		<id column="ma_chu_de" javaType="java.lang.String" property="topicID"/>
 		<result column="tieu_de" javaType="java.lang.String" property="topicName"/>
 		<result column="mo_ta" javaType="java.lang.String" property="topicDescription"/>
-		<result column="trang_thai" javaType="java.lang.Integer" property="topicStatut"/>
+		<result column="trang_thai" javaType="java.lang.Integer" property="topicStatus"/>
 	</resultMap>
 
 	<select id="getTopicByTopicID" resultMap="topic_result_1" parameterType="java.lang.String">
-		select * from chu_de c where c.ma_chu_de=#{topicID}
+		select * from chu_de c where c.ma_chu_de=#{topicID} 
 	</select>
 	<select id="getAllTopic">
 	
@@ -21,6 +21,33 @@
 	<select id="getTopicWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="topic_result_1">
 			{ call proc_paging_table(#{page}, #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER}, 'chu_de')}
 	</select>
+	
+	
+	
+	<update id="updateTopicStatus" parameterType="java.util.Map">
+			update chu_de set trang_thai =#{newStatus} where ma_chu_de =#{topicID}
+	</update>
+	
+	<update id="updateTopicWithTopicID" parameterType="java.util.Map">
+			update chu_de set 
+		<if test="topicName!=null">
+			tieu_de = #{topicName}
+		</if>
+		<if test="topicDescription != null and topicName!=null">
+			,mo_ta =#{topicDescription}
+		</if>
+		<if test="topicDescription != null and topicName==null">
+			mo_ta =#{topicDescription}
+		</if>
+		<if test="topicStatus!=null and (topicDescription != null or topicName!=null)">
+			,trang_thai =#{topicStatus}
+		</if>
+		<if test="topicStatus!=null and (topicDescription == null and topicName==null)">
+			trang_thai =#{topicStatus}
+		</if>
+		where ma_chu_de =#{topicID}
+	</update>
+	
 	
 	
 </mapper>

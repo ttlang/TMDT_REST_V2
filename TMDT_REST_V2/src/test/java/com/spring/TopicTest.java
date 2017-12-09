@@ -1,6 +1,7 @@
 package com.spring;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.spring.domain.Topic;
 import com.spring.repository.TopicRepository;
 
 @RunWith(SpringRunner.class)
@@ -32,4 +34,20 @@ public class TopicTest {
 		assertEquals(2, result.size());
 		
 	}
+	@Test
+	public void testUpdateStatut() {
+		assertEquals(1,this.topicRepository.updateTopicStatus("CD1", 1));
+	}
+	@Test
+	public void testUpdateTopic() {
+		Topic topic = new Topic("CD1", null,null, 1);
+		assertEquals(1, this.topicRepository.updateTopicWithTopicID(topic));
+	}
+	
+	@Test
+	public void testGetTopicByID() {
+		assertTrue(this.topicRepository.getTopicByID("CD1").isPresent());
+	}
 }
+
+

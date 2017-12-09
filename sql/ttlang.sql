@@ -73,3 +73,9 @@ deallocate prepare stmt;
 end $$
 delimiter ;
 
+
+drop procedure if exists `update_topic`
+delimiter $$
+
+
+

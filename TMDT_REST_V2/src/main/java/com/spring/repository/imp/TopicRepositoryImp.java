@@ -3,6 +3,7 @@ package com.spring.repository.imp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -21,13 +22,13 @@ public class TopicRepositoryImp implements TopicRepository {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TopicRepositoryImp.class);
 
 	@Override
-	public int createTopic(String topicTitle, String topicDescription, int topicStatus) {
+	public int createTopic(String topicName, String topicDescription, int topicStatut) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		Map<String, Object> param = new HashMap<>();
 		int result = 0;
-		param.put("topicTitle", topicTitle);
+		param.put("topicTitle", topicName);
 		param.put("topicDescription", topicDescription);
-		param.put("topicStatus", topicStatus);
+		param.put("topicStatus", topicStatut);
 		param.put("result", result);
 		try {
 			sqlSession.insert("com.spring.mapper.TopicMapper.createTopic", param);
@@ -62,4 +63,55 @@ public class TopicRepositoryImp implements TopicRepository {
 		return result;
 	}
 
+	@Override
+	public int updateTopicStatus(String topicID, int newStatus) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("topicID", topicID);
+		param.put("newStatus", newStatus);
+		SqlSession session = sqlSessionFactory.openSession();
+		int numberOfRowUpdate = 0;
+		try {
+			numberOfRowUpdate = session.update("com.spring.mapper.TopicMapper.updateTopicStatus", param);
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return numberOfRowUpdate;
+	}
+
+	@Override
+	public int updateTopicWithTopicID(Topic topic) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		param.put("topicID", topic.getTopicID());
+		param.put("topicName", topic.getTopicName());
+		param.put("topicDescription", topic.getTopicDescription());
+		param.put("topicStatus", topic.getTopicStatus());
+		int numberOfRowUpdate = 0;
+		try {
+			numberOfRowUpdate = session.update("com.spring.mapper.TopicMapper.updateTopicWithTopicID", param);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return numberOfRowUpdate;
+	}
+
+	@Override
+	public Optional<Topic> getTopicByID(String topicID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Topic result = new Topic();
+		try {
+			result = session.selectOne("com.spring.mapper.TopicMapper.getTopicByTopicID", topicID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return Optional.ofNullable(result);
+	}
 }
