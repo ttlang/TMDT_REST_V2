@@ -34,7 +34,6 @@ import com.spring.domain.UserMapper;
 public class AuthenticationRest {
 	@Autowired
 	JwtTokenUtil tokenHelper;
-
 	@Autowired
 	private AuthenticationManager authenticationManager;
 

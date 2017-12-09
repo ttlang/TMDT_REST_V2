@@ -51,7 +51,7 @@ public class UserRest {
 			return new ResponseEntity<Object>(user, HttpStatus.OK);
 
 		} else {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "token invalid");
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.FORBIDDEN, "token invalid");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
 
@@ -62,7 +62,7 @@ public class UserRest {
 	public ResponseEntity<?> getUserByID(@PathVariable("userID") String userID) {
 		User user = userService.getUserByUserID(userID);
 		if (user == null) {
-			ApiMessage message = new ApiMessage(HttpStatus.NO_CONTENT, "user not found");
+			ApiMessage message = new ApiMessage(HttpStatus.NOT_FOUND, "user not found");
 			return new ResponseEntity<Object>(message, message.getStatus());
 		}
 		return new ResponseEntity<User>(user, HttpStatus.OK);
@@ -152,14 +152,14 @@ public class UserRest {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.ACCEPTED, "registration success");
 			return new ResponseEntity<>(apiMessage, apiMessage.getStatus());
 		} else {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "request body is null");
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.FORBIDDEN, "user created failed");
 			return new ResponseEntity<>(apiMessage, apiMessage.getStatus());
 		}
 
 	}
 
 	/**
-	 * reset password w
+	 * reset password 
 	 * 
 	 * @param passwordReset
 	 * @return
@@ -200,7 +200,7 @@ public class UserRest {
 			// String dateCreateKey = decryptKey.get("dateTimeCreateToken").toString();
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "reset key is invalid");
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.FORBIDDEN, "reset key is invalid");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
 

@@ -1,16 +1,20 @@
 package com.spring.repository;
 
 import java.util.Map;
+import java.util.Optional;
+
+import com.spring.domain.Topic;
 
 public interface TopicRepository {
-	/**
-	 * create topic
-	 * @param topicTitle
-	 * @param topicDescription
-	 * @param topicStatus
-	 * @return number of rows effect
-	 */
-	public int createTopic(String topicTitle, String topicDescription, int topicStatus);
-	
-	public Map<String, Object> getTopicWithPaging(int page,int size);
+
+	public int createTopic(String topicName, String topicDescription, int topicStatut);
+
+	public Map<String, Object> getTopicWithPaging(int page, int size);
+
+	public Optional<Topic> getTopicByID(String topicID);
+
+	public int updateTopicStatus(String topicID, int newStatut);
+
+	public int updateTopicWithTopicID(Topic topic);
+
 }

@@ -26,6 +26,5 @@
 		<select id="getCourseWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
 			{ call proc_paging_table(#{page}, #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER}, 'khoa_hoc')}
 		</select>
-	
 		
 		</mapper>
