@@ -43,7 +43,7 @@ public class UserRest {
 	@Autowired
 	private JwtTokenUtil tokenHelper;
 
-	@RequestMapping(value = "/info")
+	@RequestMapping(value = "/info",method=RequestMethod.GET)
 	public ResponseEntity<?> getUserInfo(HttpServletRequest request) {
 		String authToken = this.tokenHelper.getToken(request);
 		if (authToken != null && this.tokenHelper.getUsernameFromToken(authToken) != null) {

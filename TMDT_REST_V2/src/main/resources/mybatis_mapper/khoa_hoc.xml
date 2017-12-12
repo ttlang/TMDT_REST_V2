@@ -7,7 +7,7 @@
 				<result column="mo_ta" javaType="java.lang.String" property="courseDescription"/>
 				<result column="ngay_tao" typeHandler="com.spring.config.mybatis.LocalDateTimeTypeHandle" property="createDate"/>
 				<result column="don_gia" javaType="java.lang.Integer" property="price"/>
-				<result column="trang_thai" javaType="java.lang.Integer" property="statut"/>
+				<result column="trang_thai" javaType="java.lang.Integer" property="status"/>
 				<result column="ngay_duyet" typeHandler="com.spring.config.mybatis.LocalDateTimeTypeHandle" property="confirmedDate"/>
 				<result column="luot_truy_cap" javaType="java.lang.Integer" property="views"/>
 				<result column="anh_dai_dien" javaType="java.lang.String" property="courseAvatar"/>
@@ -20,11 +20,21 @@
 			
 		<!-- query data -->
 		<select id="getCourseByCourseID" resultMap="course_result_1" >
-			select * from khoa_hoc k where k.ma_khoa_hoc =#{courseID}
+			select * from khoa_hoc k where k.ma_khoa_hoc =#{courseID} 
 		</select>
 		
 		<select id="getCourseWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
 			{ call proc_paging_table(#{page}, #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER}, 'khoa_hoc')}
 		</select>
 		
+		
+		<select id="getCourseByTopicIDWithPaging"  statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
+			{call proc_paging_query(#{page},#{size},#{sumPage, mode=OUT,jdbcType=INTEGER},"select * from khoa_hoc k where k.ma_chu_de ='${topicID}'")}
+		</select>
+		
+		
+		<update id="updateCourseStatus" parameterType="java.util.Map">
+			update khoa_hoc set trang_thai = #{newStatus} where ma_khoa_hoc = #{courseID}
+		</update>
+				
 		</mapper>

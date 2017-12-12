@@ -17,12 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.config.api.ApiMessage;
 import com.spring.domain.Topic;
 import com.spring.domain.json.TopicCreation;
+import com.spring.service.CourseService;
 import com.spring.service.TopicService;
 
 @RestController
 public class TopicRest {
 	@Autowired
 	private TopicService topicService;
+
+	@Autowired
+	private CourseService courseService;
 
 	@RequestMapping(value = "/users/topic", method = RequestMethod.GET, params = { "page", "size" })
 	public ResponseEntity<?> getTopic(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
@@ -35,24 +39,22 @@ public class TopicRest {
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/users/topic", params = { "topicName" }, method = RequestMethod.GET)
-	public ResponseEntity<?> searchTopicByTopicName(
-			@RequestParam(value = "topicName", required = false) String topicName) {
-		return null;
-
-	}
-
-	@RequestMapping(value = "/admin/topic", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?> createTopic(@RequestBody TopicCreation topic) {
-		int result = this.topicService.createTopic(topic.getTopicName(), topic.getTopicDescription(),
-				topic.getTopicStatus());
-		if (result > 0) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.CREATED, "topic was created successfully");
+	@RequestMapping(value = "/users/topic/{topicID}/course", method = RequestMethod.GET, params = { "page", "size" })
+	public ResponseEntity<?> getCourseWithTopicID(@PathVariable("topicID") String topicID,
+			@RequestParam(value = "page") int page, @RequestParam("size") int size) {
+		Optional<Topic> topic = this.topicService.getTopicByID(topicID);
+		if (!topic.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "topic not found");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		} else {
+			Map<String, Object> result = this.courseService.getCourseByTopicIDWithPaging(page, size,
+					topic.get().getTopicID());
+			if (result.isEmpty()) {
+				ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no course content");
+				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+			}
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
 		}
-		ApiMessage apiMessage = new ApiMessage(HttpStatus.UNPROCESSABLE_ENTITY, "Topics created failed");
-		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 
 	}
 
@@ -66,6 +68,33 @@ public class TopicRest {
 
 			return new ResponseEntity<Object>(result.get(), HttpStatus.OK);
 		}
+	}
+
+	@RequestMapping(value = "/users/topic", params = { "page", "size", "search_key" }, method = RequestMethod.GET)
+	public ResponseEntity<?> searchTopicByTopicNameWithPaging(@RequestParam(name = "page") int page,
+			@RequestParam(value = "size") int size, @RequestParam("search_key") String searchKey) {
+		Map<String, Object> result = this.topicService.searchTopicWithTopicName(page, size, searchKey);
+		if (result.isEmpty()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no result found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
+
+	}
+
+	@RequestMapping(value = "/admin/topic", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> createTopic(@RequestBody TopicCreation topic) {
+		int result = this.topicService.createTopic(topic.getTopicName(), topic.getTopicDescription(),
+				topic.getTopicStatus());
+		if (result > 0) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.CREATED, "topic was created successfully");
+			return new ResponseEntity<Object>(apiMessage, HttpStatus.CREATED);
+		}
+		ApiMessage apiMessage = new ApiMessage(HttpStatus.UNPROCESSABLE_ENTITY, "Topics created failed");
+		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+
 	}
 
 	@RequestMapping(value = "/admin/topic", method = RequestMethod.PATCH)

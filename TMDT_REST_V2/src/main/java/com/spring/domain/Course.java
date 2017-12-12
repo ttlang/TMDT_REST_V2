@@ -14,14 +14,14 @@ public class Course {
 	private CourseType courseType;
 	private Topic topic;
 	private UserCustom confirmedBy;
-	private Integer statut;
+	private Integer status;
 	private LocalDateTime confirmedDate;
 	private Integer views;
 	private String courseAvatar;
 	private String courseDetail;
 	public Course(String courseID, String courseTitle, String courseDescription, UserCustom author,
 			LocalDateTime createDate, Integer price, CourseType courseType, Topic topic, UserCustom confirmedBy,
-			Integer statut, LocalDateTime confirmedDate, Integer views, String courseAvatar, String courseDetail) {
+			Integer status, LocalDateTime confirmedDate, Integer views, String courseAvatar, String courseDetail) {
 		super();
 		this.courseID = courseID;
 		this.courseTitle = courseTitle;
@@ -32,7 +32,7 @@ public class Course {
 		this.courseType = courseType;
 		this.topic = topic;
 		this.confirmedBy = confirmedBy;
-		this.statut = statut;
+		this.status = status;
 		this.confirmedDate = confirmedDate;
 		this.views = views;
 		this.courseAvatar = courseAvatar;
@@ -95,11 +95,11 @@ public class Course {
 	public void setConfirmedBy(UserCustom confirmedBy) {
 		this.confirmedBy = confirmedBy;
 	}
-	public Integer getStatut() {
-		return statut;
+	public Integer getStatus() {
+		return status;
 	}
-	public void setStatut(Integer statut) {
-		this.statut = statut;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	public LocalDateTime getConfirmedDate() {
 		return confirmedDate;
@@ -129,8 +129,8 @@ public class Course {
 	public String toString() {
 		return "Course [courseID=" + courseID + ", courseTitle=" + courseTitle + ", courseDescription="
 				+ courseDescription + ", author=" + author + ", createDate=" + createDate + ", price=" + price
-				+ ", courseType=" + courseType + ", topic=" + topic + ", confirmedBy=" + confirmedBy + ", statut="
-				+ statut + ", confirmedDate=" + confirmedDate + ", views=" + views + ", courseAvatar=" + courseAvatar
+				+ ", courseType=" + courseType + ", topic=" + topic + ", confirmedBy=" + confirmedBy + ", status="
+				+ status + ", confirmedDate=" + confirmedDate + ", views=" + views + ", courseAvatar=" + courseAvatar
 				+ ", courseDetail=" + courseDetail + "]";
 	}
 	

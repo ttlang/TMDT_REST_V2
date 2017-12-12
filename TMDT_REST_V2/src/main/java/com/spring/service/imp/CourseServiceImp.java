@@ -26,4 +26,25 @@ public class CourseServiceImp implements CourseService {
 		return this.courseRepository.getCourseWithPaging(page, size);
 	}
 
+	@Override
+	public Map<String, Object> getCourseByTopicIDWithPaging(int page, int size, String TopicID) {
+		return this.courseRepository.getCourseByTopicIDWithPaging(page, size, TopicID);
+	}
+
+	@Override
+	public int updateCourseStatut(String courseID, int newStatut) {
+		return this.courseRepository.updateCourseStatus(courseID, newStatut);
+	}
+
+	@Override
+	public boolean isCourseAuthor(String accountID, String courseID) {
+		Optional<Course> course = this.getCourseByCourseID(courseID);
+		if (course.isPresent()) {
+			if (course.get().getAuthor().getUserID().equals(accountID)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

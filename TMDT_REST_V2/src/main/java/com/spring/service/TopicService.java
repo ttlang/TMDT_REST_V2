@@ -46,6 +46,13 @@ public interface TopicService {
 	 * @return optional<Topic>
 	 */
 	public Optional<Topic>getTopicByID(String topicID);
-
+	/**
+	 * search topic name  
+	 * @param page number of page (start at 1)
+	 * @param size
+	 * @param searchKey (String search)
+	 * @return Map<String, Object> with two key (listOfResult, numberOfPage)
+	 */
+	public Map<String, Object>searchTopicWithTopicName(int page, int size,String searchKey);
 
 }

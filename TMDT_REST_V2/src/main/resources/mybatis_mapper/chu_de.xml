@@ -16,12 +16,10 @@
 	
 	
 	
-	<select id="searchTopicWithTopicName" statementType="CALLABLE" resultMap="topic_result_1" parameterType="java.util.Map">
-		{call proc_paging_query(#{page},
-		 #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER}, concat('select * from chu_de  where match(tieu_de) against("',#{topicNameSearch},'") and trang_thai=1'))}
+	<select  id="searchTopicWithTopicName" statementType="CALLABLE" resultMap="topic_result_1" parameterType="java.util.Map">
+	{call proc_paging_query(#{page},#{size},#{sumPage, mode=OUT, 
+	jdbcType=INTEGER},"select * from chu_de where match(tieu_de,mo_ta) against('${topicNameSearch}' in natural language mode)")}
 	</select>
-	
-	
 	
 	<insert id="createTopic" statementType="CALLABLE" parameterType="java.util.Map">
 		{call insert_chu_de(#{topicTitle, mode=IN}, #{topicDescription, mode=IN}, #{topicStatus, mode=IN}, #{result, mode=OUT, jdbcType=INTEGER})}
