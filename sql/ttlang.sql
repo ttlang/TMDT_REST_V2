@@ -80,10 +80,7 @@ delimiter ;
 
 
 ALTER TABLE `tmdt`.`chu_de` 
-DROP INDEX `ft_chu_de_tieu_de1` ,
-ADD FULLTEXT INDEX `ft_chu_de_tieu_de` (`tieu_de` ASC);
-
-
+ADD FULLTEXT INDEX `ft_chu_de_mo_ta_tieu_de` (`tieu_de` ASC, `mo_ta` ASC);
 
 
 -- search with paging

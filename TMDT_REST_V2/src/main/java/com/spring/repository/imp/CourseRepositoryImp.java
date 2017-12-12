@@ -59,4 +59,45 @@ public class CourseRepositoryImp implements CourseRepository {
 		return result;
 	}
 
+	@Override
+	public Map<String, Object> getCourseByTopicIDWithPaging(int page, int size, String TopicID) {
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			param.put("page", page);
+			param.put("size", size);
+			param.put("topicID", TopicID);
+			List<Topic> listTopicResult = sqlSession
+					.selectList("com.spring.mapper.CourseMapper.getCourseByTopicIDWithPaging", param);
+			int numberOfPage = (int) param.get("sumPage");
+
+			result.put("listOfResult", listTopicResult);
+			result.put("numberOfPage", numberOfPage);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+
+	@Override
+	public int updateCourseStatus(String courseID, int newStatus) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		param.put("newStatus", newStatus);
+		param.put("courseID", courseID);
+		int numberOfrecordEffect = 0;
+		try {
+			numberOfrecordEffect = session.update("com.spring.mapper.CourseMapper.updateCourseStatus", param);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return numberOfrecordEffect;
+	}
+
 }

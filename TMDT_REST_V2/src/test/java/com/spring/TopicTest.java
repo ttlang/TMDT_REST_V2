@@ -50,7 +50,7 @@ public class TopicTest {
 	}
 	@Test
 	public void testSearchTopicWithTopicName() {
-		assertEquals(2, this.topicRepository.searchTopicWithTopicName(1, 4, "lap trinh"));
+		assertEquals(2, this.topicRepository.searchTopicWithTopicName(1, 4, "lap trinh").size());
 	}
 }
 

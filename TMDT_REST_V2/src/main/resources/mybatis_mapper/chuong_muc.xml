@@ -10,8 +10,16 @@
 		<collection column="ma_chuong_muc" property="listOfLession" select="com.spring.mapper.LessonMapper.getLessonBychapterID"></collection>
 	</resultMap>
 	
+	<resultMap type="com.spring.domain.Chapter" id="chapter_result_2">
+		<id column="ma_chuong_muc" property="chapterID" javaType="java.lang.String"/>
+		<result column="ma_khoa_hoc" property="courseID" javaType="java.lang.String"/>
+		<result column="tieu_de" property="chapterTitle" javaType="java.lang.String"/>
+		<result column="noi_dung" property="chapterContent" javaType="java.lang.String"/>
+		<result column="tom_tat" property="chapterSummary" javaType="java.lang.String"/>
+	</resultMap>
 	
 	<select id="getChapterByCourseID" resultMap="chapter_result_1" resultType="java.util.List" parameterType="java.lang.String" >
 			select * from chuong_muc c where c.ma_khoa_hoc =#{courseID}
 	</select>
+	
 </mapper>
