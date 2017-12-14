@@ -964,7 +964,7 @@ declare v_end integer ;
 declare v_total_item integer default 0;
 
 set v_start =(((p_page_number - 1) * p_size));
-set v_end =(v_start+p_size-1)+1;
+-- set v_end =(v_start+p_size)-1;
 
 
 -- caculate number of record in table use input
@@ -983,7 +983,7 @@ if (v_total_item mod p_size =0) then
     end if;
 
 -- result of paging
-set @qr2 =concat('select * from ( ',sql_query,' ) q  limit ',v_start,',',v_end);
+set @qr2 =concat('select * from ( ',sql_query,' ) q  limit ',p_size,' OFFSET ',v_start);
 prepare stmt from  @qr2;
 execute stmt;
 deallocate prepare stmt; 
@@ -1011,7 +1011,7 @@ declare v_end integer ;
 declare v_total_item integer default 0;
 
 set v_start =(((p_page_number - 1) * p_size));
-set v_end =(v_start+p_size-1)+1;
+-- set v_end =(v_start+p_size-1)+1;
 
 
 -- caculate number of record in table use input
@@ -1030,7 +1030,7 @@ if (v_total_item mod p_size =0) then
     end if;
 
 -- result of paging
-set @qr2 =concat('select * from ',p_table_name,' n where n.trang_thai=1 limit ',v_start,',',v_end);
+set @qr2 =concat('select * from ',p_table_name,' n where n.trang_thai=1 limit ',p_size,' OFFSET ',v_start);
 prepare stmt from  @qr2;
 execute stmt;
 deallocate prepare stmt; 
@@ -1091,4 +1091,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-14 15:03:31
+-- Dump completed on 2017-12-15  0:46:17
