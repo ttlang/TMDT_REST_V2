@@ -18,7 +18,6 @@
 		</resultMap>
 		
 		
-		
 		<resultMap type="com.spring.domain.custom.UserCustom" id="user_result_2">
 			<id column="ma_nguoi_dung" javaType="java.lang.String" property="userID"/>
 			<result column="ten_nguoi_dung" javaType="java.lang.String" property="userName"/>	

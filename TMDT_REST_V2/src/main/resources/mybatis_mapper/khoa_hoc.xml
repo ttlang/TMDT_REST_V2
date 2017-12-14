@@ -37,4 +37,12 @@
 			update khoa_hoc set trang_thai = #{newStatus} where ma_khoa_hoc = #{courseID}
 		</update>
 				
+		<select id="createCourse"  parameterType="java.util.Map" statementType="CALLABLE" resultType="java.util.Map">
+			{call tmdt.create_khoa_hoc(#{courseTitle}, #{courseDescription}, #{author}, #{price}, #{courseTypeID}, #{topicID},#{courseAvatar},#{courseDetail})}			
+		</select>
+		
+		<update id="updateCourse" parameterType="java.util.Map" >
+			update khoa_hoc set ${courseProperties} = #{coursePropertiesValue} where ma_khoa_hoc =#{courseID}
+		</update>
+		
 		</mapper>

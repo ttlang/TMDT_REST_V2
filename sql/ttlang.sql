@@ -120,3 +120,30 @@ deallocate prepare stmt;
 
 end $$
 delimiter ;
+
+
+-- proc tạo khóa học
+
+drop procedure if exists `create_khoa_hoc`;
+delimiter $$
+create procedure create_khoa_hoc
+(IN p_tieu_de varchar(200),IN p_mo_ta text,IN p_ma_nguoi_dung varchar(50),IN p_don_gia int,
+IN p_ma_loai_khoa_hoc varchar(50),IN p_ma_chu_de varchar(50),IN p_anh_dai_dien varchar(200),IN p_chi_tiet_khoa_hoc text)
+	begin
+		declare ma_khoa_hoc varchar(50) default null;
+        declare  result_update integer default 0;
+		insert into khoa_hoc(tieu_de,mo_ta,ma_nguoi_dung,don_gia,ma_loai_khoa_hoc,ma_chu_de,anh_dai_dien,chi_tiet_khoa_hoc)
+        values(p_tieu_de,p_mo_ta,p_ma_nguoi_dung,p_don_gia,p_ma_loai_khoa_hoc,p_ma_chu_de,p_anh_dai_dien,p_chi_tiet_khoa_hoc);
+        
+        select row_count() into result_update;
+			if(result_update>0) then
+					select c.ma_khoa_hoc into ma_khoa_hoc from khoa_hoc c order by 
+                    (convert(substring_index(c.ma_khoa_hoc,'KH',-1),unsigned int)) desc limit 1; 
+                end if;
+          select ma_khoa_hoc as courseID from dual;       
+        
+    end $$
+ delimiter ;
+
+
+
