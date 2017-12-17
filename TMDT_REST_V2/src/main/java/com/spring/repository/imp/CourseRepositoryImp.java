@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.domain.Course;
-import com.spring.domain.Topic;
 import com.spring.repository.CourseRepository;
 
 @Repository
@@ -45,11 +45,11 @@ public class CourseRepositoryImp implements CourseRepository {
 		try {
 			param.put("page", page);
 			param.put("size", size);
-			List<Topic> listTopicResult = sqlSession.selectList("com.spring.mapper.CourseMapper.getCourseWithPaging",
+			List<Course> listCourseResult = sqlSession.selectList("com.spring.mapper.CourseMapper.getCourseWithPaging",
 					param);
 			int numberOfPage = (int) param.get("sumPage");
 
-			result.put("listOfResult", listTopicResult);
+			result.put("listOfResult", listCourseResult);
 			result.put("numberOfPage", numberOfPage);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
@@ -68,7 +68,7 @@ public class CourseRepositoryImp implements CourseRepository {
 			param.put("page", page);
 			param.put("size", size);
 			param.put("topicID", TopicID);
-			List<Topic> listTopicResult = sqlSession
+			List<Course> listTopicResult = sqlSession
 					.selectList("com.spring.mapper.CourseMapper.getCourseByTopicIDWithPaging", param);
 			int numberOfPage = (int) param.get("sumPage");
 
@@ -98,6 +98,93 @@ public class CourseRepositoryImp implements CourseRepository {
 		}
 
 		return numberOfrecordEffect;
+	}
+
+	@Override
+	public String createCourse(String courseTitle, String courseDescription, String author, Integer price,
+			String courseTypeID, String topicID, String courseAvatar, String courseDetail) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		param.put("courseTitle", courseTitle);
+		param.put("courseDescription", courseDescription);
+		param.put("author", author);
+		param.put("price", price);
+		param.put("courseTypeID", courseTypeID);
+		param.put("topicID", topicID);
+		param.put("courseAvatar", courseAvatar);
+		param.put("courseDetail", courseDetail);
+		String courseID = new String();
+		try {
+			List<Map<String, Object>> resultOfInsert = session.selectList("com.spring.mapper.CourseMapper.createCourse",
+					param);
+			if (resultOfInsert.isEmpty()) {
+				return courseID;
+			} else {
+				for (Map<String, Object> map : resultOfInsert) {
+					if (!map.isEmpty() && map.containsKey("courseID")) {
+						courseID = (String) map.get("courseID");
+					}
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return courseID;
+	}
+
+	@Override
+	public int updateCourse(String courseID, String courseTitle, String courseDescription, Integer price,
+			String courseTypeID, String topicID, String courseAvatar, String courseDetail, Integer newStatus) {
+		Map<String, Object> param = new HashMap<>();
+		Map<String, String> columName = new HashMap<>();
+		int resultUpdate = 0;
+		columName.put("courseTitle", "tieu_de");
+		columName.put("courseDescription", "mo_ta");
+		columName.put("price", "don_gia");
+		columName.put("courseTypeID", "ma_loai_khoa_hoc");
+		columName.put("topicID", "ma_chu_de");
+		columName.put("courseAvatar", "anh_dai_dien");
+		columName.put("courseDetail", "chi_tiet_khoa_hoc");
+		columName.put("newStatus", "trang_thai");
+
+		param.put("courseTitle", courseTitle);
+		param.put("courseDescription", courseDescription);
+		param.put("price", price);
+		param.put("courseTypeID", courseTypeID);
+		param.put("topicID", topicID);
+		param.put("courseAvatar", courseAvatar);
+		param.put("courseDetail", courseDetail);
+		param.put("newStatus", newStatus);
+		SqlSession session = this.sqlSessionFactory.openSession(ExecutorType.BATCH, false);
+		try {
+			param.entrySet().removeIf(e -> e.getValue() == null);
+
+			for (Map.Entry<String, Object> p2 : param.entrySet()) {
+
+				Map<String, Object> p = new HashMap<>();
+				p.put("courseID", courseID);
+				p.put("courseProperties", columName.get(p2.getKey()));
+				p.put("coursePropertiesValue", p2.getValue());
+				resultUpdate += session.update("com.spring.mapper.CourseMapper.updateCourse", p);
+			}
+		} catch (Exception e) {
+			session.rollback();
+			LOGGER.error(e.getMessage());
+		}
+		if (resultUpdate == (param.size() * -2147482646)) {
+			try {
+				session.commit();
+				return param.size();
+
+			} catch (Exception e) {
+				LOGGER.error(e.getMessage());
+			}
+		}
+		session.rollback();
+		return 0;
+
 	}
 
 }

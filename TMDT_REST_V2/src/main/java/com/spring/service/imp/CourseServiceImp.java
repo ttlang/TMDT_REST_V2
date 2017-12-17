@@ -47,4 +47,18 @@ public class CourseServiceImp implements CourseService {
 		return false;
 	}
 
+	@Override
+	public String createCourse(String courseTitle, String courseDescription, String author, Integer price,
+			String courseTypeID, String topicID, String courseAvatar, String courseDetail) {
+		return this.courseRepository.createCourse(courseTitle, courseDescription, author, price, courseTypeID, topicID,
+				courseAvatar, courseDetail);
+	}
+
+	@Override
+	public int updateCourse(String courseID, String courseTitle, String courseDescription, Integer price,
+			String courseTypeID, String topicID, String courseAvatar, String courseDetail, Integer newStatus) {
+		return this.courseRepository.updateCourse(courseID, courseTitle, courseDescription, price, courseTypeID,
+				topicID, courseAvatar, courseDetail, newStatus);
+	}
+
 }

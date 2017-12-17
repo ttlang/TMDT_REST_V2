@@ -54,43 +54,43 @@ insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, i
 insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Lập trình C/C++ căn bản', 'Sau khi hoàn thành khóa học lập trình C, C++ căn bản này bạn có thể làm
  quen được với môi trường làm việc của C/C++ và có thể làm những bài toán đơn giản với C/C++ ở mức khó hơn.', 'ND4', 1000000, 'CO', 'ND2', 'CD1', 1, 500,
- 'https://drive.google.com/open?id=1uOMrAbYxL-y7qaBdhGH8320S7uGXEKA6', 'Mục tiêu của C++ là tiếp cận những ý tưởng của phương pháp luận hướng đối tượng và trừu tượng dữ liệu. C++
+ 'https://drive.google.com/uc?id=1uOMrAbYxL-y7qaBdhGH8320S7uGXEKA6', 'Mục tiêu của C++ là tiếp cận những ý tưởng của phương pháp luận hướng đối tượng và trừu tượng dữ liệu. C++
  là một ngôn ngữ lập trình tiến tiến, mạnh trong các ngôn ngữ lập trình hiện nay, nó được sử dụng bởi hàng triệu lập trình viên trên thế giới. Các đặc tính của C ++ cho phép người
  lập trình xây dựng những thư viện phần mềm có chất lượng cao phục vụ những đề án lớn.');
  insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Lập Trình JavaScript Cơ Bản', 'JavaScript là một ngôn ngữ lập trình dựa trên nguyên mẫu với cú pháp phát
  triển từ C. Giống như C, JavaScript có khái niệm từ khóa, do đó, JavaScript gần như không thể được mở rộng.', 'ND3', 800000, 'CO', 'ND1', 'CD1', 1, 300,
- 'https://drive.google.com/open?id=1qGdpMH8Eorl_S-ZdzeFqe4CBwlftj_B7', 'Nếu bạn là mới bắt đầu làm quen với JavaScript thì khóa học lập trình Javascript cơ bản này
+ 'https://drive.google.com/uc?id=1qGdpMH8Eorl_S-ZdzeFqe4CBwlftj_B7', 'Nếu bạn là mới bắt đầu làm quen với JavaScript thì khóa học lập trình Javascript cơ bản này
  sẽ giúp các bạn tìm hiểu về các thao tác , các kiến thức nền tảng về JavaScript.');
  insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Lập trình JAVA căn bản', 'Java không còn là một ngôn ngữ xa lạ với cộng đồng lập trình. Với việc có lợi thế
  khi được sinh ra với tiêu chí “Write Once, Run Anywhere” (WORA) – tức là “Viết một lần, thực thi khắp nơi”', 'ND2', 1600000, 'CO', 'ND4', 'CD1', 1, 600,
- 'https://drive.google.com/open?id=1EXlrZzARsdz4GKrWmzH9wI0-qrrnpliw', 'Hòa nhịp vào thế mạnh của Java, khóa học “Lập trình JAVA căn bản” với mục đích cung cấp cho 
+ 'https://drive.google.com/uc?id=1EXlrZzARsdz4GKrWmzH9wI0-qrrnpliw', 'Hòa nhịp vào thế mạnh của Java, khóa học “Lập trình JAVA căn bản” với mục đích cung cấp cho 
  các bạn học viên có những kiến thức cơ bản nhất về nguyên lý lập trình bằng ngôn ngữ Java, qua đó giúp các bạn có một nền tảng vững chắc về Java và có thể dùng ngôn
  ngữ này để lập trình với các Engine hay Framework nâng cao.');
  insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Lập Trình Android Qua Ứng Dụng OrderFood', 'Khóa học sẽ giúp bạn hiểu được cách thức xây dựng được ứng dụng
  cũng như cách thức phân tích yêu cầu của khách hàng.', 'ND3', 0, 'NCO', 'ND4', 'CD2', 1, 600,
- 'https://drive.google.com/open?id=1cohNd-B54V1Q8pszU-Hcqx2nLG0K5wAi', 'Bạn  có thể biết được quy trình khi viết một ứng dụng nên bắt đầu và kết thúc từ đâu, bạn có thể
+ 'https://drive.google.com/uc?id=1cohNd-B54V1Q8pszU-Hcqx2nLG0K5wAi', 'Bạn  có thể biết được quy trình khi viết một ứng dụng nên bắt đầu và kết thúc từ đâu, bạn có thể
  áp dụng những điều đã học cho nhiều ứng dụng khác nhau. Vậy nên các bạn hãy tự tin đăng ký khóa học để có thể làm nên một ứng dụng hoàn chỉnh mang phong cách riêng
  của chính bản thân mình nhé !');
  insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('App ANDROID giống App Mua sắm LAZADA', 'Với sự phát triển ngày càng mạnh và được ứng dụng ngày càng nhiều vào 
  thực tế của các ứng dụng Android, chính vì điều đó đã làm cho nó trở thành một ngành hot nhất hiện nay và thu hút được nhiều sự quan tâm của các bạn trẻ đam mê lập trình.'
  , 'ND4', 900000, 'CO', 'ND1', 'CD2', 1, 1000,
- 'https://drive.google.com/open?id=1_9SaNoQ8gBW5byjHQL5wwJygCA9abho3', 'Thông qua khóa học Lazada này các bạn sẽ nắm bắt được cách vận dụng các kiến thức cơ bản của android
+ 'https://drive.google.com/uc?id=1_9SaNoQ8gBW5byjHQL5wwJygCA9abho3', 'Thông qua khóa học Lazada này các bạn sẽ nắm bắt được cách vận dụng các kiến thức cơ bản của android
  để hoàn thành ứng dụng, ngoài ra các bạn sẽ còn biết được cách tổ chức code theo mô hình MVP pattern để có thể quản lý code tốt hơn, không những vậy các bạn sẽ nắm bắt được
  cách thức tạo Webservice với cả 2 ngôn ngữ lập trình Web hot nhất hiện nay là PHP và ASP.NET cũng như cách trao đổi dữ liệu của Webservice và ứng dụng Android.');
  insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Game Tôm Cua Bầu Cá Android', 'Các bạn có muốn tự mình làm 1 game bầu cua trên android không nào, với những kiến thức
  căn bản từ các khóa Android Căn Bản, Media Player Trong Android và CSDL', 'ND2', 800000, 'CO', 'ND3', 'CD2', 1, 1500,
- 'https://drive.google.com/open?id=1ZAJxeJDGXE_FJM111kXOjABqcIPYZK6y', 'Khi đến với khóa học này các bạn còn có thể  tiếp thu thêm các kiến thức mớic về Handler, Timer,
+ 'https://drive.google.com/uc?id=1ZAJxeJDGXE_FJM111kXOjABqcIPYZK6y', 'Khi đến với khóa học này các bạn còn có thể  tiếp thu thêm các kiến thức mớic về Handler, Timer,
  CountDown, Animation List và ngoài ra các bạn còn biết dc cách áp dụng các kiến thức cũ đã được học để hoàn chỉnh khả năng của chính mình. Hãy đến với khóa học này và tạo ra
  game bầu cua cho chính mình bạn nhé');
 insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Tạo ứng dụng GALLERY trên Android', 'Hệ điều hành Android hiện nay là một hệ điều hành có số lượng người dùng lớn, với
  các ưu điểm vượt trội của nó. Công nghệ càng phát triển, và dung lượng bộ nhớ trên các thiết bị Android ngày càng được mở rộng để đáp ứng tốt cho người dùng.', 'ND2',
- 0, 'NCO', 'ND1', 'CD2', 1, 1700, 'https://drive.google.com/open?id=19irqb2vz_7xTxJ4ePfRg3VQER-5ROx02', 'Sau khi hoàn thành khóa học các bạn có thể nắm được các kiến thức
+ 0, 'NCO', 'ND1', 'CD2', 1, 1700, 'https://drive.google.com/uc?id=19irqb2vz_7xTxJ4ePfRg3VQER-5ROx02', 'Sau khi hoàn thành khóa học các bạn có thể nắm được các kiến thức
  về Fragment, Tab, ViewPager, Content Provider… Và ngoài ra các bạn cũng sẽ biết được cách làm một ứng dụng Gallery đơn giản bằng các class trên. Ngoài ra các bạn có thể kết học
  ViewPager và Tab để làm ra một ứng dụng đọc báo hay tin tức chỉ với 1 cái vuốt nhẹ trên màn hình.');
  
@@ -99,28 +99,28 @@ insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, i
 insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Front-End: Cốt lõi thiết kế website với HTML, CSS, JavaScript , Jquery, Responsive, Bootstrap, dàn layout từ Photoshop',
  'Hiện nay, thiết kế website là rất cần thiết cho doanh nghiệp, website mang đến những thông tin cập nhật nhanh nhất về các dịch vụ của doanh nghiệp. Với sự phát triển của cơ sở
- hạ tầng, băng thông mạnh hơn hẳn, các phần mềm cũng dẫn chuyển sang nền tảng web.', 'ND2', 0, 'NCO', 'ND1', 'CD3', 1, 1300, 'https://drive.google.com/open?id=1cE8dHR4FOswwH0INT4S5db06ofMztEUN',
+ hạ tầng, băng thông mạnh hơn hẳn, các phần mềm cũng dẫn chuyển sang nền tảng web.', 'ND2', 0, 'NCO', 'ND1', 'CD3', 1, 1300, 'https://drive.google.com/uc?id=1cE8dHR4FOswwH0INT4S5db06ofMztEUN',
  'Khoá học cũng mang đến cho các bạn những khái niệm cơ bản và quan trọng của các thẻ HTML, CSS, javascript, jquery,…, trong từng bài học, tôi cố gắng trình bày kèm theo nhiều ví dụ trực quan,
  một số layout dạng thực tế để các bạn dễ tiếp cận và vận dụng. Một trong những khái niệm và kỹ thuật quan trọng như boostrap web, responsive web là gì cũng được tôi trình bày và vận dụng trong khoá học này.');
  insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Lập trình ASP.NET MVC5 toàn tập qua dự án Web bán hàng', 'Đây là một trong những đề tài rất hot hiện nay nhờ vào sự hỗ
  trợ mạnh mẽ của Microsoft với ASP.NET cùng với mô hình lập trình kinh điển MVC, mà nay đã được Microsoft tích hợp và nâng cấp thành một framework với phiên bản thứ 5, hỗ trợ rất
- nhiều tính năng và tiện ích cho người lập trình.', 'ND1', 600000, 'CO', 'ND4', 'CD3', 1, 1000, 'https://drive.google.com/open?id=1jYY66NPMAiEwerxafbKFrSsniWJcj0lo', 'Đây hứa hẹn
+ nhiều tính năng và tiện ích cho người lập trình.', 'ND1', 600000, 'CO', 'ND4', 'CD3', 1, 1000, 'https://drive.google.com/uc?id=1jYY66NPMAiEwerxafbKFrSsniWJcj0lo', 'Đây hứa hẹn
  sẽ là một sản phẩm cực kì có lợi cho các bạn học viên khi các bạn đi tìm việc làm. Các bạn sẽ có những sản phẩm thực tế để show cho nhà tuyển dụng để chứng minh khả năng của mình.');
  insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Làm dự án thực tế với ASP.NET MVC, WebAPI và AngularJS', 'Với một khóa học tổng hợp và chuyên sâu các kỹ năng cần thiết để làm
  dự án các bạn được học cả backend với C#, Entity Framework, các design pattern đồng thời cả những kiến thức frontend như Jquery, AngularJs.', 'ND4', 1000000, 'CO', 'ND2', 'CD3', 1, 1500,
- 'https://drive.google.com/open?id=1NWoNxLYPHp5FzyIQ-X9h1YqtLl21tSEA', 'Với mong muốn tạo ra giá trị cao nhất cho các bạn khi tham gia khóa học này, mình đã cố gắng đưa những best practices
+ 'https://drive.google.com/uc?id=1NWoNxLYPHp5FzyIQ-X9h1YqtLl21tSEA', 'Với mong muốn tạo ra giá trị cao nhất cho các bạn khi tham gia khóa học này, mình đã cố gắng đưa những best practices
  vào dự án giúp các bạn dễ dàng thích nghi với môi trường công việc, dễ dàng mở rộng cũng như đáp ứng các nhu cầu khác nhau của khách hàng trong tương lai.');
  insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Lập trình php căn bản đến nâng cao - web bán hàng', 'PHP là một ngôn ngữ kịch bản phía máy chủ nguồn mở  được sử dụng để phát triển
  các trang web. PHP cho sử dụng miễn phí và tương thích với các nền tảng khác nhau bao gồm cả Linux, UNIX, Windows, và Mac OS X.', 'ND2', 0, 'NCO', 'ND3', 'CD3', 1, 1500,
- 'https://drive.google.com/open?id=1TwIKDlIhA6B918DXYvplEWtueSvq6OvT', 'Trong khóa học này, bên cạnh cung cấp các kiến thức nền tảng, giảng viên cung cấp đầy đủ các kiến thực lập trình nâng
+ 'https://drive.google.com/uc?id=1TwIKDlIhA6B918DXYvplEWtueSvq6OvT', 'Trong khóa học này, bên cạnh cung cấp các kiến thức nền tảng, giảng viên cung cấp đầy đủ các kiến thực lập trình nâng
  cao của PHP. Cuối cùng, giảng viên cũng hướng dẫn đầy đủ các thao tác từ việc thiết kế cơ sở dữ liệu, thiết kế website, chọn template, xử lý bootstrap, responsive web, xây dựng hầu hết các
  tính năng của một website bán hàng theo xu thế hiện nay.');
   insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Front-End: Làm dự án thực tế với Angular 2 + Web API - Restful Service', 'Angular 2 đã phát hành và được nhiều công ty sử dụng. Việc nắm rõ
- Angular 2 giúp bạn thực hiện được các dự án lớn và khả năng tìm được việc làm rất lớn.', 'ND3', 1200000, 'CO', 'ND1', 'CD3', 1, 2500, 'https://drive.google.com/open?id=1xPdwqRs8cQxSqfJPidX6gsCncUWgN2i2',
+ Angular 2 giúp bạn thực hiện được các dự án lớn và khả năng tìm được việc làm rất lớn.', 'ND3', 1200000, 'CO', 'ND1', 'CD3', 1, 2500, 'https://drive.google.com/uc?id=1xPdwqRs8cQxSqfJPidX6gsCncUWgN2i2',
  'Khóa học Angular 2 sẽ giúp các bạn nắm rõ các kiến thức từ căn bản đến chuyên sâu về Angular. Trong khóa học cũng sử dụng công nghệ Web Service - Web API để các bạn tương tác với backend như một phần của hệ thống.');
  
  -- insert into chuong_muc
