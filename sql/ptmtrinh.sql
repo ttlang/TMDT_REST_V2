@@ -145,27 +145,27 @@ insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, i
  insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');*/
  
  --  insert into bai_hoc
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Giới thiệu khóa học', 'Giới thiệu khóa học', 'KH3CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Giới thiệu Visual C# 2010 và tạo chương trình Winform đầu tiên', 'Giới thiệu Visual C# 2010 và tạo chương trình Winform đầu tiên', 'KH3CH5', '700');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Thuộc tính của form và một số control cơ bản', 'Thuộc tính của form và một số control cơ bản', 'KH3CH5', '500');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Kiểu dữ liệu đã tích hợp sẵn (built-in) trong C#', 'Kiểu dữ liệu đã tích hợp sẵn (built-in) trong C#', 'KH3CH6', '800');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Biến (variable) trong C#', 'Biến (variable) trong C#', 'KH3CH6', '700');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Các toán tử (operator) phổ biến trong C#', 'Các toán tử (operator) phổ biến trong C#', 'KH3CH6', '466');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Câu lệnh điều kiện if', 'Câu lệnh điều kiện if', 'KH3CH7', '560');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Câu lệnh điều kiện if - else', 'Câu lệnh điều kiện if - else', 'KH3CH7', '900');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Câu lệnh điều kiện if - else if', 'Câu lệnh điều kiện if - else if', 'KH3CH7', '1000');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Slide bài giảng C/C++ ', 'Slide bài giảng C/C++ ', 'KH4CH8', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Source code C/C++ ', 'Source code C/C++ ', 'KH4CH8', '1200');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Làm quen với cấu trúc C/C++', 'Làm quen với cấu trúc C/C++', 'KH4CH9', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Các bài tập C/C++ cơ bản', 'Các bài tập C/C++ cơ bản', 'KH4CH9', '700');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Tìm hiểu cấu trúc if else và switch case', 'Tìm hiểu cấu trúc if else và switch case', 'KH4CH9', '1400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values(' Giới thiệu công cụ JsBin', ' Giới thiệu công cụ JsBin', 'KH5CH10', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Hướng dẫn cách khai báo biến (Varriable)', 'Hướng dẫn cách khai báo biến (Varriable)', 'KH5CH10', '500');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values(' Hướng dẫn sử dụng thẻ Input ', ' Hướng dẫn sử dụng thẻ Input ', 'KH5CH10', '600');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Cài đặt chương trình và Tạo ứng dụng “Helloworld” đầu tiên', 'Cài đặt chương trình và Tạo ứng dụng “Helloworld” đầu tiên', 'KH6CH11', '1000');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Biến và kiểu dữ liệu', 'Biến và kiểu dữ liệu', 'KH6CH12', '500');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Toán tử toán học trong Java', 'Toán tử toán học trong Java', 'KH6CH12', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Thực hành toán tử điều kiện IF', 'Thực hành toán tử điều kiện IF', 'KH6CH12', '800');
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Giới thiệu khóa học', 'Giới thiệu khóa học', 'KH3CH5', 400);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Giới thiệu Visual C# 2010 và tạo chương trình Winform đầu tiên', 'Giới thiệu Visual C# 2010 và tạo chương trình Winform đầu tiên', 'KH3CH5', 700);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Thuộc tính của form và một số control cơ bản', 'Thuộc tính của form và một số control cơ bản', 'KH3CH5', 500);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Kiểu dữ liệu đã tích hợp sẵn (built-in) trong C#', 'Kiểu dữ liệu đã tích hợp sẵn (built-in) trong C#', 'KH3CH6', 800);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Biến (variable) trong C#', 'Biến (variable) trong C#', 'KH3CH6', 700);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Các toán tử (operator) phổ biến trong C#', 'Các toán tử (operator) phổ biến trong C#', 'KH3CH6', 466);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Câu lệnh điều kiện if', 'Câu lệnh điều kiện if', 'KH3CH7', 560);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Câu lệnh điều kiện if - else', 'Câu lệnh điều kiện if - else', 'KH3CH7', 900);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Câu lệnh điều kiện if - else if', 'Câu lệnh điều kiện if - else if', 'KH3CH7', 1000);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Slide bài giảng C/C++ ', 'Slide bài giảng C/C++ ', 'KH4CH8', 400);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Source code C/C++ ', 'Source code C/C++ ', 'KH4CH8', 1200);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Làm quen với cấu trúc C/C++', 'Làm quen với cấu trúc C/C++', 'KH4CH9', 400);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Các bài tập C/C++ cơ bản', 'Các bài tập C/C++ cơ bản', 'KH4CH9', 700);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Tìm hiểu cấu trúc if else và switch case', 'Tìm hiểu cấu trúc if else và switch case', 'KH4CH9', 1400);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values(' Giới thiệu công cụ JsBin', ' Giới thiệu công cụ JsBin', 'KH5CH10', 400);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Hướng dẫn cách khai báo biến (Varriable)', 'Hướng dẫn cách khai báo biến (Varriable)', 'KH5CH10', 500);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values(' Hướng dẫn sử dụng thẻ Input ', ' Hướng dẫn sử dụng thẻ Input ', 'KH5CH10', 600);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Cài đặt chương trình và Tạo ứng dụng “Helloworld” đầu tiên', 'Cài đặt chương trình và Tạo ứng dụng “Helloworld” đầu tiên', 'KH6CH11', 1000);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Biến và kiểu dữ liệu', 'Biến và kiểu dữ liệu', 'KH6CH12', 500);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Toán tử toán học trong Java', 'Toán tử toán học trong Java', 'KH6CH12', 400);
+ insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Thực hành toán tử điều kiện IF', 'Thực hành toán tử điều kiện IF', 'KH6CH12', 800);
  /*insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
  insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
  insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
