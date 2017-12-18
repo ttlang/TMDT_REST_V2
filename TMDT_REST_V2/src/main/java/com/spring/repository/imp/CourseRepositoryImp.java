@@ -1,5 +1,6 @@
 package com.spring.repository.imp;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -185,6 +186,28 @@ public class CourseRepositoryImp implements CourseRepository {
 		session.rollback();
 		return 0;
 
+	}
+
+	@Override
+	public Map<String, Object> getCourseByAuthorWithPaging(int page, int size, String authorID) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		Map<String, Object> result = new HashMap<>();
+		List<Course> listCourses = new ArrayList<>();
+		try {
+			param.put("page", page);
+			param.put("size", size);
+			param.put("authorID", authorID);
+			listCourses = sqlSession.selectList("com.spring.mapper.CourseMapper.getCourseByAuthorWithPaging", param);
+			int sumPage = (int) param.get("sumPage");
+			result.put("listCourses", listCourses);
+			result.put("sumPage", sumPage);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}finally {
+			sqlSession.close();
+		}
+		return result;
 	}
 
 }

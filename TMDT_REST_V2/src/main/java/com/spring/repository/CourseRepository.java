@@ -20,5 +20,5 @@ public interface CourseRepository {
 	public int updateCourse(String courseID, String courseTitle, String courseDescription, Integer price,
 			String courseTypeID, String topicID, String courseAvatar, String courseDetail, Integer newStatus);
 
-
+	public Map<String, Object> getCourseByAuthorWithPaging(int page, int size, String authorID);
 }

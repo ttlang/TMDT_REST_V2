@@ -61,4 +61,9 @@ public class CourseServiceImp implements CourseService {
 				topicID, courseAvatar, courseDetail, newStatus);
 	}
 
+	@Override
+	public Map<String, Object> getCourseByAuthorWithPaging(int page, int size, String authorID) {
+		return this.courseRepository.getCourseByAuthorWithPaging(page, size, authorID);
+	}
+
 }

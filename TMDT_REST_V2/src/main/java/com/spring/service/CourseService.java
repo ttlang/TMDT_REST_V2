@@ -77,4 +77,10 @@ public interface CourseService {
 	 */
 	public int updateCourse(String courseID, String courseTitle, String courseDescription, Integer price,
 			String courseTypeID, String topicID, String courseAvatar, String courseDetail, Integer newStatus);
+	/**
+	 * 
+	 * @param userID
+	 * @return list user's Courses
+	 */
+	public Map<String, Object> getCourseByAuthorWithPaging(int page, int size, String userID);
 }

@@ -26,4 +26,5 @@ public class CourseTest {
 		assertEquals(2, this.courseRepository.getCourseByTopicIDWithPaging(1, 4, "CD1").size());
 		
 	}
+	
 }
