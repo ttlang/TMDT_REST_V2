@@ -48,7 +48,7 @@ insert into chu_de(tieu_de, mo_ta, trang_thai) values('Lập trình AngularJS', 
 insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
  luot_truy_cap, anh_dai_dien, chi_tiet_khoa_hoc) values('Lập Trình Visual C# Căn Bản', 'C# thông dụng ở chỗ 
  nó rất dễ học, dễ nắm bắt và với một trình soạn thảo trực quan nó cho phép chúng ta dễ dàng thiết kế giao diện người dùng,
- kiểm tra lỗi.....', 'ND1', 0, 'NCO', 'ND2', 'CD1', 1, 1200, 'https://drive.google.com/file/d/1U-PJRNMY6GYQxFbW87F6RJYy-np-5dw3/view',
+ kiểm tra lỗi.....', 'ND1', 0, 'NCO', 'ND2', 'CD1', 1, 1200, 'https://drive.google.com/uc?id=1U-PJRNMY6GYQxFbW87F6RJYy-np-5dw3',
  'Để có thể giúp các bạn làm quen với ngôn ngữ C# , ngày hôm nay tôi xin gửi đến các bạn khóa học Lập Trình C# Căn Bản. Mục đích của khóa học giúp cho
  các bạn làm quen với môi trường C# và làm sao để có thể tạo ra một ứng dụng với C#.');
 insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, id_admin_duyet, ma_chu_de, trang_thai,
@@ -178,3 +178,21 @@ insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, i
  insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
  insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
  insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');*/
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH1CH1BH1', 'https://drive.google.com/open?id=1jYY66NPMAiEwerxafbKFrSsniWJcj0lo', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH1CH1BH2', 'https://drive.google.com/open?id=1jYY66NPMAiEwerxafbKFrSsniWJcj0lo', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH1CH1BH3', 'https://drive.google.com/open?id=1jYY66NPMAiEwerxafbKFrSsniWJcj0lo', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH1CH1BH4', 'https://drive.google.com/open?id=1jYY66NPMAiEwerxafbKFrSsniWJcj0lo', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH1CH1BH5', 'https://drive.google.com/open?id=1jYY66NPMAiEwerxafbKFrSsniWJcj0lo', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH1CH2BH6', 'https://drive.google.com/open?id=1jYY66NPMAiEwerxafbKFrSsniWJcj0lo', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH3CH5BH28', 'https://drive.google.com/file/d/1U-PJRNMY6GYQxFbW87F6RJYy-np-5dw3/view', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH3CH5BH29', 'https://drive.google.com/file/d/1U-PJRNMY6GYQxFbW87F6RJYy-np-5dw3/view', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH3CH5BH30', 'https://drive.google.com/file/d/1U-PJRNMY6GYQxFbW87F6RJYy-np-5dw3/view', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH3CH5BH8', 'https://drive.google.com/file/d/1U-PJRNMY6GYQxFbW87F6RJYy-np-5dw3/view', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH3CH6BH10', 'https://drive.google.com/file/d/1U-PJRNMY6GYQxFbW87F6RJYy-np-5dw3/view', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH3CH6BH11', 'https://drive.google.com/file/d/1U-PJRNMY6GYQxFbW87F6RJYy-np-5dw3/view', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH4CH8BH16', 'https://drive.google.com/open?id=1uOMrAbYxL-y7qaBdhGH8320S7uGXEKA6', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH4CH8BH17', 'https://drive.google.com/open?id=1uOMrAbYxL-y7qaBdhGH8320S7uGXEKA6', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH4CH8BH37', 'https://drive.google.com/open?id=1uOMrAbYxL-y7qaBdhGH8320S7uGXEKA6', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH4CH8BH38', 'https://drive.google.com/open?id=1uOMrAbYxL-y7qaBdhGH8320S7uGXEKA6', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH5CH10BH21', 'https://drive.google.com/open?id=1qGdpMH8Eorl_S-ZdzeFqe4CBwlftj_B7', now());
+insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH5CH10BH22', 'https://drive.google.com/open?id=1qGdpMH8Eorl_S-ZdzeFqe4CBwlftj_B7', now());
