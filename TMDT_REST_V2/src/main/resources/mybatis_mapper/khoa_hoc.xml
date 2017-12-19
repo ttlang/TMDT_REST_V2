@@ -43,8 +43,8 @@
 				update khoa_hoc set ${courseProperties} = #{coursePropertiesValue} where ma_khoa_hoc =#{courseID}
 			</update>
 			
-			<select id="getCourseByAuthorWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
-				{call proc_paging_query(#{page},#{size},#{sumPage, mode=OUT,jdbcType=INTEGER}, "select * from tmdt.khoa_hoc k where k.ma_nguoi_dung = '${authorID}'")}
+			<select id="getCourseByAuthorWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultType="java.util.Map">
+				{call proc_paging_query(#{page},#{size},#{sumPage, mode=OUT,jdbcType=INTEGER}, "select k.tieu_de from tmdt.khoa_hoc k where k.ma_nguoi_dung = '${authorID}'")}
 			</select>
 		
 		</mapper>

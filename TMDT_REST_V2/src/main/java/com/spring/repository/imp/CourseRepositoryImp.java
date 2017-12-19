@@ -193,14 +193,14 @@ public class CourseRepositoryImp implements CourseRepository {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		Map<String, Object> param = new HashMap<>();
 		Map<String, Object> result = new HashMap<>();
-		List<Course> listCourses = new ArrayList<>();
+		List<String> listCoursesName = new ArrayList<>();
 		try {
 			param.put("page", page);
 			param.put("size", size);
 			param.put("authorID", authorID);
-			listCourses = sqlSession.selectList("com.spring.mapper.CourseMapper.getCourseByAuthorWithPaging", param);
+			listCoursesName = sqlSession.selectList("com.spring.mapper.CourseMapper.getCourseByAuthorWithPaging", param);
 			int sumPage = (int) param.get("sumPage");
-			result.put("listOfResult", listCourses);
+			result.put("listOfResult", listCoursesName);
 			result.put("numberOfPage", sumPage);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
