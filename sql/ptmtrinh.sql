@@ -198,8 +198,3 @@ insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH4CH9BH20
 insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH5CH10BH21', 'https://drive.google.com/open?id=1uOMrAbYxL-y7qaBdhGH8320S7uGXEKA6', now());
 insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH5CH10BH21', 'https://drive.google.com/open?id=1qGdpMH8Eorl_S-ZdzeFqe4CBwlftj_B7', now());
 insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH5CH10BH22', 'https://drive.google.com/open?id=1qGdpMH8Eorl_S-ZdzeFqe4CBwlftj_B7', now());
-
--- FULL TEXT SEARCH
-alter table khoa_hoc add fulltext (tieu_de, mo_ta, chi_tiet_khoa_hoc);
-
-select * from khoa_hoc where match(tieu_de, mo_ta, chi_tiet_khoa_hoc) against('nang' in natural language mode);
