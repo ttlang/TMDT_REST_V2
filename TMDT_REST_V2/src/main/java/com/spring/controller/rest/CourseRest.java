@@ -1,6 +1,5 @@
 package com.spring.controller.rest;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -120,24 +119,19 @@ public class CourseRest {
 
 	}
 	
-	//lay khoa hoc nguoi dung da dang
-	@RequestMapping(value = "/users/courses/{authorID}", method = RequestMethod.GET, params = {"page", "size"})
+	//get courses that user created
+	@RequestMapping(value = "/users/courses", method = RequestMethod.GET, params = {"page", "size"})
 	@PreAuthorize("hasRole('ROLE_USER')")
-	public ResponseEntity<?> getCourseByAuthorWithPaging(@PathVariable("authorID") String authorID, @RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			@RequestParam(value = "size", defaultValue = "1", required = false) int size){
-		Map<String, Object> listCourseByAuthor = this.courseService.getCourseByAuthorWithPaging(page, size, authorID);
-		Object listCourses = listCourseByAuthor.get("listCourses");
-		List<Course> listCourse = cast(listCourses);
-		if(listCourse.isEmpty()) {
+	public ResponseEntity<?> getCourseByAuthorWithPaging(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = false) int size,HttpServletRequest request){
+		String email = this.jwtTokenUtil.getUsernameFromToken(this.jwtTokenUtil.getToken(request));
+		User user = this.userService.getUserByEmail(email);
+		Map<String, Object> listCourseByAuthor = this.courseService.getCourseByAuthorWithPaging(page, size, user.getUserID());
+		if(listCourseByAuthor.isEmpty()) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "This user dont post any course");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
 		return new ResponseEntity<Object>(listCourseByAuthor, HttpStatus.OK);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public static <T extends List<?>> T cast(Object obj) {
-	    return (T) obj;
 	}
 	
 }

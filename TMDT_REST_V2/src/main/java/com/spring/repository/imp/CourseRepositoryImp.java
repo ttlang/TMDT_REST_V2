@@ -200,8 +200,8 @@ public class CourseRepositoryImp implements CourseRepository {
 			param.put("authorID", authorID);
 			listCourses = sqlSession.selectList("com.spring.mapper.CourseMapper.getCourseByAuthorWithPaging", param);
 			int sumPage = (int) param.get("sumPage");
-			result.put("listCourses", listCourses);
-			result.put("sumPage", sumPage);
+			result.put("listOfResult", listCourses);
+			result.put("numberOfPage", sumPage);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}finally {

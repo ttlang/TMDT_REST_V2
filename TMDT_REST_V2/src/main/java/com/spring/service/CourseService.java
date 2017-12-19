@@ -80,7 +80,7 @@ public interface CourseService {
 	/**
 	 * 
 	 * @param userID
-	 * @return list user's Courses
+	 * @return get courses that user created
 	 */
 	public Map<String, Object> getCourseByAuthorWithPaging(int page, int size, String userID);
 }
