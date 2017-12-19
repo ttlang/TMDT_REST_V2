@@ -120,7 +120,9 @@ public class CourseRest {
 
 	}
 	
+	//lay khoa hoc nguoi dung da dang
 	@RequestMapping(value = "/users/courses/{authorID}", method = RequestMethod.GET, params = {"page", "size"})
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> getCourseByAuthorWithPaging(@PathVariable("authorID") String authorID, @RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "size", defaultValue = "1", required = false) int size){
 		Map<String, Object> listCourseByAuthor = this.courseService.getCourseByAuthorWithPaging(page, size, authorID);
