@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.spring.mapper.LessonAttachMapper">
+		<resultMap type="com.spring.domain.LessonAttach" id="lesson_attach">
+			<id column="ma_dinh_kem_bai_hoc" javaType="java.lang.String" property="lessonAttachID"/>
+			<result column="ma_bai_hoc" javaType="java.lang.String" property="lessonID"/>
+			<result column="noi_dung" javaType="java.lang.String" property="lesonAttachContent"/>
+			<result column="ngay_them" typeHandler="com.spring.config.mybatis.LocalDateTimeTypeHandle" property="dayAdded" />
+		</resultMap>
+		
+	
+	</mapper>

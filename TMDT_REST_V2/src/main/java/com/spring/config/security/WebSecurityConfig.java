@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -51,7 +52,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
 		return new JwtAuthenticationTokenFilter();
 	}
-
+	
+	@Bean
+	public CSRFHeaderFilter CSRFHeaderFilterBean() throws Exception {
+		return new CSRFHeaderFilter();
+	}
+	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
@@ -64,8 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
 				.authorizeRequests()
-				// .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
 				// allow anonymous resource requests
 				.antMatchers(HttpMethod.GET, "/", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js")
 				.permitAll().antMatchers("/auth/**").permitAll().antMatchers(HttpMethod.POST, "/user").permitAll()
@@ -84,14 +88,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.ignoringAntMatchers("/user/token_reset_password")
 				.ignoringAntMatchers("/auth/logout")
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-
+				
+		httpSecurity.addFilterAfter(CSRFHeaderFilterBean(), CsrfFilter.class);
 		// Custom JWT based security filter
 		httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 	
 		// disable page caching
 		httpSecurity.headers().cacheControl();
-		httpSecurity.csrf().disable();
 	}
+	
+	
 
 	@Bean
 	public CorsFilter corsFilter() {
@@ -112,7 +118,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers(HttpMethod.POST, "/auth");
-		web.ignoring().antMatchers(HttpMethod.GET, "/", "/jsondoc", // vao json doc,
+		web.ignoring().antMatchers(HttpMethod.GET, "/", "/jsondoc", //
 				"/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
 
 		web.ignoring().antMatchers(HttpMethod.POST, "/user");
