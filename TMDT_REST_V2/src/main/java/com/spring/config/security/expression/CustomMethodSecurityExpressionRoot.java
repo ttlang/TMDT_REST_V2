@@ -51,6 +51,6 @@ public class CustomMethodSecurityExpressionRoot extends SecurityExpressionRoot
 
 	public boolean canEditCourse(String courseID) {
 		User user = ((UserPrincipal) this.getPrincipal()).getUser();
-		return this.permissionCheck.isCourseAuthor(user.getUserID(), courseID) ? true : false;
+		return this.permissionCheck.isCourseAuthor(user.getUserID(), courseID);
 	}
 }

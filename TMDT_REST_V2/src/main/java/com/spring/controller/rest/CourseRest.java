@@ -44,8 +44,7 @@ public class CourseRest {
 		}
 		return new ResponseEntity<Course>(result.get(), HttpStatus.OK);
 	}
-	
-	
+
 	@RequestMapping(value = "/users/course", method = RequestMethod.GET, params = { "page", "size" })
 	public ResponseEntity<?> getTopic(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
@@ -97,25 +96,25 @@ public class CourseRest {
 		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 	}
 
-	@RequestMapping(value = "/user/course",method=RequestMethod.PATCH)
+	@RequestMapping(value = "/user/course", method = RequestMethod.PATCH)
 	@PreAuthorize("canEditCourse(#courseUpdate.courseID)||hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> updateCourse(@RequestBody CourseUpdate courseUpdate) {
-		
 		if (!this.courseService.getCourseByCourseID(courseUpdate.getCourseID()).isPresent()) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "course not found");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		} else {
 			try {
 				this.courseService.updateCourse(courseUpdate.getCourseID(), courseUpdate.getCourseTitle(),
-						courseUpdate.getCourseDescription(), courseUpdate.getPrice(), courseUpdate.getCourseTypeID(),
-						courseUpdate.getCourseID(), courseUpdate.getCourseAvatar(), courseUpdate.getCourseDetail(),
-						courseUpdate.getStatus());
+						courseUpdate.getCourseDescription(), Integer.valueOf(courseUpdate.getPrice()),
+						courseUpdate.getCourseTypeID(), courseUpdate.getTopicID(), courseUpdate.getCourseAvatar(),
+						courseUpdate.getCourseDetail(), courseUpdate.getStatus());
 			} catch (Exception e) {
 				ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, e.getMessage());
 				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 			}
 		}
-		return new ResponseEntity<Object>(this.courseService.getCourseByCourseID(courseUpdate.getCourseID()).get(), HttpStatus.CREATED);
+		return new ResponseEntity<Object>(this.courseService.getCourseByCourseID(courseUpdate.getCourseID()).get(),
+				HttpStatus.CREATED);
 
 	}
 	
