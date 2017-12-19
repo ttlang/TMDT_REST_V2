@@ -48,6 +48,11 @@ public class UserServiceImp implements UserService {
 	@Value("${front_end.server_port}")
 	private String serverPort;
 
+	@Value("${front_end.link_reset_password}")
+	private String linkReset;
+	@Value("${front_end.link_register}")
+	private String linkRegister;
+
 	@Override
 	public User getUserByUserID(String userID) {
 
@@ -90,7 +95,7 @@ public class UserServiceImp implements UserService {
 			Map<String, Object> map = new HashMap<>();
 			try {
 				String linkRegister = this.scheme + "://" + this.serverName + ":" + this.serverPort
-						+ "/#/pages/home-pages/kich-hoat?key=" + userIDEncrypt;
+						+ this.linkRegister + userIDEncrypt;
 				map.put("linkRegister", linkRegister);
 				to.add(new InternetAddress(email));
 				mailService.sendMail(to, "Hoàn tất đăng kí 3TPL", "/mail_template/register.html", map, "logo.png");
@@ -151,7 +156,7 @@ public class UserServiceImp implements UserService {
 				Map<String, Object> map = new HashMap<>();
 				try {
 					String linkResetPassword = this.scheme + "://" + this.serverName + ":" + this.serverPort
-							+ "/#/pages/home-pages/kich-hoat?key-change=" + token;
+							+ this.linkReset + token;
 					map.put("linkResetPassword", linkResetPassword);
 					to.add(new InternetAddress(user.getEmail()));
 					mailService.sendMail(to, "Thay đổi mật khẩu 3TPL", "/mail_template/reset_password.html", map,
@@ -181,7 +186,7 @@ public class UserServiceImp implements UserService {
 		List<String> listOfResetKey = this.userRepository.getKeYResetByUserId(userID);
 		return listOfResetKey.contains(key);
 	}
-	
+
 	@Override
 	public int removeKeyReset(String userID, String keyReset) {
 		return this.userRepository.removeKeyReset(userID, keyReset);

@@ -4,15 +4,14 @@ public class CourseUpdate {
 	private String courseID;
 	private String courseTitle;
 	private String courseDescription;
-	private Integer price;
+	private int price;
 	private String courseTypeID;
 	private String topicID;
 	private Integer status;
 	private String courseAvatar;
 	private String courseDetail;
-	
-	public CourseUpdate(String courseID, String courseTitle, String courseDescription, Integer price,
-			String courseTypeID, String topicID, Integer status, String courseAvatar, String courseDetail) {
+	public CourseUpdate(String courseID, String courseTitle, String courseDescription, int price, String courseTypeID,
+			String topicID, Integer status, String courseAvatar, String courseDetail) {
 		super();
 		this.courseID = courseID;
 		this.courseTitle = courseTitle;
@@ -27,6 +26,8 @@ public class CourseUpdate {
 	public CourseUpdate() {
 		super();
 	}
+	
+	
 	public String getCourseID() {
 		return courseID;
 	}
@@ -45,10 +46,10 @@ public class CourseUpdate {
 	public void setCourseDescription(String courseDescription) {
 		this.courseDescription = courseDescription;
 	}
-	public Integer getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(Integer price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getCourseTypeID() {
@@ -87,6 +88,8 @@ public class CourseUpdate {
 				+ courseDescription + ", price=" + price + ", courseTypeID=" + courseTypeID + ", topicID=" + topicID
 				+ ", status=" + status + ", courseAvatar=" + courseAvatar + ", courseDetail=" + courseDetail + "]";
 	}
+	
+	
 	
 
 }
