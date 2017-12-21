@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.jsondoc.core.annotation.ApiMethod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -119,6 +120,7 @@ public class CourseRest {
 	}
 	
 	//get courses that user created
+	@ApiMethod(description = "Lấy danh sách khóa học mà user đã tạo")
 	@RequestMapping(value = "/users/courses", method = RequestMethod.GET, params = {"page", "size"})
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> getCourseByAuthorWithPaging(@RequestParam(value = "page", defaultValue = "1", required = false) int page,

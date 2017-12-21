@@ -268,7 +268,6 @@ CREATE TABLE `dang_ky_khoa_hoc` (
   `ma_khoa_hoc` varchar(50) NOT NULL,
   `ma_nguoi_dung` varchar(50) DEFAULT NULL,
   `ngay_dang_ky` datetime DEFAULT NULL,
-  PRIMARY KEY (`ma_khoa_hoc`),
   KEY `fk_dang_ki_khoa_hoc_nguoi_dung_idx` (`ma_nguoi_dung`),
   CONSTRAINT `fk_dang_ki_khoa_hoc` FOREIGN KEY (`ma_khoa_hoc`) REFERENCES `khoa_hoc` (`ma_khoa_hoc`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_dang_ki_khoa_hoc_nguoi_dung` FOREIGN KEY (`ma_nguoi_dung`) REFERENCES `nguoi_dung` (`ma_nguoi_dung`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -294,7 +293,6 @@ DROP TABLE IF EXISTS `dang_ky_xem_sau`;
 CREATE TABLE `dang_ky_xem_sau` (
   `ma_nguoi_dung` varchar(50) NOT NULL,
   `ma_khoa_hoc` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ma_nguoi_dung`),
   KEY `fk_dang_ky_xem_sau_khoa_hoc_idx` (`ma_khoa_hoc`),
   CONSTRAINT `fk_dang_ki_xem_sau_nguoi_dung` FOREIGN KEY (`ma_nguoi_dung`) REFERENCES `nguoi_dung` (`ma_nguoi_dung`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_dang_ky_xem_sau_khoa_hoc` FOREIGN KEY (`ma_khoa_hoc`) REFERENCES `khoa_hoc` (`ma_khoa_hoc`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -318,7 +316,7 @@ DROP TABLE IF EXISTS `dinh_kem_bai_hoc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `dinh_kem_bai_hoc` (
-  `ma_dinh_kem_bai_hoc` varchar(50) NOT NULL,
+  `ma_dinh_kem_bai_hoc` int(11) NOT NULL AUTO_INCREMENT,
   `ma_bai_hoc` varchar(50) DEFAULT NULL,
   `noi_dung` text,
   `ngay_them` datetime DEFAULT NULL,

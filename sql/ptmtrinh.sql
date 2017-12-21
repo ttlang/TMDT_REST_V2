@@ -132,17 +132,6 @@ insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, i
  insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH5', 'Giới thiệu Công Cụ JsBin', 'Giới thiệu Công Cụ JsBin', 'Giới thiệu Công Cụ JsBin');
  insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH6', 'Giới thiệu và cài đặt', 'Giới thiệu và cài đặt', 'Giới thiệu và cài đặt');
  insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH6', 'Làm quen với Java', 'Làm quen với Java', 'Làm quen với Java');
- /*insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
- insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
- insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
- insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
- insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
- insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
- insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
- insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
- insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
- insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');
- insert into chuong_muc(ma_khoa_hoc, tieu_de, noi_dung, tom_tat) values('KH2', 'CHƯƠNG 1: LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010', 'LÀM QUEN VỚI VISUAL STUDIO 2010');*/
  
  --  insert into bai_hoc
  insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Giới thiệu khóa học', 'Giới thiệu khóa học', 'KH3CH5', 400);
@@ -166,18 +155,6 @@ insert into khoa_hoc(tieu_de, mo_ta, ma_nguoi_dung, don_gia, ma_loai_khoa_hoc, i
  insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Biến và kiểu dữ liệu', 'Biến và kiểu dữ liệu', 'KH6CH12', 500);
  insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Toán tử toán học trong Java', 'Toán tử toán học trong Java', 'KH6CH12', 400);
  insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('Thực hành toán tử điều kiện IF', 'Thực hành toán tử điều kiện IF', 'KH6CH12', 800);
- /*insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');
- insert into bai_hoc(tieu_de, noi_dung, ma_chuong_muc, luot_xem) values('BÀI 1.1. GIỚI THIỆU KHÓA HỌC', 'GIỚI THIỆU KHÓA HỌC', 'KH2CH5', '400');*/
 
 -- insert into dinh_kem_bai_hoc
 insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH1CH1BH1', 'https://drive.google.com/open?id=1jYY66NPMAiEwerxafbKFrSsniWJcj0lo', now());
@@ -198,3 +175,65 @@ insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH4CH9BH20
 insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH5CH10BH21', 'https://drive.google.com/open?id=1uOMrAbYxL-y7qaBdhGH8320S7uGXEKA6', now());
 insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH5CH10BH21', 'https://drive.google.com/open?id=1qGdpMH8Eorl_S-ZdzeFqe4CBwlftj_B7', now());
 insert into dinh_kem_bai_hoc(ma_bai_hoc, noi_dung, ngay_them) values('KH5CH10BH22', 'https://drive.google.com/open?id=1qGdpMH8Eorl_S-ZdzeFqe4CBwlftj_B7', now());
+
+-- trigger insert dang_ky_khoa_hoc
+delimiter ;;
+create trigger tg_ngay_dang_ky_insert
+	before insert on dang_ky_khoa_hoc for each row
+    begin
+		set new.ngay_dang_ky = now();
+    end ;;
+delimiter ;
+
+-- insert into dang_ky_khoa_hoc
+insert into dang_ky_khoa_hoc(ma_khoa_hoc, ma_nguoi_dung) values('KH4', 'ND1');
+insert into dang_ky_khoa_hoc(ma_khoa_hoc, ma_nguoi_dung) values('KH5', 'ND1');
+insert into dang_ky_khoa_hoc(ma_khoa_hoc, ma_nguoi_dung) values('KH6', 'ND1');
+insert into dang_ky_khoa_hoc(ma_khoa_hoc, ma_nguoi_dung) values('KH1', 'ND2');
+insert into dang_ky_khoa_hoc(ma_khoa_hoc, ma_nguoi_dung) values('KH3', 'ND2');
+insert into dang_ky_khoa_hoc(ma_khoa_hoc, ma_nguoi_dung) values('KH4', 'ND2');
+insert into dang_ky_khoa_hoc(ma_khoa_hoc, ma_nguoi_dung) values('KH5', 'ND2');
+insert into dang_ky_khoa_hoc(ma_khoa_hoc, ma_nguoi_dung) values('KH1', 'ND3');
+insert into dang_ky_khoa_hoc(ma_khoa_hoc, ma_nguoi_dung) values('KH3', 'ND3');
+insert into dang_ky_khoa_hoc(ma_khoa_hoc, ma_nguoi_dung) values('KH4', 'ND3');
+insert into dang_ky_khoa_hoc(ma_khoa_hoc, ma_nguoi_dung) values('KH6', 'ND3');
+
+-- insert into binh_luan
+insert into binh_luan(ma_bai_hoc, ma_nguoi_dung, noi_dung) values('KH4CH8BH16', 'ND1', 'Cảm ơn thầy, khóa học giúp em nắm vững hơn kiến thức rất nhiều!');
+insert into binh_luan(ma_bai_hoc, ma_nguoi_dung, noi_dung) values('KH4CH8BH17', 'ND1', 'Mong thầy ra nhiều khóa học thú vị như thế này nữa!');
+insert into binh_luan(ma_bai_hoc, ma_nguoi_dung, noi_dung) values('KH4CH9BH20', 'ND1', 'Dạ cảm ơn thầy rất nhiều ạ!');
+insert into binh_luan(ma_bai_hoc, ma_nguoi_dung, noi_dung) values('KH1CH1BH1', 'ND2', 'Dạ thầy thầy nói rõ hơn ví dụ 3 giúp em với ạ!');
+insert into binh_luan(ma_bai_hoc, ma_nguoi_dung, noi_dung) values('KH3CH5BH7', 'ND3', 'Bài học này rất hay!');
+insert into binh_luan(ma_bai_hoc, ma_nguoi_dung, noi_dung) values('KH1CH1BH2', 'ND2', 'Đăng thêm nhiều bài nữa đi thầy');
+insert into binh_luan(ma_bai_hoc, ma_nguoi_dung, noi_dung) values('KH5CH10BH23', 'ND2', 'Bài này sao có thể tuyệt vời đến như vậy chứ!');
+insert into binh_luan(ma_bai_hoc, ma_nguoi_dung, noi_dung) values('KH1CH1BH2', 'ND3', 'Bài này rất thú vị thầy ơi!');
+insert into binh_luan(ma_bai_hoc, ma_nguoi_dung, noi_dung) values('KH6CH12BH27', 'ND3', 'Bài toán này có thể giải theo cách khác được không thầy?');
+insert into binh_luan(ma_bai_hoc, ma_nguoi_dung, noi_dung) values('KH4CH8BH17', 'ND3', 'Tuyệt vời lắm ạ!');
+
+-- insert into dang_ky_xem_sau
+insert into dang_ky_xem_sau(ma_nguoi_dung, ma_khoa_hoc) values('ND1', 'KH4');
+insert into dang_ky_xem_sau(ma_nguoi_dung, ma_khoa_hoc) values('ND1', 'KH5');
+insert into dang_ky_xem_sau(ma_nguoi_dung, ma_khoa_hoc) values('ND1', 'KH6');
+insert into dang_ky_xem_sau(ma_nguoi_dung, ma_khoa_hoc) values('ND2', 'KH1');
+insert into dang_ky_xem_sau(ma_nguoi_dung, ma_khoa_hoc) values('ND2', 'KH3');
+insert into dang_ky_xem_sau(ma_nguoi_dung, ma_khoa_hoc) values('ND2', 'KH4');
+insert into dang_ky_xem_sau(ma_nguoi_dung, ma_khoa_hoc) values('ND2', 'KH5');
+insert into dang_ky_xem_sau(ma_nguoi_dung, ma_khoa_hoc) values('ND3', 'KH1');
+insert into dang_ky_xem_sau(ma_nguoi_dung, ma_khoa_hoc) values('ND3', 'KH3');
+insert into dang_ky_xem_sau(ma_nguoi_dung, ma_khoa_hoc) values('ND3', 'KH4');
+insert into dang_ky_xem_sau(ma_nguoi_dung, ma_khoa_hoc) values('ND3', 'KH6');
+
+-- insert into hinh_thuc_giao_dich
+insert into hinh_thuc_giao_dich values('GDD', 'Giao dịch bằng điểm', 'Đổi tiền sang điểm và trao đổi bằng điểm');
+
+-- insert into lich_su_giao_dich
+/*insert into lich_su_giao_dich(ma_lich_su_giao_dich, no, ma_hinh_thuc_giao_dich, co, ma_nguoi_dung) values('G1', 1000, 'GDD', 0, 'ND1');
+insert into lich_su_giao_dich(ma_lich_su_giao_dich, no, ma_hinh_thuc_giao_dich, co, ma_nguoi_dung) values('N1', 0, 'GDD', 1000, 'ND4');
+insert into lich_su_giao_dich(ma_lich_su_giao_dich, no, ma_hinh_thuc_giao_dich, co, ma_nguoi_dung) values('G2', 800, 'GDD', 0, 'ND1');
+insert into lich_su_giao_dich(ma_lich_su_giao_dich, no, ma_hinh_thuc_giao_dich, co, ma_nguoi_dung) values('N2', 1000, 'GDD', 0, 'ND1');
+insert into lich_su_giao_dich(ma_lich_su_giao_dich, no, ma_hinh_thuc_giao_dich, co, ma_nguoi_dung) values('G1', 1000, 'GDD', 0, 'ND1');
+insert into lich_su_giao_dich(ma_lich_su_giao_dich, no, ma_hinh_thuc_giao_dich, co, ma_nguoi_dung) values('G1', 1000, 'GDD', 0, 'ND1');
+insert into lich_su_giao_dich(ma_lich_su_giao_dich, no, ma_hinh_thuc_giao_dich, co, ma_nguoi_dung) values('G1', 1000, 'GDD', 0, 'ND1');
+insert into lich_su_giao_dich(ma_lich_su_giao_dich, no, ma_hinh_thuc_giao_dich, co, ma_nguoi_dung) values('G1', 1000, 'GDD', 0, 'ND1');
+insert into lich_su_giao_dich(ma_lich_su_giao_dich, no, ma_hinh_thuc_giao_dich, co, ma_nguoi_dung) values('G1', 1000, 'GDD', 0, 'ND1');
+insert into lich_su_giao_dich(ma_lich_su_giao_dich, no, ma_hinh_thuc_giao_dich, co, ma_nguoi_dung) values('G1', 1000, 'GDD', 0, 'ND1');*/
