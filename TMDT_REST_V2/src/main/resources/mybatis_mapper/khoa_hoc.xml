@@ -74,10 +74,10 @@
 			select * from khoa_hoc k where k.ma_nguoi_dung =#{authorID} order by k.luot_truy_cap ${sortType} limit ${limitRecord}
 		</select>
 		
-		<select id="getAllCourseAuthorIdWithSortAndPaging" parameterType="java.util.Map" resultMap="course_result_1">
+		<select id="getAllCourseAuthorIdWithSortAndPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
 		{call proc_paging_query(#{page},#{size},#{sumPage, mode=OUT,jdbcType=INTEGER},
 			#{sumRecord, mode=OUT,jdbcType=INTEGER},
-				"select * from khoa_hoc k where k.ma_nguoi_dung =${authorID} order by k.${sortPropertie}")} 		
+				"select * from khoa_hoc k where k.ma_nguoi_dung ='${authorID}' order by k.${sortPropertie}")} 		
 		</select>
 		
 		<update id="updateCourse" parameterType="java.util.Map" >

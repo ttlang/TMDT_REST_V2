@@ -164,4 +164,26 @@ public class CourseRest {
 		}
 
 	}
+
+	@RequestMapping(value = "/users/course/{authorID}", params = { "sortPropertie", "page", "size" },method=RequestMethod.GET)
+	public ResponseEntity<?> getAllCourseAuthorIdWithSortAndPaging(@PathVariable("authorID") String authorID,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = false) int size,
+			@RequestParam(value = "sortPropertie") String sortPropertie) {
+
+		String sortPropertieArr[] = { "courseID", "courseTitle", "courseDescription", "createDate", "price", "views" };
+		if (!Arrays.asList(sortPropertieArr).contains(sortPropertie)) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "sort type " + Arrays.asList(sortPropertieArr).toString());
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		} else {
+			if (userService.getUserByUserID(authorID) == null) {
+				ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "authorID not found");
+				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+			}
+			Map<String, Object> result = this.courseService.getAllCourseAuthorIdWithSortAndPaging(page, size, authorID,
+					sortPropertie);
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		}
+
+	}
 }

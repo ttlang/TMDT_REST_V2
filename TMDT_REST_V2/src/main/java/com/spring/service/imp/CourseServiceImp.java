@@ -76,5 +76,12 @@ public class CourseServiceImp implements CourseService {
 	@Override
 	public List<Course> getCourseByAuthorIDSortByView(String authorID, String sortType, int limitRecord) {
 		return this.courseRepository.getCourseByAuthorIDSortByView(authorID, sortType, limitRecord);
+
+	}
+
+	@Override
+	public Map<String, Object> getAllCourseAuthorIdWithSortAndPaging(int page, int size, String authorID,
+			String sortPropertie) {
+		return this.courseRepository.getAllCourseAuthorIdWithSortAndPaging(page, size, authorID, sortPropertie);
 	}
 }
