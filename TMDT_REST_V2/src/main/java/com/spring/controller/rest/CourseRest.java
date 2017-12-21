@@ -1,5 +1,7 @@
 package com.spring.controller.rest;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -124,24 +126,42 @@ public class CourseRest {
 	public ResponseEntity<?> getCourseRelate(@PathVariable("courseID") String courseID,
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
-			Map<String, Object> result = this.courseService.getRelateCourse(page, size, courseID);
-			
-			if(result.isEmpty()) {
-				ApiMessage apiMessage  = new ApiMessage(HttpStatus.NO_CONTENT, "no course found");
-				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
-			}
+		Map<String, Object> result = this.courseService.getRelateCourse(page, size, courseID);
+
+		if (result.isEmpty()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no course found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
 
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
-	@RequestMapping(value="/users/course/author/{authorID}",method=RequestMethod.GET)
-	public ResponseEntity<?>getAuthorByAuthorID(@PathVariable("authorID")String authorID){
+
+	@RequestMapping(value = "/users/course/author/{authorID}", method = RequestMethod.GET)
+	public ResponseEntity<?> getAuthorByAuthorID(@PathVariable("authorID") String authorID) {
 		Optional<Author> author = this.courseService.getAuthorInfo(authorID);
-			if(!author.isPresent()) {
-				ApiMessage   apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "author not found");
+		if (!author.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "author not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		} else {
+			return new ResponseEntity<Object>(author.get(), HttpStatus.OK);
+		}
+	}
+
+	@RequestMapping(value = "/users/course/{authorID}", params = { "sortType", "limitRecord" })
+	public ResponseEntity<?> getCourseByAuthorIDSortByView(@PathVariable("authorID") String authorID,
+			@RequestParam("sortType") String sortType, @RequestParam("limitRecord") int limitRecord) {
+		String sortTypeArray[] = { "desc", "asc" };
+		if (!Arrays.asList(sortTypeArray).contains(sortType)) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "sort type [desc,asc]");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		} else {
+			if (userService.getUserByUserID(authorID) == null) {
+				ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "authorID not found");
 				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
-			}else {
-				return new ResponseEntity<Object>(author.get(), HttpStatus.OK);
 			}
-		
+			List<Course> result = this.courseService.getCourseByAuthorIDSortByView(authorID, sortType, limitRecord);
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		}
+
 	}
 }

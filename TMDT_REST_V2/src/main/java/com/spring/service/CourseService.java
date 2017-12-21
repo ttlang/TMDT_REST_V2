@@ -1,5 +1,6 @@
 package com.spring.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -94,4 +95,7 @@ public interface CourseService {
 	 * @return
 	 */
 	public Optional<Author>getAuthorInfo(String authorID);
+	
+	
+	public List<Course>getCourseByAuthorIDSortByView(String authorID,String sortType,int limitRecord);
 }
