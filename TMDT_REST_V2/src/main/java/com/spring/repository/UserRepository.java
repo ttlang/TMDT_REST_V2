@@ -2,8 +2,10 @@ package com.spring.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import com.spring.domain.User;
+import com.spring.domain.custom.UserInfo;
 
 public interface UserRepository {
 	public User getUserByUserID(String userID);
@@ -28,5 +30,7 @@ public interface UserRepository {
 	public int removeKeyReset(String userID,String keyReset);
 	
 	public List<String>getKeYResetByUserId(String userID);
+	
+	public Optional<UserInfo> getUserInfo(String userID);
 
 }

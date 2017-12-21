@@ -3,6 +3,7 @@ package com.spring.controller.rest;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.config.api.ApiMessage;
 import com.spring.config.security.JwtTokenUtil;
 import com.spring.domain.User;
+import com.spring.domain.custom.UserInfo;
 import com.spring.domain.json.PasswordReset;
 import com.spring.domain.json.RegisterKey;
 import com.spring.domain.json.UserCustom;
@@ -43,7 +45,7 @@ public class UserRest {
 	@Autowired
 	private JwtTokenUtil tokenHelper;
 
-	@RequestMapping(value = "/info",method=RequestMethod.GET)
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public ResponseEntity<?> getUserInfo(HttpServletRequest request) {
 		String authToken = this.tokenHelper.getToken(request);
 		if (authToken != null && this.tokenHelper.getUsernameFromToken(authToken) != null) {
@@ -133,7 +135,7 @@ public class UserRest {
 	 */
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> createUser(@RequestBody UserCustom userCustom) {
+	public ResponseEntity<?> createUser(@RequestBody UserCustom userCustom ) {
 		boolean resultOfCreate = false;
 		if (userCustom == null) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "request body is null");
@@ -161,7 +163,7 @@ public class UserRest {
 	}
 
 	/**
-	 * reset password 
+	 * reset password
 	 * 
 	 * @param passwordReset
 	 * @return
@@ -208,4 +210,15 @@ public class UserRest {
 
 	}
 
+	@RequestMapping(value = "/info/{userID}",method=RequestMethod.GET)
+	public ResponseEntity<?> getUserInfo(@PathVariable("userID") String userID) {
+		Optional<UserInfo> userInfo = this.userService.getUserInfo(userID);
+		if (!userInfo.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "user not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		} else {
+
+			return new ResponseEntity<Object>(userInfo.get(), HttpStatus.OK);
+		}
+	}
 }

@@ -46,5 +46,71 @@
 			<select id="getCourseByAuthorWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultType="java.util.Map">
 				{call proc_paging_query(#{page},#{size},#{sumPage, mode=OUT,jdbcType=INTEGER}, "select k.tieu_de from tmdt.khoa_hoc k where k.ma_nguoi_dung = '${authorID}'")}
 			</select>
+			
+			<resultMap type="com.spring.domain.custom.Author" id="author_info">
+					<id column="ma_nguoi_dung" javaType="java.lang.String" property="userID" />
+					<result column="ten_nguoi_dung" javaType="java.lang.String" property="userName"/>
+					<result column="ngay_dang_ky" typeHandler="com.spring.config.mybatis.LocalDateTimeTypeHandle" property="registrationDate"/>
+					<result column="email" javaType="java.lang.String" property="email"/>
+					<result column="anh_dai_dien" javaType="java.lang.String" property="avatar"/>
+					<result column="diem" javaType="java.lang.Integer" property="score"/>
+					<result column="dia_chi" javaType="java.lang.String" property="address"/>
+					<result column="sdt" javaType="java.lang.String" property="phoneNumber"/>
+					<result column="number_of_course" javaType="int" property="numberOfCourses"/>
+			
+			</resultMap>
+			
+			
+		<!-- query data -->
+		<select id="getCourseByCourseID" resultMap="course_result_1" >
+			select * from khoa_hoc k where k.ma_khoa_hoc =#{courseID} 
+		</select>
+		
+		<select id="getCourseWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
+			{ call proc_paging_table(#{page}, #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER},
+			#{sumRecord, mode=OUT,jdbcType=INTEGER},'khoa_hoc')}
+		</select>
+		
+		
+		<select id="getCourseByTopicIDWithPaging"  statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
+			{call proc_paging_query(#{page},#{size},#{sumPage, mode=OUT,jdbcType=INTEGER},
+			#{sumRecord, mode=OUT,jdbcType=INTEGER},"select * from khoa_hoc k where k.ma_chu_de ='${topicID}'")}
+		</select>
+		
+		
+		<select id="getRelateCourse" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
+			{call proc_paging_query(#{page},#{size},#{sumPage, mode=OUT,jdbcType=INTEGER},
+			#{sumRecord, mode=OUT,jdbcType=INTEGER},
+			"select * from khoa_hoc k where k.ma_chu_de in 
+			(select ma_chu_de from khoa_hoc k2 where k2.ma_khoa_hoc='${courseID}' ) and  k.ma_khoa_hoc!='${courseID}' order by rand()")}
+		</select>
+		
+		<update id="updateCourseStatus" parameterType="java.util.Map">
+			update khoa_hoc set trang_thai = #{newStatus} where ma_khoa_hoc = #{courseID}
+		</update>
+				
+		<select id="createCourse"  parameterType="java.util.Map" statementType="CALLABLE" resultType="java.util.Map">
+			{call tmdt.create_khoa_hoc(#{courseTitle}, #{courseDescription}, #{author}, #{price}, #{courseTypeID}, #{topicID},#{courseAvatar},#{courseDetail})}			
+		</select>
+		
+		<select id="getAuthorInfo" parameterType="java.lang.String" resultMap="author_info">
+		select n.ma_nguoi_dung,n.ten_nguoi_dung,n.ngay_dang_ky,n.email,n.anh_dai_dien,n.diem,n.dia_chi,n.sdt,count(*) as number_of_course  from nguoi_dung n inner join
+		khoa_hoc k on n.ma_nguoi_dung= k.ma_nguoi_dung where n.ma_nguoi_dung= #{authorID} group by k.ma_nguoi_dung;
+		</select>
+		
+		<select id="getCourseByAuthorIDSortByView" parameterType="java.util.Map" resultMap="course_result_1">
+			select * from khoa_hoc k where k.ma_nguoi_dung =#{authorID} order by k.luot_truy_cap ${sortType} limit ${limitRecord}
+		</select>
+		
+		<select id="getAllCourseAuthorIdWithSortAndPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
+		{call proc_paging_query(#{page},#{size},#{sumPage, mode=OUT,jdbcType=INTEGER},
+			#{sumRecord, mode=OUT,jdbcType=INTEGER},
+				"select * from khoa_hoc k where k.ma_nguoi_dung ='${authorID}' order by k.${sortPropertie}")} 		
+		</select>
+		
+		<update id="updateCourse" parameterType="java.util.Map" >
+			update khoa_hoc set ${courseProperties} = #{coursePropertiesValue} where ma_khoa_hoc =#{courseID}
+		</update>
+		
 		
 		</mapper>

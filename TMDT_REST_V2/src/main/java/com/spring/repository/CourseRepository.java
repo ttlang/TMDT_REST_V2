@@ -1,9 +1,11 @@
 package com.spring.repository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import com.spring.domain.Course;
+import com.spring.domain.custom.Author;
 
 public interface CourseRepository {
 	public Optional<Course> getCourseByCourseID(String courseID);
@@ -19,6 +21,14 @@ public interface CourseRepository {
 
 	public int updateCourse(String courseID, String courseTitle, String courseDescription, Integer price,
 			String courseTypeID, String topicID, String courseAvatar, String courseDetail, Integer newStatus);
+	
+	public Map<String, Object>getRelateCourse(int page,int size,String courseID);
+	
+	public Optional<Author>getAuthorInfo(String authorID);
+	
+	public List<Course>getCourseByAuthorIDSortByView(String authorID,String sortType,int limitRecord);
+	
+	public Map<String, Object>getAllCourseAuthorIdWithSortAndPaging(int page,int size,String authorID,String sortPropertie);
 
 	public Map<String, Object> getCourseByAuthorWithPaging(int page, int size, String authorID);
 }

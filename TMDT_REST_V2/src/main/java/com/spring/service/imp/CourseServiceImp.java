@@ -1,5 +1,6 @@
 package com.spring.service.imp;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.Course;
+import com.spring.domain.custom.Author;
 import com.spring.repository.CourseRepository;
 import com.spring.service.CourseService;
 
@@ -66,4 +68,24 @@ public class CourseServiceImp implements CourseService {
 		return this.courseRepository.getCourseByAuthorWithPaging(page, size, authorID);
 	}
 
+	public Map<String, Object> getRelateCourse(int page, int size, String courseID) {
+		return this.courseRepository.getRelateCourse(page, size, courseID);
+	}
+
+	@Override
+	public Optional<Author> getAuthorInfo(String authorID) {
+		return this.courseRepository.getAuthorInfo(authorID);
+	}
+
+	@Override
+	public List<Course> getCourseByAuthorIDSortByView(String authorID, String sortType, int limitRecord) {
+		return this.courseRepository.getCourseByAuthorIDSortByView(authorID, sortType, limitRecord);
+
+	}
+
+	@Override
+	public Map<String, Object> getAllCourseAuthorIdWithSortAndPaging(int page, int size, String authorID,
+			String sortPropertie) {
+		return this.courseRepository.getAllCourseAuthorIdWithSortAndPaging(page, size, authorID, sortPropertie);
+	}
 }

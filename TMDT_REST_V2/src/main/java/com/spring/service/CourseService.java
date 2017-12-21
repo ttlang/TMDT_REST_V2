@@ -1,9 +1,11 @@
 package com.spring.service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import com.spring.domain.Course;
+import com.spring.domain.custom.Author;
 
 public interface CourseService {
 	public Optional<Course> getCourseByCourseID(String courseID);
@@ -83,4 +85,26 @@ public interface CourseService {
 	 * @return get courses that user created
 	 */
 	public Map<String, Object> getCourseByAuthorWithPaging(int page, int size, String userID);
+	
+	/**
+	 * get relate course by courseID id with paging
+	 * @param page
+	 * @param size
+	 * @param courseID
+	 * @return Map<String, Object> with two key (listOfResult, numberOfPage)
+	 */
+	public Map<String, Object>getRelateCourse(int page,int size,String courseID);
+	
+	/**
+	 *  get author by authorID 
+	 * @param authorID
+	 * @return
+	 */
+	public Optional<Author>getAuthorInfo(String authorID);
+	
+	
+	public List<Course>getCourseByAuthorIDSortByView(String authorID,String sortType,int limitRecord);
+	
+	
+	public Map<String, Object>getAllCourseAuthorIdWithSortAndPaging(int page,int size,String authorID,String sortPropertie);
 }

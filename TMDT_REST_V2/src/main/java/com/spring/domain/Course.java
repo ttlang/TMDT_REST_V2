@@ -2,25 +2,25 @@ package com.spring.domain;
 
 import java.time.LocalDateTime;
 
-import com.spring.domain.custom.UserCustom;
+import com.spring.domain.custom.UserInfo;
 
 public class Course {
 	private String courseID;
 	private String courseTitle;
 	private String courseDescription;
-	private UserCustom author;
+	private UserInfo author;
 	private LocalDateTime createDate;
 	private Integer price;
 	private CourseType courseType;
 	private Topic topic;
-	private UserCustom confirmedBy;
+	private UserInfo confirmedBy;
 	private Integer status;
 	private LocalDateTime confirmedDate;
 	private Integer views;
 	private String courseAvatar;
 	private String courseDetail;
-	public Course(String courseID, String courseTitle, String courseDescription, UserCustom author,
-			LocalDateTime createDate, Integer price, CourseType courseType, Topic topic, UserCustom confirmedBy,
+	public Course(String courseID, String courseTitle, String courseDescription, UserInfo author,
+			LocalDateTime createDate, Integer price, CourseType courseType, Topic topic, UserInfo confirmedBy,
 			Integer status, LocalDateTime confirmedDate, Integer views, String courseAvatar, String courseDetail) {
 		super();
 		this.courseID = courseID;
@@ -59,10 +59,10 @@ public class Course {
 	public void setCourseDescription(String courseDescription) {
 		this.courseDescription = courseDescription;
 	}
-	public UserCustom getAuthor() {
+	public UserInfo getAuthor() {
 		return author;
 	}
-	public void setAuthor(UserCustom author) {
+	public void setAuthor(UserInfo author) {
 		this.author = author;
 	}
 	public LocalDateTime getCreateDate() {
@@ -89,10 +89,10 @@ public class Course {
 	public void setTopic(Topic topic) {
 		this.topic = topic;
 	}
-	public UserCustom getConfirmedBy() {
+	public UserInfo getConfirmedBy() {
 		return confirmedBy;
 	}
-	public void setConfirmedBy(UserCustom confirmedBy) {
+	public void setConfirmedBy(UserInfo confirmedBy) {
 		this.confirmedBy = confirmedBy;
 	}
 	public Integer getStatus() {
