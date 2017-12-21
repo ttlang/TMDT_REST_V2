@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.domain.Course;
+import com.spring.domain.custom.Author;
 import com.spring.repository.CourseRepository;
 
 @Repository
@@ -48,9 +49,12 @@ public class CourseRepositoryImp implements CourseRepository {
 			List<Course> listCourseResult = sqlSession.selectList("com.spring.mapper.CourseMapper.getCourseWithPaging",
 					param);
 			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
 
 			result.put("listOfResult", listCourseResult);
 			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
@@ -71,9 +75,12 @@ public class CourseRepositoryImp implements CourseRepository {
 			List<Course> listTopicResult = sqlSession
 					.selectList("com.spring.mapper.CourseMapper.getCourseByTopicIDWithPaging", param);
 			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
 
 			result.put("listOfResult", listTopicResult);
 			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
@@ -185,6 +192,44 @@ public class CourseRepositoryImp implements CourseRepository {
 		session.rollback();
 		return 0;
 
+	}
+
+	@Override
+	public Map<String, Object> getRelateCourse(int page, int size, String courseID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		Map<String, Object> result = new HashMap<>();
+		param.put("page", page);
+		param.put("size", size);
+		param.put("courseID", courseID);
+		try {
+			List<Course> listCourses = session.selectList("com.spring.mapper.CourseMapper.getRelateCourse", param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+
+			result.put("listOfResult", listCourses);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+			
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+	@Override
+	public Optional<Author> getAuthorInfo(String authorID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Author author = new Author();
+		try {
+			author = session.selectOne("com.spring.mapper.CourseMapper.getAuthorInfo",authorID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}finally {
+			session.close();
+		}
+		return Optional.ofNullable(author);
 	}
 
 }

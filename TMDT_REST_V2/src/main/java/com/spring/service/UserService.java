@@ -2,8 +2,10 @@ package com.spring.service;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 
 import com.spring.domain.User;
+import com.spring.domain.custom.UserInfo;
 
 public interface UserService {
 	
@@ -58,6 +60,7 @@ public interface UserService {
 	
 	public int removeKeyReset(String userID,String keyReset);
 	
-
+	
+	public Optional<UserInfo> getUserInfo(String userID);
 
 }

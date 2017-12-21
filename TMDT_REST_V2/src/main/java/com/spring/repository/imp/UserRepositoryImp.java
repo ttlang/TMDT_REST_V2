@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.spring.domain.User;
+import com.spring.domain.custom.UserInfo;
 import com.spring.repository.UserRepository;
 
 @Repository
@@ -171,18 +173,32 @@ public class UserRepositoryImp implements UserRepository {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public List<String> getKeYResetByUserId(String userID) {
 		SqlSession session = sqlSessionFactory.openSession();
-		List<String>result = Collections.emptyList();
+		List<String> result = Collections.emptyList();
 		try {
-			result = session.selectList("com.spring.mapper.UserActionMapper.getKeYResetByUserId",userID);
+			result = session.selectList("com.spring.mapper.UserActionMapper.getKeYResetByUserId", userID);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
-		}finally {
+		} finally {
 			session.close();
 		}
 		return result;
+	}
+
+	@Override
+	public Optional<UserInfo> getUserInfo(String userID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		UserInfo userCustom = new UserInfo();
+		try {
+			userCustom = session.selectOne("com.spring.mapper.UserMapper.getUserByUserID2", userID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return Optional.ofNullable(userCustom);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.spring.domain.Course;
+import com.spring.domain.custom.Author;
 
 public interface CourseService {
 	public Optional<Course> getCourseByCourseID(String courseID);
@@ -77,4 +78,20 @@ public interface CourseService {
 	 */
 	public int updateCourse(String courseID, String courseTitle, String courseDescription, Integer price,
 			String courseTypeID, String topicID, String courseAvatar, String courseDetail, Integer newStatus);
+	
+	/**
+	 * get relate course by courseID id with paging
+	 * @param page
+	 * @param size
+	 * @param courseID
+	 * @return Map<String, Object> with two key (listOfResult, numberOfPage)
+	 */
+	public Map<String, Object>getRelateCourse(int page,int size,String courseID);
+	
+	/**
+	 *  get author by authorID 
+	 * @param authorID
+	 * @return
+	 */
+	public Optional<Author>getAuthorInfo(String authorID);
 }

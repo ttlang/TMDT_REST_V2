@@ -3,12 +3,12 @@ package com.spring.domain;
 import java.time.LocalDateTime;
 
 public class LessonAttach {
-	private String lessonAttachID;
+	private int lessonAttachID;
 	private String lessonID;
 	private String lesonAttachContent;
 	private LocalDateTime dayAdded;
 
-	public LessonAttach(String lessonAttachID, String lessonID, String lesonAttachContent, LocalDateTime dayAdded) {
+	public LessonAttach(int lessonAttachID, String lessonID, String lesonAttachContent, LocalDateTime dayAdded) {
 		super();
 		this.lessonAttachID = lessonAttachID;
 		this.lessonID = lessonID;
@@ -20,11 +20,11 @@ public class LessonAttach {
 		super();
 	}
 
-	public String getLessonAttachID() {
+	public int getLessonAttachID() {
 		return lessonAttachID;
 	}
 
-	public void setLessonAttachID(String lessonAttachID) {
+	public void setLessonAttachID(int lessonAttachID) {
 		this.lessonAttachID = lessonAttachID;
 	}
 

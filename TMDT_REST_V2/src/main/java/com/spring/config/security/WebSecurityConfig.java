@@ -76,6 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.PATCH, "/user/register_status/*").permitAll()
 				.antMatchers(HttpMethod.GET, "/user/token_reset_password").permitAll()
 				.antMatchers(HttpMethod.GET, "/users/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/user/info/**").permitAll()
 				.antMatchers(HttpMethod.PATCH, "/user/password_reset").permitAll().anyRequest().authenticated().and()
 				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
 				.logoutSuccessHandler(logoutSuccess).deleteCookies(AUTH_COOKIE);
@@ -87,6 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.ignoringAntMatchers("/user/register_status/*")
 				.ignoringAntMatchers("/user/token_reset_password")
 				.ignoringAntMatchers("/auth/logout")
+				.ignoringAntMatchers("/user/info/**")
 				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 				
 		httpSecurity.addFilterAfter(CSRFHeaderFilterBean(), CsrfFilter.class);

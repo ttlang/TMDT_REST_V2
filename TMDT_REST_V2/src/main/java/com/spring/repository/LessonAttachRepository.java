@@ -1,0 +1,21 @@
+package com.spring.repository;
+
+import java.util.Map;
+import java.util.Optional;
+
+import com.spring.domain.LessonAttach;
+
+public interface LessonAttachRepository {
+	
+	public Map<String, Object>getLessonAttachByLessonIDWithPaging(int page,int size,String lessonID);
+	
+	public Optional<LessonAttach>getLessonAttachByLessonAttachID(int lessonAttachID);
+	
+	public int insertLessonAttach(String lessonID,String lesonAttachContent);
+	
+	public int deleteLessonAttachBylessonAttachID(int lessonAttachID);
+	
+	public int updateLessonAttach(int lessonAttachID,String lessonID,String lesonAttachContent);
+	
+
+}

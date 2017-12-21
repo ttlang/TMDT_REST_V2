@@ -14,6 +14,9 @@
 			select * from bai_hoc b where  b.ma_chuong_muc = #{chapterID}
 		</select>
 		
+		<select id="getLessonByLessonID" resultMap="lesson_result_1">
+			select * from bai_hoc b where b.ma_bai_hoc=#{lessonID}
+		</select>
 		
 		
 		
