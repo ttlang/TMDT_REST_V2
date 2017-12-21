@@ -17,8 +17,10 @@
 	
 	
 	<select  id="searchTopicWithTopicName" statementType="CALLABLE" resultMap="topic_result_1" parameterType="java.util.Map">
-	{call proc_paging_query(#{page},#{size},#{sumPage, mode=OUT, 
-	jdbcType=INTEGER},"select * from chu_de where match(tieu_de,mo_ta) against('${topicNameSearch}' in natural language mode)")}
+	{call proc_paging_query(#{page},#{size},
+	#{sumPage, mode=OUT,jdbcType=INTEGER},
+	#{sumRecord, mode=OUT,jdbcType=INTEGER},
+	"select * from chu_de where match(tieu_de,mo_ta) against('${topicNameSearch}' in natural language mode)")}
 	</select>
 	
 	<insert id="createTopic" statementType="CALLABLE" parameterType="java.util.Map">
@@ -28,7 +30,9 @@
 	
 	
 	<select id="getTopicWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="topic_result_1">
-			{ call proc_paging_table(#{page}, #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER}, 'chu_de')}
+			{ call proc_paging_table(#{page}, #{size},
+			 #{sumPage, mode=OUT,jdbcType=INTEGER},
+			 #{sumRecord, mode=OUT,jdbcType=INTEGER},'chu_de')}
 	</select>
 	
 	

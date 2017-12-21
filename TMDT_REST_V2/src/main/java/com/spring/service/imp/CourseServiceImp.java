@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.Course;
+import com.spring.domain.custom.Author;
 import com.spring.repository.CourseRepository;
 import com.spring.service.CourseService;
 
@@ -59,6 +60,16 @@ public class CourseServiceImp implements CourseService {
 			String courseTypeID, String topicID, String courseAvatar, String courseDetail, Integer newStatus) {
 		return this.courseRepository.updateCourse(courseID, courseTitle, courseDescription, price, courseTypeID,
 				topicID, courseAvatar, courseDetail, newStatus);
+	}
+
+	@Override
+	public Map<String, Object> getRelateCourse(int page, int size, String courseID) {
+		return this.courseRepository.getRelateCourse(page, size, courseID);
+	}
+
+	@Override
+	public Optional<Author> getAuthorInfo(String authorID) {
+		return this.courseRepository.getAuthorInfo(authorID);
 	}
 
 }

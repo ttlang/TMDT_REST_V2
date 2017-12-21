@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.StringTokenizer;
 
 import javax.mail.internet.InternetAddress;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.User;
+import com.spring.domain.custom.UserInfo;
 import com.spring.repository.UserRepository;
 import com.spring.service.AES;
 import com.spring.service.MailService;
@@ -94,8 +96,8 @@ public class UserServiceImp implements UserService {
 			Collection<InternetAddress> to = new ArrayList<>();
 			Map<String, Object> map = new HashMap<>();
 			try {
-				String linkRegister = this.scheme + "://" + this.serverName + ":" + this.serverPort
-						+ this.linkRegister + userIDEncrypt;
+				String linkRegister = this.scheme + "://" + this.serverName + ":" + this.serverPort + this.linkRegister
+						+ userIDEncrypt;
 				map.put("linkRegister", linkRegister);
 				to.add(new InternetAddress(email));
 				mailService.sendMail(to, "Hoàn tất đăng kí 3TPL", "/mail_template/register.html", map, "logo.png");
@@ -190,5 +192,10 @@ public class UserServiceImp implements UserService {
 	@Override
 	public int removeKeyReset(String userID, String keyReset) {
 		return this.userRepository.removeKeyReset(userID, keyReset);
+	}
+
+	@Override
+	public Optional<UserInfo> getUserInfo(String userID) {
+		return this.userRepository.getUserInfo(userID);
 	}
 }

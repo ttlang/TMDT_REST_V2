@@ -100,7 +100,7 @@ public class JwtTokenUtil implements Serializable {
 		try {
 			final Claims claims = this.getAllClaimsFromToken(token);
 			claims.setIssuedAt(a);
-			refreshedToken = Jwts.builder().setClaims(claims).setExpiration(generateExpirationDate(device))
+			refreshedToken =this.prefix + " "+Jwts.builder().setClaims(claims).setExpiration(generateExpirationDate(device))
 					.signWith(SIGNATURE_ALGORITHM, SECRET).compact();
 		} catch (Exception e) {
 			refreshedToken = null;

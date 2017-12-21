@@ -52,9 +52,10 @@ public class TopicRepositoryImp implements TopicRepository {
 			List<Topic> listTopicResult = sqlSession.selectList("com.spring.mapper.TopicMapper.getTopicWithPaging",
 					param);
 			int numberOfPage = (int) param.get("sumPage");
-
+			int numberOfRecord =(int) param.get("sumRecord");
 			result.put("listOfResult", listTopicResult);
 			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
@@ -131,9 +132,10 @@ public class TopicRepositoryImp implements TopicRepository {
 					param);
 
 			int numberOfPage = (int) param.get("sumPage");
-
+			int numberOfRecord =(int) param.get("sumRecord");
 			result.put("listOfResult", listTopicResult);
 			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {

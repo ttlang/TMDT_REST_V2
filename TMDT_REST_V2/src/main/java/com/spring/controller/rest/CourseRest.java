@@ -20,6 +20,7 @@ import com.spring.config.api.ApiMessage;
 import com.spring.config.security.JwtTokenUtil;
 import com.spring.domain.Course;
 import com.spring.domain.User;
+import com.spring.domain.custom.Author;
 import com.spring.domain.json.CourseCreate;
 import com.spring.domain.json.CourseStatus;
 import com.spring.domain.json.CourseUpdate;
@@ -39,7 +40,7 @@ public class CourseRest {
 	public ResponseEntity<?> getCourseByID(@PathVariable("courseID") String courseID) {
 		Optional<Course> result = courseService.getCourseByCourseID(courseID);
 		if (!result.isPresent()) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "cant found course");
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "cant find course");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
 		return new ResponseEntity<Course>(result.get(), HttpStatus.OK);
@@ -50,7 +51,7 @@ public class CourseRest {
 			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
 		Map<String, Object> result = this.courseService.getCourseWithPaging(page, size);
 		if (result.isEmpty()) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "not topic found");
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "no course found");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
@@ -62,7 +63,7 @@ public class CourseRest {
 
 		Optional<Course> result = courseService.getCourseByCourseID(courseStatus.getCourseID());
 		if (!result.isPresent()) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "cant found course");
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "cant find course");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		} else {
 			if (this.courseService.updateCourseStatut(courseStatus.getCourseID(), courseStatus.getNewStatus()) <= 0) {
@@ -116,5 +117,31 @@ public class CourseRest {
 		return new ResponseEntity<Object>(this.courseService.getCourseByCourseID(courseUpdate.getCourseID()).get(),
 				HttpStatus.CREATED);
 
+	}
+
+	@RequestMapping(value = "/users/course/{courseID}/relationship", method = RequestMethod.GET, params = { "page",
+			"size" })
+	public ResponseEntity<?> getCourseRelate(@PathVariable("courseID") String courseID,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
+			Map<String, Object> result = this.courseService.getRelateCourse(page, size, courseID);
+			
+			if(result.isEmpty()) {
+				ApiMessage apiMessage  = new ApiMessage(HttpStatus.NO_CONTENT, "no course found");
+				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+			}
+
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
+	}
+	@RequestMapping(value="/users/course/author/{authorID}",method=RequestMethod.GET)
+	public ResponseEntity<?>getAuthorByAuthorID(@PathVariable("authorID")String authorID){
+		Optional<Author> author = this.courseService.getAuthorInfo(authorID);
+			if(!author.isPresent()) {
+				ApiMessage   apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "author not found");
+				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+			}else {
+				return new ResponseEntity<Object>(author.get(), HttpStatus.OK);
+			}
+		
 	}
 }
