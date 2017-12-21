@@ -135,7 +135,7 @@ public class UserRest {
 	 */
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> createUser(@RequestBody UserCustom userCustom) {
+	public ResponseEntity<?> createUser(@RequestBody UserCustom userCustom ) {
 		boolean resultOfCreate = false;
 		if (userCustom == null) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "request body is null");

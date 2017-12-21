@@ -26,7 +26,6 @@ front_end :
   scheme: http
   server_name: localhost
   server_port : 4200
-  link_reset_password : "/#/pages/home-pages/kich-hoat?key-change="
-  
-  link_register : "/#/pages/home-pages/kich-hoat?key="
+  link_reset_password : "/pages/kich-hoat?key-change="
+  link_register : "/pages/kich-hoat?key="
     
