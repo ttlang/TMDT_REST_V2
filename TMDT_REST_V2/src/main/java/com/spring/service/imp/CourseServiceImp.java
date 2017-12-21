@@ -1,5 +1,6 @@
 package com.spring.service.imp;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -72,4 +73,8 @@ public class CourseServiceImp implements CourseService {
 		return this.courseRepository.getAuthorInfo(authorID);
 	}
 
+	@Override
+	public List<Course> getCourseByAuthorIDSortByView(String authorID, String sortType, int limitRecord) {
+		return this.courseRepository.getCourseByAuthorIDSortByView(authorID, sortType, limitRecord);
+	}
 }

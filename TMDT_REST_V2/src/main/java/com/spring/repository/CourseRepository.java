@@ -1,5 +1,6 @@
 package com.spring.repository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -24,6 +25,10 @@ public interface CourseRepository {
 	public Map<String, Object>getRelateCourse(int page,int size,String courseID);
 	
 	public Optional<Author>getAuthorInfo(String authorID);
+	
+	public List<Course>getCourseByAuthorIDSortByView(String authorID,String sortType,int limitRecord);
+	
+	public Map<String, Object>getAllCourseAuthorIdWithSortAndPaging(int page,int size,String authorID,String sortPropertie);
 
 
 }

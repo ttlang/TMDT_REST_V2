@@ -15,7 +15,7 @@ public class LessonAttachTest {
 	CourseRepository courseRepository;
 	@Test
 	public void testGetAuthor() {
-		System.err.println(courseRepository.getAuthorInfo("ND1").get());
+		System.err.println(courseRepository.getCourseByAuthorIDSortByView("ND1", "desc", 10).toString());
 	}
 	
 }
