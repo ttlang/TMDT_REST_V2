@@ -68,9 +68,9 @@ public class UserRest {
 			return new ResponseEntity<Object>(message, message.getStatus());
 		}
 		return new ResponseEntity<User>(user, HttpStatus.OK);
-
 	}
 
+	
 	/**
 	 * send reset password key
 	 * 

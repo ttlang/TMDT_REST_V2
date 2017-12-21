@@ -3,6 +3,8 @@ package com.spring.controller.rest;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -85,7 +87,9 @@ public class TopicRest {
 
 	@RequestMapping(value = "/admin/topic", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?> createTopic(@RequestBody TopicCreation topic) {
+	public ResponseEntity<?> createTopic(@RequestBody TopicCreation topic , HttpServletRequest httpServletRequestp) {
+		  System.err.println(httpServletRequestp.getHeader("XSRF-TOKEN"));
+		  System.out.println("----------");
 		int result = this.topicService.createTopic(topic.getTopicName(), topic.getTopicDescription(),
 				topic.getTopicStatus());
 		if (result > 0) {

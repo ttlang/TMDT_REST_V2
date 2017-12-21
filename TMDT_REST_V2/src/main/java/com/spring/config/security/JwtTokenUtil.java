@@ -185,6 +185,13 @@ public class JwtTokenUtil implements Serializable {
 		 * Getting the token from Cookie store
 		 */
 		Cookie authCookie = getCookieValueByName(request, AUTH_COOKIE);
+		
+	Cookie authCookie2 = getCookieValueByName(request, "XSRF-TOKEN");
+
+		if (authCookie2 != null) {
+			System.out.println(authCookie2.getValue());
+		}
+		
 		if (authCookie != null) {
 			return authCookie.getValue();
 		}

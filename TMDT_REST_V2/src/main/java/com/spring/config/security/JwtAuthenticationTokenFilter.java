@@ -38,10 +38,13 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
-
+// nó lọc request ở đây á , hi . khong co gi hien thi o console, chac ko vao day roi
+		// 
 		String username = null;
 		String authToken = this.jwtTokenUtil.getToken(request);
-
+		System.err.println(authToken );
+    System.out.println(request.getAttribute("XSRF-TOKEN"));
+    System.out.println(request.getHeader("AUTH-TOKEN"));
 		response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
 		response.setHeader("Access-Control-Allow-Credentials", "true");
 		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, PATCH");

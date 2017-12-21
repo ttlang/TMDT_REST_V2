@@ -90,7 +90,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 		// disable page caching
 		httpSecurity.headers().cacheControl();
-		httpSecurity.csrf().disable();
+//		httpSecurity.csrf().disable();
 	}
 
 	@Bean
