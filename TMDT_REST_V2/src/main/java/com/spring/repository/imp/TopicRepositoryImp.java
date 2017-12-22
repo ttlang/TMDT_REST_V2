@@ -22,17 +22,17 @@ public class TopicRepositoryImp implements TopicRepository {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TopicRepositoryImp.class);
 
 	@Override
-	public int createTopic(String topicName, String topicDescription, int topicStatut) {
+	public String createTopic(String topicName, String topicDescription, int topicStatut) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		Map<String, Object> param = new HashMap<>();
-		int result = 0;
+		String result =null;
 		param.put("topicTitle", topicName);
 		param.put("topicDescription", topicDescription);
 		param.put("topicStatus", topicStatut);
 		param.put("result", result);
 		try {
 			sqlSession.insert("com.spring.mapper.TopicMapper.createTopic", param);
-			result = (int) param.get("result");
+			result = (String)param.get("result");
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {

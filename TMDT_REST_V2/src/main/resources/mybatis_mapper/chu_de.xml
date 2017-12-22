@@ -24,7 +24,7 @@
 	</select>
 	
 	<insert id="createTopic" statementType="CALLABLE" parameterType="java.util.Map">
-		{call insert_chu_de(#{topicTitle, mode=IN}, #{topicDescription, mode=IN}, #{topicStatus, mode=IN}, #{result, mode=OUT, jdbcType=INTEGER})}
+		{call create_chu_de(#{topicTitle, mode=IN}, #{topicDescription, mode=IN}, #{topicStatus, mode=IN}, #{result, mode=OUT, jdbcType=VARCHAR})}
 	</insert>
 	
 	

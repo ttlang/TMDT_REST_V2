@@ -86,11 +86,11 @@ public class TopicRest {
 	@RequestMapping(value = "/admin/topic", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> createTopic(@RequestBody TopicCreation topic) {
-		int result = this.topicService.createTopic(topic.getTopicName(), topic.getTopicDescription(),
+		String result = this.topicService.createTopic(topic.getTopicName(), topic.getTopicDescription(),
 				topic.getTopicStatus());
-		if (result > 0) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.CREATED, "topic was created successfully");
-			return new ResponseEntity<Object>(apiMessage, HttpStatus.CREATED);
+		if (result !=null) {
+			Optional<Topic> optional = this.topicService.getTopicByID(result);
+			return new ResponseEntity<Object>(optional.get(), HttpStatus.CREATED);
 		}
 		ApiMessage apiMessage = new ApiMessage(HttpStatus.UNPROCESSABLE_ENTITY, "Topics created failed");
 		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
@@ -107,8 +107,8 @@ public class TopicRest {
 		}
 		int result = this.topicService.updateTopicWithTopicID(topic);
 		if (result > 0) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.OK, "topic was created successfully");
-			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+			Optional<Topic> optional = this.topicService.getTopicByID(topic.getTopicID());
+			return new ResponseEntity<Object>(optional.get(), HttpStatus.OK);
 
 		}
 		ApiMessage apiMessage = new ApiMessage(HttpStatus.UNPROCESSABLE_ENTITY, "create topic failed");

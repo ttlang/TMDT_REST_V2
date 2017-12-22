@@ -23,7 +23,7 @@ public class ChapterRest {
 	@Autowired
 	private CourseService courseService;
 	
-	@RequestMapping(value="/user/course/{courseID}/chapter",method=RequestMethod.GET)
+	@RequestMapping(value="/users/course/{courseID}/chapter",method=RequestMethod.GET)
 	public ResponseEntity<?> getChapterByCourseID(@PathVariable("courseID")String courseID){
 		if(!courseService.getCourseByCourseID(courseID).isPresent()) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND,"course not found");
