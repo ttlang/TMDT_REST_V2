@@ -6,17 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.spring.repository.CourseRepository;
+import com.spring.repository.ChapterRepository;
+import com.spring.service.LessonService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class LessonAttachTest {
+public class LessonTest {
 	@Autowired
-	CourseRepository courseRepository;
+	LessonService lessonService;
+	@Autowired
+	ChapterRepository chapterRepository;
 	@Test
-	public void testGetAuthor() {
-		System.err.println(courseRepository.getAllCourseAuthorIdWithSortAndPaging(1, 10, "ND1", "courseTitle"));
-		
+	public void test() {
+		System.err.println(chapterRepository.getChapterByCourseID("KH1"));
 	}
 	
 }

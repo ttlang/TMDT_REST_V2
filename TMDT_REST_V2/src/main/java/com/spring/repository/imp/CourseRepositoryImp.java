@@ -269,6 +269,7 @@ public class CourseRepositoryImp implements CourseRepository {
 			columnName.put("createDate", "ngay_tao");	
 			columnName.put("price", "don_gia");	
 			columnName.put("views", "ma_khoa_hoc");	
+			columnName.put("courseType", "ma_loai_khoa_hoc");
 			
 			
 		try {

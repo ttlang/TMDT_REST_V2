@@ -5,7 +5,7 @@
 
 	<resultMap type="com.spring.domain.CourseType" id="course_type_result">
 		<id column="ma_loai_khoa_hoc" javaType="java.lang.String" property="courseTypeID"/>
-		<result column="tieu_de"  javaType="java.lang.String" property="courseTitle"/>
+		<result column="tieu_de"  javaType="java.lang.String" property="courseTypeTitle"/>
 		<result column="mo_ta" javaType="java.lang.String" property="courseDescription"/>
 	</resultMap>
 	

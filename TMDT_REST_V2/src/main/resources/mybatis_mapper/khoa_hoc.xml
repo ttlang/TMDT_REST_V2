@@ -80,6 +80,8 @@
 				"select * from khoa_hoc k where k.ma_nguoi_dung ='${authorID}' order by k.${sortPropertie}")} 		
 		</select>
 		
+		
+		
 		<update id="updateCourse" parameterType="java.util.Map" >
 			update khoa_hoc set ${courseProperties} = #{coursePropertiesValue} where ma_khoa_hoc =#{courseID}
 		</update>

@@ -7,7 +7,7 @@
 		<result column="noi_dung" property="lessonContent" javaType="java.lang.String"/>
 		<result column="ma_chuong_muc" property="chapterID" javaType="java.lang.String"/>
 		<result column="luot_xem" property="views" javaType="java.lang.Integer"/>
-
+		<collection column="ma_bai_hoc" select="com.spring.mapper.CommentMapper.getCommentByLessonID" property="listOfComments"></collection>
 	</resultMap>
 
 		<select id="getLessonBychapterID" resultMap="lesson_result_1"  resultType="java.util.List" parameterType="java.lang.String" >
@@ -17,7 +17,6 @@
 		<select id="getLessonByLessonID" resultMap="lesson_result_1">
 			select * from bai_hoc b where b.ma_bai_hoc=#{lessonID}
 		</select>
-		
 		
 		
 	</mapper>
