@@ -171,7 +171,7 @@ public class CourseRest {
 			@RequestParam(value = "size", defaultValue = "1", required = false) int size,
 			@RequestParam(value = "sortPropertie") String sortPropertie) {
 
-		String sortPropertieArr[] = { "courseID", "courseTitle", "courseDescription", "createDate", "price", "views" };
+		String sortPropertieArr[] = { "courseID", "courseTitle", "courseDescription", "createDate", "price", "views","courseType"};
 		if (!Arrays.asList(sortPropertieArr).contains(sortPropertie)) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "sort type " + Arrays.asList(sortPropertieArr).toString());
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
