@@ -7,7 +7,7 @@
 		<result column="tieu_de" property="chapterTitle" javaType="java.lang.String"/>
 		<result column="noi_dung" property="chapterContent" javaType="java.lang.String"/>
 		<result column="tom_tat" property="chapterSummary" javaType="java.lang.String"/>
-		<collection column="ma_chuong_muc" property="listOfLession" select="com.spring.mapper.LessonMapper.getLessonBychapterID"></collection>
+		<collection column="ma_chuong_muc" property="listOfLesson" select="com.spring.mapper.LessonMapper.getLessonBychapterID"></collection>
 	</resultMap>
 	
 	<resultMap type="com.spring.domain.Chapter" id="chapter_result_2">
