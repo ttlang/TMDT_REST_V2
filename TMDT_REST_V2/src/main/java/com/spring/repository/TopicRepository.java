@@ -7,7 +7,7 @@ import com.spring.domain.Topic;
 
 public interface TopicRepository {
 
-	public int createTopic(String topicName, String topicDescription, int topicStatut);
+	public String createTopic(String topicName, String topicDescription, int topicStatut);
 
 	public Map<String, Object> getTopicWithPaging(int page, int size);
 

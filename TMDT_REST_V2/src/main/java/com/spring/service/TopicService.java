@@ -30,7 +30,7 @@ public interface TopicService {
 	 * @param topicStatus
 	 * @return number of row effect
 	 */
-	public int createTopic(String topicTitle, String topicDescription, int topicStatus);
+	public String createTopic(String topicTitle, String topicDescription, int topicStatus);
 	
 	/**
 	 * update topic with topicID

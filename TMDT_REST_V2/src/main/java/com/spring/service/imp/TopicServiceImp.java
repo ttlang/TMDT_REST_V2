@@ -26,7 +26,7 @@ public class TopicServiceImp implements TopicService {
 	}
 
 	@Override
-	public int createTopic(String topicTitle, String topicDescription, int topicStatus) {
+	public String createTopic(String topicTitle, String topicDescription, int topicStatus) {
 		return this.topicRepository.createTopic(topicTitle, topicDescription, topicStatus);
 	}
 
