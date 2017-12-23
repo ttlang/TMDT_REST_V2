@@ -9,5 +9,7 @@ public interface LessonRepository {
 	List<Lesson> getLessonBychapterID(String chapterID);
 	
 	Optional<Lesson>getLessonByLessonID(String lessonID);
+	
+	public List<Lesson>getLessonRelateInChapter(String lessonID);
 
 }

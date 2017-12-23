@@ -16,4 +16,9 @@ public class PermissionCheckImp implements PermissionCheck {
 		return this.courseService.isCourseAuthor(accountID, courseID);
 	}
 
+	@Override
+	public boolean isRegisteredCourse(String userID, String courseID) {
+		return this.courseService.isRegisteredCourse(userID, courseID);
+	}
+
 }

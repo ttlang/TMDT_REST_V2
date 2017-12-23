@@ -19,5 +19,7 @@
 			select * from bai_hoc b where b.ma_bai_hoc=#{lessonID}
 		</select>
 		
-		
+		<select id="getLessonRelateInChapter" parameterType="java.lang.String" resultMap="lesson_result_1">
+			select * from bai_hoc b where b.ma_chuong_muc =(select b2.ma_chuong_muc from bai_hoc b2 where b2.ma_bai_hoc=#{lessonID}) and ma_bai_hoc !=#{lessonID}
+		</select>
 	</mapper>

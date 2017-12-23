@@ -259,23 +259,23 @@ public class CourseRepositoryImp implements CourseRepository {
 		Map<String, Object> param = new HashMap<>();
 		Map<String, Object> columnName = new HashMap<>();
 		Map<String, Object> result = new HashMap<>();
-			param.put("page",page);
-			param.put("size", size);
-			param.put("authorID", authorID);
-			
-			columnName.put("courseID", "ma_khoa_hoc");	
-			columnName.put("courseTitle", "tieu_de");
-			columnName.put("courseDescription", "mo_ta");	
-			columnName.put("createDate", "ngay_tao");	
-			columnName.put("price", "don_gia");	
-			columnName.put("views", "ma_khoa_hoc");	
-			columnName.put("courseType", "ma_loai_khoa_hoc");
-			
-			
+		param.put("page", page);
+		param.put("size", size);
+		param.put("authorID", authorID);
+
+		columnName.put("courseID", "ma_khoa_hoc");
+		columnName.put("courseTitle", "tieu_de");
+		columnName.put("courseDescription", "mo_ta");
+		columnName.put("createDate", "ngay_tao");
+		columnName.put("price", "don_gia");
+		columnName.put("views", "ma_khoa_hoc");
+		columnName.put("courseType", "ma_loai_khoa_hoc");
+
 		try {
-			
+
 			param.put("sortPropertie", columnName.get(sortPropertie));
-			List<Course> listCourses=session.selectList("com.spring.mapper.CourseMapper.getAllCourseAuthorIdWithSortAndPaging",param);
+			List<Course> listCourses = session
+					.selectList("com.spring.mapper.CourseMapper.getAllCourseAuthorIdWithSortAndPaging", param);
 			int numberOfPage = (int) param.get("sumPage");
 			int numberOfRecord = (int) param.get("sumRecord");
 
@@ -285,8 +285,31 @@ public class CourseRepositoryImp implements CourseRepository {
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}
-		
+
 		return result;
+	}
+
+	@Override
+	public boolean isRegisteredCourse(String userID, String courseID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		long result[] = { 0 };
+		try {
+			param.put("userID", userID);
+			param.put("courseID", courseID);
+			List<Map<String, Object>> resultSelect = session.selectList("isRegisteredCourse", param);
+			if (!resultSelect.isEmpty()) {
+				resultSelect.stream().forEach(e -> {
+					result[0] = (long) e.get("result");
+				});
+			}
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return (result[0] == 0) ? false : true;
 	}
 
 }

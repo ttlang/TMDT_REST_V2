@@ -1,10 +1,16 @@
 package com.spring.controller.rest;
 
+
+import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,18 +24,35 @@ import com.spring.service.LessonService;
 public class LessonRest {
 
 	@Autowired
-	private LessonService lessonService;
+	LessonService lessonService;
 
-	@RequestMapping(value = "/users/lesson/{lessonID}", method = RequestMethod.GET)
-	public ResponseEntity<?> getTopic(@PathVariable("lessonID") String lessonID) {
-		Optional<Lesson> lesson = lessonService.getLessonByLessonID(lessonID);
+	@RequestMapping(value = "/lesson{lessonID}", method = RequestMethod.GET)
+	@PreAuthorize("isRegisteredCourse(#lessonID)||hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> getLessonByLessonID(@PathVariable("lessonID") String lessonID) {
+		Optional<Lesson> lesson = this.lessonService.getLessonByLessonID(lessonID);
 		if (!lesson.isPresent()) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "Topic not found");
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "lesson not found");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		} else {
-
 			return new ResponseEntity<Object>(lesson.get(), HttpStatus.OK);
 		}
+
 	}
+
+	
+	@RequestMapping(value = "/lesson/relate/{lessonID}", method = RequestMethod.GET)
+	@PreAuthorize("isRegisteredCourse(#lessonID)||hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> getLessonRelateInChapter(@PathVariable("lessonID") String lessonID) {
+		Optional<Lesson> lesson = this.lessonService.getLessonByLessonID(lessonID);
+		if (!lesson.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "lesson not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		} else {
+			List<Lesson> result = this.lessonService.getLessonRelateInChapter(lessonID);
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		}
+
+
+
 
 }

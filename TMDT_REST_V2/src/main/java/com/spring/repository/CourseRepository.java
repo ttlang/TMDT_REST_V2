@@ -29,6 +29,8 @@ public interface CourseRepository {
 	public List<Course>getCourseByAuthorIDSortByView(String authorID,String sortType,int limitRecord);
 	
 	public Map<String, Object>getAllCourseAuthorIdWithSortAndPaging(int page,int size,String authorID,String sortPropertie);
+	
+	public boolean isRegisteredCourse(String userID,String courseID);
 
 
 }

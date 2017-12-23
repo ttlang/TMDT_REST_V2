@@ -49,4 +49,18 @@ public class LessonRepositoryImp implements LessonRepository {
 		return Optional.ofNullable(lesson);
 	}
 
+	@Override
+	public List<Lesson> getLessonRelateInChapter(String lessonID) {
+		List<Lesson> result = Collections.emptyList();
+		SqlSession session = this.sessionFactory.openSession();
+		try {
+		result =session.selectList("com.spring.mapper.LessonMapper.getLessonRelateInChapter", lessonID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+
 }
