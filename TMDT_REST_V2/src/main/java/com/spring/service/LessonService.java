@@ -8,6 +8,6 @@ import com.spring.domain.Lesson;
 public interface LessonService {
 	Optional<Lesson>getLessonByLessonID(String lessonID);
 	
-	public List<Lesson> getLessonRelateInChapter(String lessonID);
+	public List<Lesson> getAllLessonRelate(String lessonID);
 
 }
