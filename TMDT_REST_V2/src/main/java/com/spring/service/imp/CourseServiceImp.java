@@ -84,4 +84,9 @@ public class CourseServiceImp implements CourseService {
 			String sortPropertie) {
 		return this.courseRepository.getAllCourseAuthorIdWithSortAndPaging(page, size, authorID, sortPropertie);
 	}
+
+	@Override
+	public boolean isRegisteredCourse(String userID, String courseID) {
+		return this.courseRepository.isRegisteredCourse(userID, courseID);
+	}
 }

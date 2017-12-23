@@ -28,4 +28,11 @@ front_end :
   server_port : 4200
   link_reset_password : "/pages/kich-hoat?key-change="
   link_register : "/pages/kich-hoat?key="
+  
+#google drive api
+google :
+  service_account_email : ttlang@ttlang-171013.iam.gserviceaccount.com
+  application_name : ttlang
+  folder_id : 0B27mfRY62YKZaU9Yby1EdGJ5cjg
+  service_account_key : ttlang-f98aaa157b45.p12   
     

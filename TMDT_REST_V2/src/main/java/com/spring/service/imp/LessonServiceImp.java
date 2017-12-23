@@ -1,5 +1,6 @@
 package com.spring.service.imp;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,10 @@ public class LessonServiceImp implements LessonService {
 	@Override
 	public Optional<Lesson> getLessonByLessonID(String lessonID) {
 		return lessonRepository.getLessonByLessonID(lessonID);
+	}
+	
+	@Override
+	public List<Lesson> getLessonRelateInChapter(String lessonID) {
+		return this.lessonRepository.getLessonRelateInChapter(lessonID);
 	}
 }
