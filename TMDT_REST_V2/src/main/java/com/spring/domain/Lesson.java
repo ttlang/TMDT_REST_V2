@@ -10,7 +10,14 @@ public class Lesson {
 	private String chapterID;
 	private Integer views;
 	private List<Comment>listOfComments;
+	private List<LessonAttach> listOfLessonAttach;
 
+	public List<LessonAttach> getListOfLessonAttach() {
+		return listOfLessonAttach;
+	}
+	public void setListOfLessonAttach(List<LessonAttach> listOfLessonAttach) {
+		this.listOfLessonAttach = listOfLessonAttach;
+	}
 	public Lesson(String lessonID, String lessonTitle, String lessonContent, String chapterID, Integer views,
 			List<Comment> listOfComments) {
 		super();
@@ -64,7 +71,18 @@ public class Lesson {
 	@Override
 	public String toString() {
 		return "Lesson [lessonID=" + lessonID + ", lessonTitle=" + lessonTitle + ", lessonContent=" + lessonContent
-				+ ", chapterID=" + chapterID + ", views=" + views + ", listOfComments=" + listOfComments + "]";
+				+ ", chapterID=" + chapterID + ", views=" + views + ", listOfComments=" + listOfComments+ ", listOfLessonAttach=" + listOfLessonAttach + "]";
+	}
+	public Lesson(String lessonID, String lessonTitle, String lessonContent, String chapterID, Integer views,
+			List<Comment> listOfComments, List<LessonAttach> listOfLessonAttach) {
+		super();
+		this.lessonID = lessonID;
+		this.lessonTitle = lessonTitle;
+		this.lessonContent = lessonContent;
+		this.chapterID = chapterID;
+		this.views = views;
+		this.listOfComments = listOfComments;
+		this.listOfLessonAttach = listOfLessonAttach;
 	}
 	
 	
