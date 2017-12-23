@@ -42,17 +42,17 @@ public class LessonRest {
 	
 	@RequestMapping(value = "/lesson/relate/{lessonID}", method = RequestMethod.GET)
 	@PreAuthorize("isRegisteredCourse(#lessonID)||hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?> getLessonRelateInChapter(@PathVariable("lessonID") String lessonID) {
+	public ResponseEntity<?> getAllLessonRelate(@PathVariable("lessonID") String lessonID) {
 		Optional<Lesson> lesson = this.lessonService.getLessonByLessonID(lessonID);
 		if (!lesson.isPresent()) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "lesson not found");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		} else {
-			List<Lesson> result = this.lessonService.getLessonRelateInChapter(lessonID);
+			List<Lesson> result = this.lessonService.getAllLessonRelate(lessonID);
 			return new ResponseEntity<Object>(result, HttpStatus.OK);
 		}
 
-
+	}
 
 
 }

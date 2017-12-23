@@ -42,7 +42,7 @@ public class LessonTest {
 
 	@Test
 	public void testGetLessonByID() {
-		System.out.println(lessonRepository.getLessonByLessonID("KH1CH1BH1"));
+		lessonRepository.getAllLessonRelate("KH1CH1BH1").stream().forEach(e->{System.err.println(e);});
 	}
 
 }

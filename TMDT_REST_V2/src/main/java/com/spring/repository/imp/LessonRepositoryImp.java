@@ -50,11 +50,11 @@ public class LessonRepositoryImp implements LessonRepository {
 	}
 
 	@Override
-	public List<Lesson> getLessonRelateInChapter(String lessonID) {
+	public List<Lesson> getAllLessonRelate(String lessonID) {
 		List<Lesson> result = Collections.emptyList();
 		SqlSession session = this.sessionFactory.openSession();
 		try {
-		result =session.selectList("com.spring.mapper.LessonMapper.getLessonRelateInChapter", lessonID);
+		result =session.selectList("com.spring.mapper.LessonMapper.getAllLessonRelate", lessonID);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {

@@ -21,7 +21,7 @@ public class LessonServiceImp implements LessonService {
 	}
 	
 	@Override
-	public List<Lesson> getLessonRelateInChapter(String lessonID) {
-		return this.lessonRepository.getLessonRelateInChapter(lessonID);
+	public List<Lesson> getAllLessonRelate(String lessonID) {
+		return this.lessonRepository.getAllLessonRelate(lessonID);
 	}
 }
