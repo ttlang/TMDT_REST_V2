@@ -18,4 +18,6 @@ public interface TopicRepository {
 	public int updateTopicWithTopicID(Topic topic);
 	
 	public Map<String, Object>searchTopicWithTopicName(int page, int size,String searchKey);
+	
+	public Map<String, Object>getAllTopicAdmin(int page,int size);
 }

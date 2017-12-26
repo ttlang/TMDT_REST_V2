@@ -54,5 +54,13 @@ public interface TopicService {
 	 * @return Map<String, Object> with two key (listOfResult, numberOfPage)
 	 */
 	public Map<String, Object>searchTopicWithTopicName(int page, int size,String searchKey);
+	
+	/**
+	 * get topic with paging parameter 
+	 * @param page current page begin with 1
+	 * @param size number of record per page
+	 * @return Map<String, Object> with two key (listOfResult, numberOfPage)
+	 */
+	public Map<String, Object>getAllTopicAdmin(int page,int size);
 
 }
