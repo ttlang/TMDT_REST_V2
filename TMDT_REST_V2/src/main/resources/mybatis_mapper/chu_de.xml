@@ -35,7 +35,11 @@
 			 #{sumRecord, mode=OUT,jdbcType=INTEGER},'chu_de')}
 	</select>
 	
-	
+	<select id="getAllTopicAdmin" statementType="CALLABLE" parameterType="java.util.Map" resultMap="topic_result_1">
+		{call proc_paging_query(#{page},#{size},#{sumPage, mode=OUT,jdbcType=INTEGER},
+		#{sumRecord, mode=OUT,jdbcType=INTEGER},
+		"select * from chu_de")}
+	</select>
 	
 	<update id="updateTopicStatus" parameterType="java.util.Map">
 			update chu_de set trang_thai =#{newStatus} where ma_chu_de =#{topicID}

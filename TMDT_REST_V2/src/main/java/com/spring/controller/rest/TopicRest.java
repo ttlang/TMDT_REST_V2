@@ -39,6 +39,17 @@ public class TopicRest {
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/admin/topic", method = RequestMethod.GET, params = { "page", "size" })
+	public ResponseEntity<?> getTopicAdmin(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
+		Map<String, Object> result = this.topicService.getAllTopicAdmin(page, size);
+		if (result.isEmpty()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no topic found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/users/topic/{topicID}/course", method = RequestMethod.GET, params = { "page", "size" })
 	public ResponseEntity<?> getCourseWithTopicID(@PathVariable("topicID") String topicID,
 			@RequestParam(value = "page") int page, @RequestParam("size") int size) {
@@ -88,7 +99,7 @@ public class TopicRest {
 	public ResponseEntity<?> createTopic(@RequestBody TopicCreation topic) {
 		String result = this.topicService.createTopic(topic.getTopicName(), topic.getTopicDescription(),
 				topic.getTopicStatus());
-		if (result !=null) {
+		if (result != null) {
 			Optional<Topic> optional = this.topicService.getTopicByID(result);
 			return new ResponseEntity<Object>(optional.get(), HttpStatus.CREATED);
 		}
