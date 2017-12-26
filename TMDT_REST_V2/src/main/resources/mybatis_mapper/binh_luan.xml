@@ -11,10 +11,25 @@
 		</resultMap>
 
 	<!-- Query Data -->
-	<select id="getCommentByLessonID" resultMap="comment_result_1" resultType="java.util.List" parameterType="java.lang.String">
-		select * from binh_luan b where b.ma_bai_hoc = #{lessonID}
-	</select>
-	
-
+		<select id="getCommentByLessonID" resultMap="comment_result_1" resultType="java.util.List" parameterType="java.lang.String">
+				select * from binh_luan b where b.ma_bai_hoc = #{lessonID}
+		</select>
+		<select id="getCommentBycommentID" resultMap="comment_result_1">
+				select * from binh_luan where ma_binh_luan =#{commentID}
+		</select>
+		
+		<update id="updateCommentContent" parameterType="java.util.Map">
+				update binh_luan set noi_dung =#{commentContent} where ma_binh_luan =#{commentID}
+		</update>
+		
+		<update id="updateCommentStatut" parameterType="java.util.Map">
+				update binh_luan set trang_thai =#{commentStatut} where ma_binh_luan =#{commentID}
+		</update>
+		
+		<delete id="deleteCommentByCommentID" parameterType="java.lang.String">
+				delete from binh_luan where  ma_binh_luan =#{commentID}
+		</delete>
+		
+		
 		</mapper>
 
