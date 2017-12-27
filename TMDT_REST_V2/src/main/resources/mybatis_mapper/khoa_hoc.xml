@@ -80,7 +80,7 @@
 				"select * from khoa_hoc k where k.ma_nguoi_dung ='${authorID}' order by k.${sortPropertie}")} 		
 		</select>
 		
-		<select id="isRegisteredCourse" parameterType="java.util.Map" resultType="java.util.Map">
+		<select id="isRegisteredCourse" parameterType="java.util.Map" resultType="int">
 			select if( EXISTS(select * from dang_ky_khoa_hoc k where  k.ma_nguoi_dung='${userID}' and k.ma_khoa_hoc='${courseID}'), 1, 0) as result
 		</select>
 		

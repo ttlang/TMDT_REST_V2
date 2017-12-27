@@ -9,13 +9,13 @@ public interface CommentService {
 	
 	public List<Comment> getCommentByLessonID(String lessonID);
 
-	public Optional<Comment> getCommentBycommentID(String commentID);
+	public Optional<Comment> getCommentBycommentID(int commentID);
 
-	public int deleteCommentByCommentID(String commentID);
+	public int deleteCommentByCommentID(int commentID);
 	
-	public int updateCommentContent(String commentID,String commentContent);
+	public int updateCommentContent(int commentID,String commentContent);
 	
-	public int updateCommentStatut(String commentID,int commentStatut);
+	public boolean canEditComment(int commentID,String userID);
 	
 
 }
