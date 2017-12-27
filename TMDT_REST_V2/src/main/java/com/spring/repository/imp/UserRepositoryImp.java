@@ -201,4 +201,21 @@ public class UserRepositoryImp implements UserRepository {
 		}
 		return Optional.ofNullable(userCustom);
 	}
+
+	@Override
+	public int updateScore(String userID, double score) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		param.put("userID", userID);
+		param.put("score", score);
+		int resultUpdate = 0;
+		try {
+			resultUpdate = session.update("com.spring.mapper.UserMapper.updateScore", param);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return resultUpdate;
+	}
 }

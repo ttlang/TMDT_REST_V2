@@ -293,23 +293,18 @@ public class CourseRepositoryImp implements CourseRepository {
 	public boolean isRegisteredCourse(String userID, String courseID) {
 		SqlSession session = this.sqlSessionFactory.openSession();
 		Map<String, Object> param = new HashMap<>();
-		long result[] = { 0 };
+		int result =  0 ;
 		try {
 			param.put("userID", userID);
 			param.put("courseID", courseID);
-			List<Map<String, Object>> resultSelect = session.selectList("isRegisteredCourse", param);
-			if (!resultSelect.isEmpty()) {
-				resultSelect.stream().forEach(e -> {
-					result[0] = (long) e.get("result");
-				});
-			}
+			 result = session.selectOne("com.spring.mapper.CourseMapper.isRegisteredCourse", param);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
 			session.close();
 		}
 
-		return (result[0] == 0) ? false : true;
+		return result==1;
 	}
 
 }

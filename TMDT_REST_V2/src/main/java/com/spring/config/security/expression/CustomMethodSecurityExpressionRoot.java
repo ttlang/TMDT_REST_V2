@@ -58,4 +58,9 @@ public class CustomMethodSecurityExpressionRoot extends SecurityExpressionRoot
 		User user = ((UserPrincipal) this.getPrincipal()).getUser();
 		return this.permissionCheck.isRegisteredCourse(user.getUserID(), courseID);
 	}
+
+	public boolean canEditComment(int commentID) {
+		User user = ((UserPrincipal) this.getPrincipal()).getUser();
+		return this.permissionCheck.canEditComment(commentID, user.getUserID());
+	}
 }

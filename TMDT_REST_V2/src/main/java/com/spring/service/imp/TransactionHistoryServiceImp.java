@@ -29,4 +29,11 @@ public class TransactionHistoryServiceImp implements TransactionHistoryService {
 	public Map<String, Object> getTransactionHistoryByTraders(int page, int size, String userID) {
 		return this.transactionHistoryRepository.getTransactionHistoryByTraders(page, size, userID);
 	}
+
+	@Override
+	public String inserTransactionHistory(String transactionFormID, double debt, double balance, String userID,
+			String transactionDescription) {
+		return this.transactionHistoryRepository.inserTransactionHistory(transactionFormID, debt, balance, userID,
+				transactionDescription);
+	}
 }

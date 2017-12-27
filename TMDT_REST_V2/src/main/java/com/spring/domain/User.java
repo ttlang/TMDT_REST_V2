@@ -10,14 +10,14 @@ public class User {
 	private String email;
 	private String avatar;
 	private String password;
-	private Integer score;
+	private Double score;
 	private Integer status;
 	private String address;
 	private String phoneNumber;
 	private List<Role> permission;
 	private LocalDateTime lastPasswordResetDate;
 	public User(String userID, String userName, LocalDateTime registrationDate, String email, String avatar,
-			String password, Integer score, Integer status, String address, String phoneNumber, List<Role> permission,
+			String password, Double score, Integer status, String address, String phoneNumber, List<Role> permission,
 			LocalDateTime lastPasswordResetDate) {
 		super();
 		this.userID = userID;
@@ -33,26 +33,9 @@ public class User {
 		this.permission = permission;
 		this.lastPasswordResetDate = lastPasswordResetDate;
 	}
-	
-	
-	
-	public User(String userID, String userName, String email, String avatar, String address, String phoneNumber) {
-		super();
-		this.userID = userID;
-		this.userName = userName;
-		this.email = email;
-		this.avatar = avatar;
-		this.address = address;
-		this.phoneNumber = phoneNumber;
-	}
-
-
-
 	public User() {
 		super();
 	}
-
-
 	public String getUserID() {
 		return userID;
 	}
@@ -89,10 +72,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Integer getScore() {
+	public Double getScore() {
 		return score;
 	}
-	public void setScore(Integer score) {
+	public void setScore(Double score) {
 		this.score = score;
 	}
 	public Integer getStatus() {
@@ -125,8 +108,6 @@ public class User {
 	public void setLastPasswordResetDate(LocalDateTime lastPasswordResetDate) {
 		this.lastPasswordResetDate = lastPasswordResetDate;
 	}
-
-
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", userName=" + userName + ", registrationDate=" + registrationDate
@@ -134,9 +115,6 @@ public class User {
 				+ ", status=" + status + ", address=" + address + ", phoneNumber=" + phoneNumber + ", permission="
 				+ permission + ", lastPasswordResetDate=" + lastPasswordResetDate + "]";
 	}
-	
-	
-	
 	
 
 }

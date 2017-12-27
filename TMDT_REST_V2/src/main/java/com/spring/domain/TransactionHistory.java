@@ -9,11 +9,11 @@ public class TransactionHistory {
 	private LocalDateTime transactionDate;
 	private TransactionForm transactionForm;
 	private String transactionDescription;
-	private Integer debt;
-	private Integer balance;
+	private Double debt;
+	private Double balance;
 	private	UserInfo traders;
 	public TransactionHistory(String transactionHistoryID, LocalDateTime transactionDate,
-			TransactionForm transactionForm, String transactionDescription, Integer debt, Integer balance,
+			TransactionForm transactionForm, String transactionDescription, Double debt, Double balance,
 			UserInfo traders) {
 		super();
 		this.transactionHistoryID = transactionHistoryID;
@@ -51,16 +51,16 @@ public class TransactionHistory {
 	public void setTransactionDescription(String transactionDescription) {
 		this.transactionDescription = transactionDescription;
 	}
-	public Integer getDebt() {
+	public Double getDebt() {
 		return debt;
 	}
-	public void setDebt(Integer debt) {
+	public void setDebt(Double debt) {
 		this.debt = debt;
 	}
-	public Integer getBalance() {
+	public Double getBalance() {
 		return balance;
 	}
-	public void setBalance(Integer balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
 	public UserInfo getTraders() {
@@ -75,6 +75,7 @@ public class TransactionHistory {
 				+ transactionDate + ", transactionForm=" + transactionForm + ", transactionDescription="
 				+ transactionDescription + ", debt=" + debt + ", balance=" + balance + ", traders=" + traders + "]";
 	}
+
 
 	
 }
