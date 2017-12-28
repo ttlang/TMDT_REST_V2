@@ -32,5 +32,7 @@ public interface UserRepository {
 	public List<String>getKeYResetByUserId(String userID);
 	
 	public Optional<UserInfo> getUserInfo(String userID);
+	
+	public int updateScore(String userID,double score);
 
 }

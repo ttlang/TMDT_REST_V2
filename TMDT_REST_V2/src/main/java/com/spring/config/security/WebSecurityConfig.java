@@ -77,6 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/user/token_reset_password").permitAll()
 				.antMatchers(HttpMethod.GET, "/users/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/user/info/**").permitAll()
+//				.antMatchers(HttpMethod.GET, "/pay/success").permitAll()
 				.antMatchers(HttpMethod.PATCH, "/user/password_reset").permitAll().anyRequest().authenticated().and()
 				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
 				.logoutSuccessHandler(logoutSuccess).deleteCookies(AUTH_COOKIE);

@@ -86,4 +86,27 @@ public class TransactionHistoryRepositoryImp implements TransactionHistoryReposi
 		}
 		return result;
 	}
+
+	@Override
+	public String inserTransactionHistory(String transactionFormID, double debt, double balance, String userID,
+			String transactionDescription) {
+
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		param.put("transactionFormID", transactionFormID);
+		param.put("debt", debt);
+		param.put("balance", balance);
+		param.put("userID", userID);
+		param.put("transactionDescription", transactionDescription);
+		String result = null;
+		try {
+			session.insert("com.spring.mapper.TransactionHistoryMapper.inserTransactionHistory", param);
+			result = (String) param.get("result");
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return result;
+	}
 }

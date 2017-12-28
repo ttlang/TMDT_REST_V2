@@ -198,4 +198,15 @@ public class UserServiceImp implements UserService {
 	public Optional<UserInfo> getUserInfo(String userID) {
 		return this.userRepository.getUserInfo(userID);
 	}
+
+	@Override
+	public int addScore(String userID, double score) {
+		Optional<User> user = Optional.ofNullable(this.userRepository.getUserByUserID(userID));
+		int result = 0;
+		if (user.isPresent()) {
+			double newScore = user.get().getScore() + score;
+			result = this.userRepository.updateScore(userID, newScore);
+		}
+		return result;
+	}
 }

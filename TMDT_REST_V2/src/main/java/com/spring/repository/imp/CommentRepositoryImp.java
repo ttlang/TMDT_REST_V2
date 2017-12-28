@@ -36,7 +36,7 @@ public class CommentRepositoryImp implements CommentRepository {
 	}
 
 	@Override
-	public Optional<Comment> getCommentBycommentID(String commentID) {
+	public Optional<Comment> getCommentBycommentID(int commentID) {
 		Comment comment = new Comment();
 		SqlSession session = this.sessionFactory.openSession();
 		try {
@@ -50,7 +50,7 @@ public class CommentRepositoryImp implements CommentRepository {
 	}
 
 	@Override
-	public int deleteCommentByCommentID(String commentID) {
+	public int deleteCommentByCommentID(int commentID) {
 		SqlSession session = this.sessionFactory.openSession();
 		int result = 0;
 		try {
@@ -64,7 +64,7 @@ public class CommentRepositoryImp implements CommentRepository {
 	}
 
 	@Override
-	public int updateCommentContent(String commentID, String commentContent) {
+	public int updateCommentContent(int commentID, String commentContent) {
 		SqlSession session = this.sessionFactory.openSession();
 		Map<String, Object> param = new HashMap<>();
 		param.put("commentID", commentID);
@@ -80,22 +80,23 @@ public class CommentRepositoryImp implements CommentRepository {
 
 		return resultUpdate;
 	}
+
+
 	@Override
-	public int updateCommentStatut(String commentID, int commentStatut) {
+	public boolean canEditComment(int commentID, String userID) {
 		SqlSession session = this.sessionFactory.openSession();
 		Map<String, Object> param = new HashMap<>();
 		param.put("commentID", commentID);
-		param.put("commentStatut", commentStatut);
-		int resultUpdate = 0;
+		param.put("userID", userID);
+		int result = 0 ;
 		try {
-			resultUpdate = session.update("com.spring.mapper.CommentMapper.updateCommentStatut", param);
+			 result = session.selectOne("com.spring.mapper.CommentMapper.canEditComment", param);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
 			session.close();
 		}
-
-		return resultUpdate;
+		return result == 1;
 	}
 
 }

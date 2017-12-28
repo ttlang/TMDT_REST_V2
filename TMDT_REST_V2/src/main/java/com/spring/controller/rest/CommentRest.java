@@ -44,10 +44,35 @@ public class CommentRest {
 	}
 
 	@RequestMapping(value = "/comment/{commentID}", method = RequestMethod.GET)
-	public ResponseEntity<?> getCommentBycommentID(@PathVariable("commentID") String commentID) {
-		
-		
-		return null;
+	@PreAuthorize("isRegisteredCourse(#lessonID)||hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> getCommentBycommentID(@PathVariable("commentID") int commentID) {
+		Optional<Comment> comment = this.commentService.getCommentBycommentID(commentID);
+		if (!comment.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "comment not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+
+		}
+		return new ResponseEntity<Object>(comment.get(), HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/comment/{commentID}", method = RequestMethod.DELETE)
+	@PreAuthorize("canEditComment(#commentID)||hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> deleteCommentByCommentID(@PathVariable("commentID") int commentID) {
+		Optional<Comment> comment = this.commentService.getCommentBycommentID(commentID);
+		if (!comment.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "comment not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		} else {
+			int result = this.commentService.deleteCommentByCommentID(commentID);
+			if (result > 0) {
+				ApiMessage apiMessage = new ApiMessage(HttpStatus.OK, "comment deleted successfully");
+				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+			} else {
+				ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "comment deleted failed");
+				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+			}
+		}
+
+	}
+	
 }

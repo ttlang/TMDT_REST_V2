@@ -21,23 +21,23 @@ public class CommentServiceImp implements CommentService {
 	}
 
 	@Override
-	public Optional<Comment> getCommentBycommentID(String commentID) {
+	public Optional<Comment> getCommentBycommentID(int commentID) {
 		return this.commentRepository.getCommentBycommentID(commentID);
 	}
 
 	@Override
-	public int deleteCommentByCommentID(String commentID) {
+	public int deleteCommentByCommentID(int commentID) {
 		return this.commentRepository.deleteCommentByCommentID(commentID);
 	}
 
 	@Override
-	public int updateCommentContent(String commentID, String commentContent) {
+	public int updateCommentContent(int commentID, String commentContent) {
 		return this.commentRepository.updateCommentContent(commentID, commentContent);
 	}
 
-	@Override
-	public int updateCommentStatut(String commentID, int commentStatut) {
-		return this.commentRepository.updateCommentStatut(commentID, commentStatut);
-	}
 
+	@Override
+	public boolean canEditComment(int commentID, String userID) {
+		return this.commentRepository.canEditComment(commentID, userID);
+	}
 }

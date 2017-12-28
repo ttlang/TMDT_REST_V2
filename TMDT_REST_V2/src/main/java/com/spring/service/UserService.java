@@ -62,5 +62,6 @@ public interface UserService {
 	
 	
 	public Optional<UserInfo> getUserInfo(String userID);
-
+	
+	public int addScore(String userID,double score) ;
 }
