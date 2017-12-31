@@ -98,7 +98,7 @@ public class PaypalRest {
 		if (payment.getState().equals("approved")) {
 			Double total = Double.valueOf(payment.getTransactions().get(0).getAmount().getTotal());
 			Double score = Double
-					.valueOf(this.currencyService.moneyToScore(this.currencyService.currencyConvert(total)));
+					.valueOf(this.currencyService.moneyToScore(this.currencyService.currencyConvert(total,"USD","VND")));
 			String authToken = this.tokenHelper.getToken(request);
 			if (authToken != null && this.tokenHelper.getUsernameFromToken(authToken) != null) {
 				User user = userService.getUserByEmail(this.tokenHelper.getUsernameFromToken(authToken));

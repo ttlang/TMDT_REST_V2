@@ -34,6 +34,12 @@
 		
 		<!-- QUERY data -->
 		
+		<select id="getListUserInfo" resultMap="user_result_2" statementType="CALLABLE" parameterType="java.util.Map">
+			{call proc_paging_query(#{page},#{size},
+			#{sumPage, mode=OUT,jdbcType=INTEGER},
+			#{sumRecord, mode=OUT,jdbcType=INTEGER},
+			"select * from nguoi_dung")}
+		</select>
 		
 		<select id="getUserByUserID" parameterType="java.lang.String" statementType="CALLABLE"  resultMap="user_result_1">
 			{call get_nguoi_dung_by_ma_nguoi_dung(#{userID,mode=IN})}
@@ -64,5 +70,8 @@
 			update nguoi_dung set diem =#{score} where ma_nguoi_dung = #{userID}
 		</insert>
 		
+		<update id="updateUserInfo" parameterMap="java.util.Map">
+			update nguoi_dung set '${column}' =#{value} where ma_nguoi_dung = #{userID}
+		</update>
 		
 		</mapper>

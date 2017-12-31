@@ -9,5 +9,7 @@ public interface LessonService {
 	Optional<Lesson>getLessonByLessonID(String lessonID);
 	
 	public List<Lesson> getAllLessonRelate(String lessonID);
+	
+	public String getCourseIDByLessonID(String lessonID);
 
 }

@@ -25,4 +25,12 @@
 		 inner join chuong_muc c on b.ma_chuong_muc = c.ma_chuong_muc  
 		 inner join khoa_hoc k on c.ma_khoa_hoc = k.ma_khoa_hoc where b.ma_bai_hoc =#{lessonID})
 		</select>
+		
+		<select id="getCourseIDByLessonID" parameterType="java.lang.String" resultType="java.lang.String">
+		select distinct k.ma_khoa_hoc from bai_hoc b  join chuong_muc c on b.ma_chuong_muc = c.ma_chuong_muc  
+		 inner join khoa_hoc k on c.ma_khoa_hoc = k.ma_khoa_hoc where k.ma_khoa_hoc=(select k.ma_khoa_hoc from bai_hoc b  
+		 inner join chuong_muc c on b.ma_chuong_muc = c.ma_chuong_muc  
+		 inner join khoa_hoc k on c.ma_khoa_hoc = k.ma_khoa_hoc where b.ma_bai_hoc =#{lessonID});
+		</select>
+		
 	</mapper>

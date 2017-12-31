@@ -45,4 +45,7 @@ paypal:
       secret: ED3cyFA1zIpnzAruyGNrusBRfPxbmT9ZSBT_RbecZS3hdkaODrhPItM0iy0fcYIO7GyUDT-xT_5M8Prn
   success_url : pay/success
   cancle      : pay/cancel 
+  
+#currency
+vnd_to_score : 1000.0  
     
