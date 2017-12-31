@@ -209,4 +209,15 @@ public class UserServiceImp implements UserService {
 		}
 		return result;
 	}
+
+	@Override
+	public boolean checkBalance(String userID, double banlance) {
+		User user = this.userRepository.getUserByUserID(userID);
+		return user.getScore() >= banlance;
+	}
+
+	@Override
+	public Map<String, Object> getListUserInfo(int page, int size) {
+		return this.userRepository.getListUserInfo(page, size);
+	}
 }
