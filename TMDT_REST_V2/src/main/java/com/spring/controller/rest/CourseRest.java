@@ -165,15 +165,18 @@ public class CourseRest {
 
 	}
 
-	@RequestMapping(value = "/users/course/{authorID}", params = { "sortPropertie", "page", "size" },method=RequestMethod.GET)
+	@RequestMapping(value = "/users/course/{authorID}", params = { "sortPropertie", "page",
+			"size" }, method = RequestMethod.GET)
 	public ResponseEntity<?> getAllCourseAuthorIdWithSortAndPaging(@PathVariable("authorID") String authorID,
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "size", defaultValue = "1", required = false) int size,
 			@RequestParam(value = "sortPropertie") String sortPropertie) {
 
-		String sortPropertieArr[] = { "courseID", "courseTitle", "courseDescription", "createDate", "price", "views","courseType"};
+		String sortPropertieArr[] = { "courseID", "courseTitle", "courseDescription", "createDate", "price", "views",
+				"courseType" };
 		if (!Arrays.asList(sortPropertieArr).contains(sortPropertie)) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "sort type " + Arrays.asList(sortPropertieArr).toString());
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST,
+					"sort type " + Arrays.asList(sortPropertieArr).toString());
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		} else {
 			if (userService.getUserByUserID(authorID) == null) {
@@ -185,5 +188,17 @@ public class CourseRest {
 			return new ResponseEntity<Object>(result, HttpStatus.OK);
 		}
 
+	}
+
+	@RequestMapping(value = "/users/courses-featured", params = { "page", "size" }, method = RequestMethod.GET)
+	public ResponseEntity<?> coursesFeatured(
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
+		Map<String, Object> result = this.courseService.getListCoursesFeatured(page, size);
+		if (result.isEmpty()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no topic found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 }

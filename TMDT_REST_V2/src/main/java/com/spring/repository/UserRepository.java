@@ -33,4 +33,6 @@ public interface UserRepository {
 	
 	public Map<String, Object>getListUserInfo(int page,int size);
 
+	public Map<String, Object> getUserWithPaging(int page, int size);
+
 }

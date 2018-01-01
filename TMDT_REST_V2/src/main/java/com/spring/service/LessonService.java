@@ -12,4 +12,8 @@ public interface LessonService {
 	
 	public String getCourseIDByLessonID(String lessonID);
 
+	public Optional<Lesson> getFirstLessonInCourse(String courseID);
+
+
+
 }
