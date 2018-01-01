@@ -223,7 +223,7 @@ public class UserRest {
 			return new ResponseEntity<Object>(userInfo.get(), HttpStatus.OK);
 		}
 	}
-<<<<<<< HEAD
+
 	/** quản lý danh sách người dùng
 	 * @param  page  & size
 	 * return danh sách người dùng
@@ -245,8 +245,6 @@ public class UserRest {
 		return null;
 	}
 	
-=======
 
->>>>>>> master
 	
 }
