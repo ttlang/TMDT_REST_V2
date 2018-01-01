@@ -54,13 +54,28 @@ public class LessonRepositoryImp implements LessonRepository {
 		List<Lesson> result = Collections.emptyList();
 		SqlSession session = this.sessionFactory.openSession();
 		try {
-		result =session.selectList("com.spring.mapper.LessonMapper.getAllLessonRelate", lessonID);
+			result = session.selectList("com.spring.mapper.LessonMapper.getAllLessonRelate", lessonID);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
 			session.close();
 		}
 		return result;
+	}
+
+	@Override
+	public Optional<Lesson> getFirstLessonInCourse(String courseID) {
+		 Lesson result  = null;
+		SqlSession session = this.sessionFactory.openSession();
+		try {
+			result = session.selectOne("com.spring.mapper.LessonMapper.getFirstLessonInCourse", courseID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return  Optional.ofNullable(result);
 	}
 
 }

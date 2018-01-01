@@ -89,4 +89,9 @@ public class CourseServiceImp implements CourseService {
 	public boolean isRegisteredCourse(String userID, String courseID) {
 		return this.courseRepository.isRegisteredCourse(userID, courseID);
 	}
+
+	@Override
+	public Map<String, Object> getListCoursesFeatured(int page, int size) {
+		return this.courseRepository.getListCoursesFeatured(page, size);
+	}
 }

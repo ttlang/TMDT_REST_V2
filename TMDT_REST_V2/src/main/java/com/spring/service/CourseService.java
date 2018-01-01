@@ -103,4 +103,6 @@ public interface CourseService {
 	public Map<String, Object>getAllCourseAuthorIdWithSortAndPaging(int page,int size,String authorID,String sortPropertie);
 	
 	public boolean isRegisteredCourse(String userID,String courseID);
+
+	public Map<String, Object> getListCoursesFeatured(int page, int size);
 }

@@ -24,4 +24,10 @@ public class LessonServiceImp implements LessonService {
 	public List<Lesson> getAllLessonRelate(String lessonID) {
 		return this.lessonRepository.getAllLessonRelate(lessonID);
 	}
+
+	@Override
+	public Optional<Lesson> getFirstLessonInCourse(String courseID) {
+		return this.lessonRepository.getFirstLessonInCourse(courseID);
+	}
+
 }

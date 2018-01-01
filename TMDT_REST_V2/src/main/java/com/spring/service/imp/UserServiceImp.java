@@ -198,4 +198,9 @@ public class UserServiceImp implements UserService {
 	public Optional<UserInfo> getUserInfo(String userID) {
 		return this.userRepository.getUserInfo(userID);
 	}
+
+	@Override
+	public Map<String, Object> getUserWithPaging(int page, int size) {
+		return this.userRepository.getUserWithPaging(page, size);
+	}
 }

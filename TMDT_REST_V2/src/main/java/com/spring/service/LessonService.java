@@ -10,4 +10,8 @@ public interface LessonService {
 	
 	public List<Lesson> getAllLessonRelate(String lessonID);
 
+	public Optional<Lesson> getFirstLessonInCourse(String courseID);
+
+
+
 }

@@ -62,5 +62,6 @@ public interface UserService {
 	
 	
 	public Optional<UserInfo> getUserInfo(String userID);
+	public Map<String, Object> getUserWithPaging(int page, int size);
 
 }

@@ -32,5 +32,7 @@ public interface CourseRepository {
 	
 	public boolean isRegisteredCourse(String userID,String courseID);
 
+	public Map<String, Object> getListCoursesFeatured(int page, int size);
+
 
 }

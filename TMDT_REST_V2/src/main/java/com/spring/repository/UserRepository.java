@@ -2,6 +2,7 @@ package com.spring.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.spring.domain.User;
@@ -32,5 +33,7 @@ public interface UserRepository {
 	public List<String>getKeYResetByUserId(String userID);
 	
 	public Optional<UserInfo> getUserInfo(String userID);
+
+	public Map<String, Object> getUserWithPaging(int page, int size);
 
 }

@@ -25,4 +25,7 @@
 		 inner join chuong_muc c on b.ma_chuong_muc = c.ma_chuong_muc  
 		 inner join khoa_hoc k on c.ma_khoa_hoc = k.ma_khoa_hoc where b.ma_bai_hoc =#{lessonID})
 		</select>
+		 <select  id="getFirstLessonInCourse"  parameterType="java.lang.String" resultMap="lesson_result_1">
+		 select  * from bai_hoc b  where b.ma_chuong_muc in (select  ma_chuong_muc from chuong_muc c where c.ma_khoa_hoc= #{courseID}) limit 0,1
+		 </select>
 	</mapper>

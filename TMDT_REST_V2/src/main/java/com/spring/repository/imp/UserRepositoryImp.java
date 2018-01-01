@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import com.spring.domain.Topic;
 import com.spring.domain.User;
 import com.spring.domain.custom.UserInfo;
 import com.spring.repository.UserRepository;
@@ -200,5 +201,28 @@ public class UserRepositoryImp implements UserRepository {
 			session.close();
 		}
 		return Optional.ofNullable(userCustom);
+	}
+
+	@Override
+	public Map<String, Object> getUserWithPaging(int page, int size) {
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			param.put("page", page);
+			param.put("size", size);
+			List<Topic> listUserResult = sqlSession.selectList("com.spring.mapper.UserMapper.getUserWithPaging",
+					param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord =(int) param.get("sumRecord");
+			result.put("listOfResult", listUserResult);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			sqlSession.close();
+		}
+		return result;
 	}
 }
