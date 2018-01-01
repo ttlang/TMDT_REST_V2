@@ -200,7 +200,29 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public Map<String, Object> getUserWithPaging(int page, int size) {
 		return this.userRepository.getUserWithPaging(page, size);
+=======
+	public int addScore(String userID, double score) {
+		Optional<User> user = Optional.ofNullable(this.userRepository.getUserByUserID(userID));
+		int result = 0;
+		if (user.isPresent()) {
+			double newScore = user.get().getScore() + score;
+			result = this.userRepository.updateScore(userID, newScore);
+		}
+		return result;
+	}
+
+	@Override
+	public boolean checkBalance(String userID, double banlance) {
+		User user = this.userRepository.getUserByUserID(userID);
+		return user.getScore() >= banlance;
+	}
+
+	@Override
+	public Map<String, Object> getListUserInfo(int page, int size) {
+		return this.userRepository.getListUserInfo(page, size);
+>>>>>>> master
 	}
 }

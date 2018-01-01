@@ -34,14 +34,20 @@ public class TopicServiceImp implements TopicService {
 	public int updateTopicWithTopicID(Topic topic) {
 		return this.topicRepository.updateTopicWithTopicID(topic);
 	}
-	
+
 	@Override
 	public Optional<Topic> getTopicByID(String topicID) {
 		return this.topicRepository.getTopicByID(topicID);
 	}
+
 	@Override
 	public Map<String, Object> searchTopicWithTopicName(int page, int size, String searchKey) {
 		return this.topicRepository.searchTopicWithTopicName(page, size, searchKey);
 	}
-	
+
+	@Override
+	public Map<String, Object> getAllTopicAdmin(int page, int size) {
+		return this.topicRepository.getAllTopicAdmin(page, size);
+	}
+
 }

@@ -137,7 +137,7 @@ public class UserRest {
 	 */
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> createUser(@RequestBody UserCustom userCustom ) {
+	public ResponseEntity<?> createUser(@RequestBody UserCustom userCustom) {
 		boolean resultOfCreate = false;
 		if (userCustom == null) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "request body is null");
@@ -212,7 +212,7 @@ public class UserRest {
 
 	}
 
-	@RequestMapping(value = "/info/{userID}",method=RequestMethod.GET)
+	@RequestMapping(value = "/info/{userID}", method = RequestMethod.GET)
 	public ResponseEntity<?> getUserInfo(@PathVariable("userID") String userID) {
 		Optional<UserInfo> userInfo = this.userService.getUserInfo(userID);
 		if (!userInfo.isPresent()) {
@@ -223,6 +223,7 @@ public class UserRest {
 			return new ResponseEntity<Object>(userInfo.get(), HttpStatus.OK);
 		}
 	}
+<<<<<<< HEAD
 	/** quản lý danh sách người dùng
 	 * @param  page  & size
 	 * return danh sách người dùng
@@ -244,5 +245,8 @@ public class UserRest {
 		return null;
 	}
 	
+=======
+
+>>>>>>> master
 	
 }

@@ -204,6 +204,7 @@ public class UserRepositoryImp implements UserRepository {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public Map<String, Object> getUserWithPaging(int page, int size) {
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> param = new HashMap<>();
@@ -216,12 +217,47 @@ public class UserRepositoryImp implements UserRepository {
 			int numberOfPage = (int) param.get("sumPage");
 			int numberOfRecord =(int) param.get("sumRecord");
 			result.put("listOfResult", listUserResult);
+=======
+	public int updateScore(String userID, double score) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		param.put("userID", userID);
+		param.put("score", score);
+		int resultUpdate = 0;
+		try {
+			resultUpdate = session.update("com.spring.mapper.UserMapper.updateScore", param);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return resultUpdate;
+	}
+
+	@Override
+	public Map<String, Object> getListUserInfo(int page, int size) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+		param.put("page", page);
+		param.put("size", size);
+		try {
+			List<UserInfo> listOfResults = session.selectList("com.spring.mapper.UserMapper.getListUserInfo", param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+
+			result.put("listOfResult", listOfResults);
+>>>>>>> master
 			result.put("numberOfPage", numberOfPage);
 			result.put("numberOfRecord", numberOfRecord);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
+<<<<<<< HEAD
 			sqlSession.close();
+=======
+			session.close();
+>>>>>>> master
 		}
 		return result;
 	}

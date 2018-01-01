@@ -34,5 +34,18 @@ google :
   service_account_email : ttlang@ttlang-171013.iam.gserviceaccount.com
   application_name : ttlang
   folder_id : 0B27mfRY62YKZaU9Yby1EdGJ5cjg
-  service_account_key : ttlang-f98aaa157b45.p12   
+  service_account_key : ttlang-f98aaa157b45.p12  
+  
+
+#paypal
+paypal:
+  mode: sandbox
+  client:
+      app: ATxYEuV1ZntyEvEIdUYk8gzjMrArES481gUUaGCqiD1vgTBziUNJSBwwWUtWTbS5owaTHNQSiMLpYTpi
+      secret: ED3cyFA1zIpnzAruyGNrusBRfPxbmT9ZSBT_RbecZS3hdkaODrhPItM0iy0fcYIO7GyUDT-xT_5M8Prn
+  success_url : pay/success
+  cancle      : pay/cancel 
+  
+#currency
+vnd_to_score : 1000.0  
     

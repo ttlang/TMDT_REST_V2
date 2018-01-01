@@ -8,12 +8,12 @@ public class Author {
 	private LocalDateTime registrationDate;
 	private String email;
 	private String avatar;
-	private Integer score;
+	private Double score;
 	private String address;
 	private String phoneNumber;
 	private int numberOfCourses;
 	public Author(String userID, String userName, LocalDateTime registrationDate, String email, String avatar,
-			Integer score, String address, String phoneNumber, int numberOfCourses) {
+			Double score, String address, String phoneNumber, int numberOfCourses) {
 		super();
 		this.userID = userID;
 		this.userName = userName;
@@ -58,10 +58,10 @@ public class Author {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-	public Integer getScore() {
+	public Double getScore() {
 		return score;
 	}
-	public void setScore(Integer score) {
+	public void setScore(Double score) {
 		this.score = score;
 	}
 	public String getAddress() {
