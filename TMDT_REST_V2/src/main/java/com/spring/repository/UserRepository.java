@@ -32,6 +32,10 @@ public interface UserRepository {
 	public int updateScore(String userID,double score);
 	
 	public Map<String, Object>getListUserInfo(int page,int size);
+	
+	public int updateUserInfo(String column,Object value,String userID);
+	
+	public int updateUserInfo(String userName,String avatar,String address,String phoneNumber,String userID);
 
 	public Map<String, Object> getUserWithPaging(int page, int size);
 

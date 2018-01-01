@@ -224,4 +224,9 @@ public class UserServiceImp implements UserService {
 	public Map<String, Object> getListUserInfo(int page, int size) {
 		return this.userRepository.getListUserInfo(page, size);
 	}
+
+	@Override
+	public int updateUserInfo(String userName, String avatar, String address, String phoneNumber, String userID) {
+		return this.userRepository.updateUserInfo(userName, avatar, address, phoneNumber, userID);
+	}
 }

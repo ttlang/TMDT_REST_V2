@@ -1,16 +1,22 @@
 package com.spring.controller.rest;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.config.api.ApiMessage;
+import com.spring.domain.User;
+import com.spring.domain.custom.UserInfo;
+import com.spring.domain.json.UserInfoUpdate;
 import com.spring.service.UserService;
 
 @RestController
@@ -28,5 +34,24 @@ public class UserManageRest {
 		}
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 
+	}
+
+	@RequestMapping(value = "/admin/user_info", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ROLE_ADMIN')||isAccountOwner(#infoUpdate.userID)")
+	public ResponseEntity<?> updateUserInfo(@RequestBody UserInfoUpdate infoUpdate) {
+		User user = this.userService.getUserByUserID(infoUpdate.getUserID());
+		if (user == null) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "user not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+		int resultOfUpdate = this.userService.updateUserInfo(infoUpdate.getUserName(), infoUpdate.getAvatar(),
+				infoUpdate.getAddress(), infoUpdate.getPhoneNumber(), infoUpdate.getUserID());
+		long numberOfFieldNotNull = infoUpdate.getNonNullFieldCount();
+		if (resultOfUpdate < numberOfFieldNotNull - 1) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "user info update failed");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+		Optional<UserInfo> info = this.userService.getUserInfo(infoUpdate.getUserID());
+		return new ResponseEntity<Object>(info.get(), HttpStatus.OK);
 	}
 }

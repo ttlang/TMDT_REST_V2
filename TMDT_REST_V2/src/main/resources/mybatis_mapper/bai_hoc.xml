@@ -37,5 +37,13 @@
 		 inner join chuong_muc c on b.ma_chuong_muc = c.ma_chuong_muc  
 		 inner join khoa_hoc k on c.ma_khoa_hoc = k.ma_khoa_hoc where b.ma_bai_hoc =#{lessonID});
 		</select>
+		
+		<insert id="insertLesson" statementType="CALLABLE" parameterType="java.util.Map">
+			{call insert_bai_hoc(#{lessonTitle}, #{lessonContent}, #{chapterID},#{result, mode=OUT,jdbcType=VARCHAR})}
+		</insert>
+		
+		<update id="updateLesson" parameterType="java.util.Map">
+			update bai_hoc  set ${column} =#{value}  where ma_bai_hoc =#{lessonID}
+		</update>
 
 	</mapper>
