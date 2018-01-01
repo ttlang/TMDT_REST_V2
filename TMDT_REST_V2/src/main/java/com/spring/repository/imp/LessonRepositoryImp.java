@@ -64,9 +64,8 @@ public class LessonRepositoryImp implements LessonRepository {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public Optional<Lesson> getFirstLessonInCourse(String courseID) {
-		 Lesson result  = null;
+		Lesson result = null;
 		SqlSession session = this.sessionFactory.openSession();
 		try {
 			result = session.selectOne("com.spring.mapper.LessonMapper.getFirstLessonInCourse", courseID);
@@ -76,20 +75,20 @@ public class LessonRepositoryImp implements LessonRepository {
 		} finally {
 			session.close();
 		}
-		return  Optional.ofNullable(result);
-=======
+		return Optional.ofNullable(result);
+	}
+
 	public String getCourseIDByLessonID(String lessonID) {
 		SqlSession session = this.sessionFactory.openSession();
 		String courseID = null;
 		try {
-		courseID=session.selectOne("com.spring.mapper.LessonMapper.getCourseIDByLessonID", lessonID);
+			courseID = session.selectOne("com.spring.mapper.LessonMapper.getCourseIDByLessonID", lessonID);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
-		}finally {
+		} finally {
 			session.close();
 		}
 		return courseID;
->>>>>>> master
 	}
 
 }
