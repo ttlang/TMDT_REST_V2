@@ -77,5 +77,7 @@ public interface UserService {
 	public boolean checkBalance(String userID, double banlance);
 
 	public Map<String, Object> getListUserInfo(int page, int size);
+	
+	public int updateUserInfo(String userName,String avatar,String address,String phoneNumber,String userID);
 
 }

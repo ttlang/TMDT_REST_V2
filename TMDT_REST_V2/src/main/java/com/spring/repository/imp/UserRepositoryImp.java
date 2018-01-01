@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
@@ -240,5 +241,71 @@ public class UserRepositoryImp implements UserRepository {
 			session.close();
 		}
 		return result;
+	}
+
+	@Override
+	public int updateUserInfo(String column, Object value, String userID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		int result = 0;
+		param.put("column", column);
+		param.put("value", value);
+		param.put("userID", userID);
+		try {
+
+			result = session.update("com.spring.mapper.UserMapper.updateUserInfo", param);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+
+	@Override
+	public int updateUserInfo(String userName, String avatar, String address, String phoneNumber, String userID) {
+		SqlSession session = this.sqlSessionFactory.openSession(ExecutorType.BATCH, false);
+		Map<String, Object> param = new HashMap<>();
+		Map<String, String> columnName = new HashMap<>();
+		int resultUpdate = 0;
+		param.put("userName", userName);
+		param.put("avatar", avatar);
+		param.put("address", address);
+		param.put("phoneNumber", phoneNumber);
+
+		columnName.put("userName", "ten_nguoi_dung");
+		columnName.put("avatar", "anh_dai_dien");
+		columnName.put("address", "dia_chi");
+		columnName.put("phoneNumber", "sdt");
+		try {
+			param.entrySet().removeIf(e -> e.getValue() == null);
+			for (Map.Entry<String, Object> p2 : param.entrySet()) {
+				Map<String, Object> p = new HashMap<>();
+				p.put("column", columnName.get(p2.getKey()));
+				p.put("value", p2.getValue());
+				p.put("userID", userID);
+
+				resultUpdate += session.update("com.spring.mapper.UserMapper.updateUserInfo", p);
+			}
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			session.rollback();
+			session.close();
+		}
+		if (resultUpdate == (param.size() * -2147482646)) {
+			try {
+				session.commit();
+				session.close();
+				return param.size();
+
+			} catch (Exception e) {
+				LOGGER.error(e.getMessage());
+			}
+		}
+		session.rollback();
+		session.close();
+		return 0;
+
 	}
 }

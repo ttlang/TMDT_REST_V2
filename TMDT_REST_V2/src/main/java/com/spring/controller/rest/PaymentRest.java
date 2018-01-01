@@ -1,5 +1,7 @@
 package com.spring.controller.rest;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,6 +71,46 @@ public class PaymentRest {
 	}
 
 	@RequestMapping(value = "/payment/course/register")
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public ResponseEntity<?> courseRegister(@RequestBody List<CourseRegisterInfo> registerInfo,
+			HttpServletRequest request) {
+		String email = this.tokenHelper.getUsernameFromToken(this.tokenHelper.getToken(request));
+		User user = this.userService.getUserByEmail(email);
+
+		List<Optional<Course>> listCourse = new ArrayList<>();
+		for (CourseRegisterInfo r : registerInfo) {
+			Optional<Course> course = courseService.getCourseByCourseID(r.getCourseID());
+			if (!course.isPresent()) {
+				ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "course not found");
+				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+			} else {
+				listCourse.add(course);
+			}
+
+		}
+		double priceForCourseRegister[] = {0};
+		listCourse.stream().forEach(l -> {
+			priceForCourseRegister[0] += l.get().getPrice();
+		});
+
+		if (user.getScore() < priceForCourseRegister[0]) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_ACCEPTABLE,
+					"The balance is not enough to make a transaction");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+		List<TransactionHistory> listOfTransaction = new ArrayList<>();
+		for (CourseRegisterInfo r : registerInfo) {
+			String transactionHistoryID = paymentService.courseRegister(user.getUserID(), r.getCourseID());
+			Optional<TransactionHistory> th = this.transactionHistoryService.getTransactionHistoryByID(transactionHistoryID);
+			listOfTransaction.add(th.get());
+		}
+
+
+		return new ResponseEntity<Object>(listOfTransaction, HttpStatus.CREATED);
+
+	}
+	
+	@RequestMapping(value = "/payment/course/register/one")
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> courseRegister(@RequestBody CourseRegisterInfo registerInfo, HttpServletRequest request) {
 		String email = this.tokenHelper.getUsernameFromToken(this.tokenHelper.getToken(request));

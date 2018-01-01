@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.config.api.ApiMessage;
 import com.spring.domain.Comment;
 import com.spring.domain.Lesson;
+import com.spring.domain.json.CommentUpdate;
 import com.spring.service.CommentService;
 import com.spring.service.LessonService;
 
@@ -74,5 +76,23 @@ public class CommentRest {
 		}
 
 	}
-	
+
+	@RequestMapping(value = "/comment", method = RequestMethod.PATCH)
+	@PreAuthorize("canEditComment(#commentID)||hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> updateCommentContent(@RequestBody CommentUpdate commentUpdate) {
+		Optional<Comment> comment = this.commentService.getCommentBycommentID(commentUpdate.getCommentID());
+		if (!comment.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "comment not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+		int resultOfUpdate = this.commentService.updateCommentContent(commentUpdate.getCommentID(),
+				commentUpdate.getCommentContent());
+		if (resultOfUpdate < 0) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "comment update failed");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+		Optional<Comment> commentAfterUpdate = this.commentService.getCommentBycommentID(commentUpdate.getCommentID());
+		return new ResponseEntity<Object>(commentAfterUpdate.get(), HttpStatus.OK);
+	}
+
 }

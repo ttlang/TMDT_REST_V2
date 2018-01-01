@@ -6,15 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.spring.repository.WatchLaterRepository;
+import com.spring.repository.LessonRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AppTest {
 	@Autowired
-	WatchLaterRepository watchLaterRepository;
+	LessonRepository lessonRepository;
 	@Test
-	public void testGetListCourseRegisterByCourseID() {
-		System.err.println(watchLaterRepository.insertWatchLater("ND2", "KH2"));
+	public void testA() {
+		int a = lessonRepository.updateLesson("Thực hành", "abc", null, "KH6CH12BH28");
+		System.err.println(a);
 	}
 }

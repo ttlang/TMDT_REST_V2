@@ -70,8 +70,8 @@
 			update nguoi_dung set diem =#{score} where ma_nguoi_dung = #{userID}
 		</insert>
 		
-		<update id="updateUserInfo" parameterMap="java.util.Map">
-			update nguoi_dung set '${column}' =#{value} where ma_nguoi_dung = #{userID}
+		<update id="updateUserInfo" parameterType="java.util.Map">
+			update nguoi_dung set ${column} =#{value} where ma_nguoi_dung = #{userID}
 		</update>
 		
 		</mapper>
