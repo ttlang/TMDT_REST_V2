@@ -71,6 +71,7 @@ public interface UserService {
 	public int removeKeyReset(String userID, String keyReset);
 
 	public Optional<UserInfo> getUserInfo(String userID);
+	public Map<String, Object> getUserWithPaging(int page, int size);
 
 	public int addScore(String userID, double score);
 

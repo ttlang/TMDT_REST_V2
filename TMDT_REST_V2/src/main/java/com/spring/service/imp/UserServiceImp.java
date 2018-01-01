@@ -200,6 +200,10 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
+	public Map<String, Object> getUserWithPaging(int page, int size) {
+		return this.userRepository.getUserWithPaging(page, size);
+	}
+
 	public int addScore(String userID, double score) {
 		Optional<User> user = Optional.ofNullable(this.userRepository.getUserByUserID(userID));
 		int result = 0;

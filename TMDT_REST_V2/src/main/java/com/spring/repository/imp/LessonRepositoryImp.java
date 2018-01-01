@@ -67,6 +67,20 @@ public class LessonRepositoryImp implements LessonRepository {
 	}
 
 	@Override
+	public Optional<Lesson> getFirstLessonInCourse(String courseID) {
+		Lesson result = null;
+		SqlSession session = this.sessionFactory.openSession();
+		try {
+			result = session.selectOne("com.spring.mapper.LessonMapper.getFirstLessonInCourse", courseID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return Optional.ofNullable(result);
+	}
+
 	public String getCourseIDByLessonID(String lessonID) {
 		SqlSession session = this.sessionFactory.openSession();
 		String courseID = null;

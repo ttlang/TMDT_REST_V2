@@ -26,6 +26,11 @@ public class LessonServiceImp implements LessonService {
 	}
 
 	@Override
+	public Optional<Lesson> getFirstLessonInCourse(String courseID) {
+		return this.lessonRepository.getFirstLessonInCourse(courseID);
+	}
+
+	@Override
 	public String getCourseIDByLessonID(String lessonID) {
 		return this.lessonRepository.getCourseIDByLessonID(lessonID);
 	}

@@ -1,6 +1,5 @@
 package com.spring.controller.rest;
 
-
 import java.util.List;
 
 import java.util.Optional;
@@ -26,7 +25,7 @@ public class LessonRest {
 	@Autowired
 	LessonService lessonService;
 
-	@RequestMapping(value = "/lesson{lessonID}", method = RequestMethod.GET)
+	@RequestMapping(value = "/lesson/{lessonID}", method = RequestMethod.GET)
 	@PreAuthorize("isRegisteredCourse(#lessonID)||hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> getLessonByLessonID(@PathVariable("lessonID") String lessonID) {
 		Optional<Lesson> lesson = this.lessonService.getLessonByLessonID(lessonID);
@@ -39,7 +38,6 @@ public class LessonRest {
 
 	}
 
-	
 	@RequestMapping(value = "/lesson/relate/{lessonID}", method = RequestMethod.GET)
 	@PreAuthorize("isRegisteredCourse(#lessonID)||hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> getAllLessonRelate(@PathVariable("lessonID") String lessonID) {
@@ -54,5 +52,15 @@ public class LessonRest {
 
 	}
 
+	@RequestMapping(value = "/users/lesson/first-lesson-course/{courseID}", method = RequestMethod.GET)
+	public ResponseEntity<?> getFirstLessonInCourse(@PathVariable("courseID") String courseID) {
+		Optional<Lesson> lesson = lessonService.getFirstLessonInCourse(courseID);
+		if (!lesson.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "lesson not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		} else {
+			return new ResponseEntity<Object>(lesson.get(), HttpStatus.OK);
+		}
+	}
 
 }
