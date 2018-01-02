@@ -18,36 +18,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.config.api.ApiMessage;
-import com.spring.config.security.JwtTokenUtil;
 import com.spring.domain.Lesson;
-import com.spring.domain.User;
-import com.spring.service.CourseService;
 import com.spring.service.LessonService;
-import com.spring.service.UserService;
 
 @RestController
 public class LessonRest {
 
 	@Autowired
 	LessonService lessonService;
-	@Autowired
-	private JwtTokenUtil jwtTokenUtil;
-	@Autowired
-	private UserService userService;
-	@Autowired
-	private CourseService courseService;
 
 	@RequestMapping(value = "/lesson/{lessonID}", method = RequestMethod.GET)
-	// @PreAuthorize("isRegisteredCourseFromLesson(#lessonID)||hasRole('ROLE_ADMIN')")
+	@PreAuthorize("isRegisteredCourseFromLesson(#lessonID)||hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> getLessonByLessonID(@PathVariable("lessonID") String lessonID,
 			HttpServletRequest request) {
-		String authToken = jwtTokenUtil.getToken(request);
-		User user = userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
-		if (!courseService.isRegisteredCourse(user.getUserID(),
-				courseService.getCourseByLessonID(lessonID).get().getCourseID())) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.FORBIDDEN, "Access is denied");
-			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
-		}
+		// String authToken = jwtTokenUtil.getToken(request);
+		// User user =
+		// userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
+		// if (!courseService.isRegisteredCourse(user.getUserID(),
+		// courseService.getCourseByLessonID(lessonID).get().getCourseID())) {
+		// ApiMessage apiMessage = new ApiMessage(HttpStatus.FORBIDDEN, "Access is
+		// denied");
+		// return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		// }
 		Optional<Lesson> lesson = this.lessonService.getLessonByLessonID(lessonID);
 		if (!lesson.isPresent()) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "lesson not found");

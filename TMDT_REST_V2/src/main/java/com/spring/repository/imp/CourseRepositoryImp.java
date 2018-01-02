@@ -298,15 +298,15 @@ public class CourseRepositoryImp implements CourseRepository {
 		Map<String, Object> param = new HashMap<>();
 		int result = 0;
 		try {
-			param.put("userID", userID);
-			param.put("courseID", courseID);
+			param.put("userID", userID.trim());
+			param.put("courseID", courseID.trim());
 			result = session.selectOne("com.spring.mapper.CourseMapper.isRegisteredCourse", param);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
 			session.close();
 		}
-
+		LOGGER.error("userID: " + userID + "\tcourseID: " + courseID + "\t result: " + result);
 		return result == 1;
 	}
 
