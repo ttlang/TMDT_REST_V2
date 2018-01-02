@@ -1,8 +1,11 @@
 package com.spring.service.imp;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.domain.Course;
 import com.spring.service.CommentService;
 import com.spring.service.CourseService;
 import com.spring.service.PermissionCheck;
@@ -27,6 +30,15 @@ public class PermissionCheckImp implements PermissionCheck {
 	@Override
 	public boolean canEditComment(int commentID, String userID) {
 		return this.commentService.canEditComment(commentID, userID);
+	}
+
+	@Override
+	public boolean isRegisteredCourseFromLesson(String userID, String lessonID) {
+		Optional<Course> course = courseService.getCourseByLessonID(lessonID);
+		if (course.isPresent()) {
+			return this.courseService.isRegisteredCourse(userID, course.get().getCourseID());
+		} else
+			return false;
 	}
 
 }

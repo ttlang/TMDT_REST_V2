@@ -94,4 +94,20 @@ public class CourseServiceImp implements CourseService {
 	public Map<String, Object> getListCoursesFeatured(int page, int size) {
 		return this.courseRepository.getListCoursesFeatured(page, size);
 	}
+
+	@Override
+	public Map<String, Object> searchByCourseName(int page, int size, String keySearch) {
+		return this.courseRepository.searchByCourseName(page, size, keySearch);
+	}
+
+	@Override
+	public void updateViewByCourseID(String courseID) {
+		this.courseRepository.updateViewByCourseID(courseID);
+	}
+
+	@Override
+	public Optional<Course> getCourseByLessonID(String lessonID) {
+		return this.courseRepository.getCourseByLessonID(lessonID);
+	}
+
 }
