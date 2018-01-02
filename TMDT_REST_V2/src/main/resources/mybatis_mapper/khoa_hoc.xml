@@ -67,6 +67,14 @@
 		#{sumRecord, mode=OUT,jdbcType=INTEGER},
 		" select  * from khoa_hoc k order by k.luot_truy_cap  desc")}
 	</select>
+	<select  id="searchByCourseName"  statementType="CALLABLE"  parameterType="java.util.Map"  resultMap="course_result_1">
+		{call
+		proc_paging_query(#{page},#{size},#{sumPage,
+		mode=OUT,jdbcType=INTEGER},
+		#{sumRecord, mode=OUT,jdbcType=INTEGER},
+		" select  * from khoa_hoc k where k.tieu_de like \'%${keySearch}%\'")}
+	</select>
+	
 	<update id="updateCourseStatus" parameterType="java.util.Map">
 		update khoa_hoc set trang_thai = #{newStatus} where ma_khoa_hoc =
 		#{courseID}
@@ -100,15 +108,21 @@
 		k.${sortPropertie}")}
 	</select>
 
-	<select id="isRegisteredCourse" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="isRegisteredCourse" parameterType="java.util.Map" resultType="java.lang.Integer">
 		select if( EXISTS(select * from dang_ky_khoa_hoc k where
 		k.ma_nguoi_dung='${userID}' and k.ma_khoa_hoc='${courseID}'), 1, 0) as
 		result
 	</select>
 
+	<select id="getCourseByLessonID"  parameterType="java.lang.String"  resultMap="course_result_1">
+	select * from khoa_hoc where ma_khoa_hoc in (select ma_khoa_hoc from chuong_muc where  ma_chuong_muc in (select  ma_chuong_muc from bai_hoc where ma_bai_hoc =#{lessonID}))
+	</select>
 	<update id="updateCourse" parameterType="java.util.Map">
 		update khoa_hoc set ${courseProperties} = #{coursePropertiesValue} where
 		ma_khoa_hoc =#{courseID}
+	</update>
+	<update id="updateViewByCourseID" parameterType="java.lang.String">
+		UPDATE KHOA_HOC  SET LUOT_TRUY_CAP = (LUOT_TRUY_CAP + 1) WHERE MA_KHOA_HOC = #{courseID}
 	</update>
 
 

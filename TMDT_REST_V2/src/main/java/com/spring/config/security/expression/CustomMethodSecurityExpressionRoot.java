@@ -69,4 +69,9 @@ public class CustomMethodSecurityExpressionRoot extends SecurityExpressionRoot
 		return userID.equals(user.getUserID());
 	}
 
+	public boolean isRegisteredCourseFromLesson(String lessonID) {
+		User user = ((UserPrincipal) this.getPrincipal()).getUser();
+		return this.permissionCheck.isRegisteredCourse(user.getUserID(), lessonID);
+	}
+
 }
