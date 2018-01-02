@@ -1,11 +1,16 @@
 package com.spring.service.imp;
 
+import static org.mockito.Matchers.contains;
+
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.domain.Course;
+import com.spring.repository.imp.CourseRepositoryImp;
 import com.spring.service.CommentService;
 import com.spring.service.CourseService;
 import com.spring.service.PermissionCheck;
@@ -40,5 +45,4 @@ public class PermissionCheckImp implements PermissionCheck {
 		} else
 			return false;
 	}
-
 }
