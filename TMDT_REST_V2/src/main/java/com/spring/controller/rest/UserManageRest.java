@@ -36,7 +36,7 @@ public class UserManageRest {
 
 	}
 
-	@RequestMapping(value = "/admin/user_info", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/user_info", method = RequestMethod.PATCH)
 	@PreAuthorize("hasRole('ROLE_ADMIN')||isAccountOwner(#infoUpdate.userID)")
 	public ResponseEntity<?> updateUserInfo(@RequestBody UserInfoUpdate infoUpdate) {
 		User user = this.userService.getUserByUserID(infoUpdate.getUserID());
