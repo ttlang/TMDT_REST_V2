@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,7 +25,6 @@ import com.paypal.base.rest.PayPalRESTException;
 import com.spring.config.api.ApiMessage;
 import com.spring.config.paypal.PaypalPaymentIntent;
 import com.spring.config.paypal.PaypalPaymentMethod;
-import com.spring.config.paypal.URLUtils;
 import com.spring.config.security.JwtTokenUtil;
 import com.spring.domain.TransactionHistory;
 import com.spring.domain.User;
@@ -39,7 +39,17 @@ import com.spring.service.UserService;
 public class PaypalRest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PaypalRest.class);
+	@Value("${front_end.scheme}")
+	private String scheme;
+	@Value("${front_end.server_name}")
+	private String serverName;
 
+	@Value("${front_end.server_port}")
+	private String serverPort;
+	@Value("${front_end.nap_the}")
+	private String paySuccessURL;
+	
+	
 	public static final String PAYPAL_SUCCESS_URL = "pay/success";
 	public static final String PAYPAL_CANCEL_URL = "pay/cancel";
 	@Autowired
@@ -56,8 +66,8 @@ public class PaypalRest {
 	@RequestMapping(value = "pay", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> pay(HttpServletRequest request, @RequestBody PayInfo payInfo) {
-		String cancelUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_CANCEL_URL;
-		String successUrl = URLUtils.getBaseURl(request) + "/" + PAYPAL_SUCCESS_URL;
+		String cancelUrl = this.scheme + "://" + this.serverName + ":" + this.serverPort+ paySuccessURL;
+		String successUrl = this.scheme + "://" + this.serverName + ":" + this.serverPort+ paySuccessURL;
 		if (payInfo.getTotal() < 0) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "total must be greater than 0");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
@@ -75,10 +85,6 @@ public class PaypalRest {
 		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_CANCEL_URL)
-	public String cancelPay() {
-		return "cancel";
-	}
 
 	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_SUCCESS_URL)
 	@PreAuthorize("hasRole('ROLE_USER')")

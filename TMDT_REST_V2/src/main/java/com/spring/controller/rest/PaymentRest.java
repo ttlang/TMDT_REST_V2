@@ -70,7 +70,7 @@ public class PaymentRest {
 		return new ResponseEntity<Object>(th.get(), HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/payment/course/register")
+	@RequestMapping(value = "/payment/course/register", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> courseRegister(@RequestBody List<CourseRegisterInfo> registerInfo,
 			HttpServletRequest request) {
@@ -110,7 +110,7 @@ public class PaymentRest {
 
 	}
 	
-	@RequestMapping(value = "/payment/course/register/one")
+	@RequestMapping(value = "/payment/course/register/one", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> courseRegister(@RequestBody CourseRegisterInfo registerInfo, HttpServletRequest request) {
 		String email = this.tokenHelper.getUsernameFromToken(this.tokenHelper.getToken(request));
