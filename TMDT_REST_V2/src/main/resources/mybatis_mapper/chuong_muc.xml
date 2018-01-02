@@ -21,7 +21,18 @@
 	<select id="getChapterByCourseID" resultMap="chapter_result_1" resultType="java.util.List" parameterType="java.lang.String" >
 			select * from chuong_muc c where c.ma_khoa_hoc =#{courseID}
 	</select>
-
+	<select id="getChapterByChapterID" parameterType="java.lang.String" resultMap="chapter_result_2">
+			select * from chuong_muc c where c.ma_chuong_muc =#{chapterID}
+	</select>
+	
+	<insert id="insertChappter" statementType="CALLABLE" parameterType="java.util.Map">
+			{call insert_chuong_muc(#{courseID}, #{chapterTitle}, #{chapterContent}, #{chapterSummary},#{result,jdbcType=VARCHAR,mode=OUT})}
+	</insert>
+	
+	<update id="updateChapter" parameterType="java.util.Map">
+			update chuong_muc set ${column} =#{value} where ma_chuong_muc =#{chapterID}
+	</update>
+	
 	
 
 </mapper>

@@ -6,16 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.spring.repository.LessonRepository;
+import com.spring.service.ChapterService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AppTest {
 	@Autowired
-	LessonRepository lessonRepository;
+	ChapterService chapterService;
 	@Test
 	public void testA() {
-		int a = lessonRepository.updateLesson("Thực hành", "abc", null, "KH6CH12BH28");
-		System.err.println(a);
+		System.err.println(chapterService.updateChapter(null, "hihi","hihi", "KH6CH12"));
 	}
 }
