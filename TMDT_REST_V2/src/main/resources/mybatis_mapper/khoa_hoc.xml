@@ -88,7 +88,7 @@
 
 	<select id="getAuthorInfo" parameterType="java.lang.String" resultMap="author_info">
 		select
-		n.ma_nguoi_dung,n.ten_nguoi_dung,n.ngay_dang_ky,n.email,n.anh_dai_dien,n.diem,n.dia_chi,n.sdt,count(*)
+		n.ma_nguoi_dung,n.ten_nguoi_dung,n.ngay_dang_ky,n.email,n.anh_dai_dien,n.diem,n.dia_chi,n.sdt,count(k.ma_nguoi_dung)
 		as number_of_course from nguoi_dung n left join
 		khoa_hoc k on
 		n.ma_nguoi_dung= k.ma_nguoi_dung where n.ma_nguoi_dung= #{authorID}
