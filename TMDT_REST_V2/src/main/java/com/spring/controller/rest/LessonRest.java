@@ -51,7 +51,7 @@ public class LessonRest {
 	}
 
 	@RequestMapping(value = "/lesson/relate/{lessonID}", method = RequestMethod.GET)
-	@PreAuthorize("isRegisteredCourse(#lessonID)||hasRole('ROLE_ADMIN')")
+	@PreAuthorize("isRegisteredCourseFromLesson(#lessonID)||hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> getAllLessonRelate(@PathVariable("lessonID") String lessonID) {
 		Optional<Lesson> lesson = this.lessonService.getLessonByLessonID(lessonID);
 		if (!lesson.isPresent()) {
