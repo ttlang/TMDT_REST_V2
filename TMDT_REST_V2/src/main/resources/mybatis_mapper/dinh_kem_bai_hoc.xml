@@ -22,6 +22,7 @@
 		 select * from dinh_kem_bai_hoc d where d.ma_bai_hoc = #{lessonID}
 		</select>
 		
+		
 		<insert id="insertLessonAttach" parameterType="java.util.Map" statementType="CALLABLE">
 			{call insert_dinh_kem_bai_hoc(#{lessonID},#{lesonAttachContent},#{result, mode=OUT,jdbcType=INTEGER})}
 		</insert>

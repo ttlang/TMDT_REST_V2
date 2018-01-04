@@ -1,5 +1,6 @@
 package com.spring.service.imp;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,6 +41,11 @@ public class LessonAttachServiceImp implements LessonAttachService {
 	@Override
 	public int updateLessonAttach(int lessonAttachID, String lessonID, String lesonAttachContent) {
 		return this.lessonAttachRepository.updateLessonAttach(lessonAttachID, lessonID, lesonAttachContent);
+	}
+
+	@Override
+	public List<LessonAttach> getLessonAttachByLessonID(String lessonID) {
+		return this.lessonAttachRepository.getLessonAttachByLessonID(lessonID);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.spring.repository.imp;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,22 @@ public class LessonAttachRepositoryImp implements LessonAttachRepository {
 			session.close();
 		}
 		return Optional.ofNullable(lessonAttach);
+	}
+
+	@Override
+	public List<LessonAttach> getLessonAttachByLessonID(String lessonID) {
+		List<LessonAttach> lessonAttachs = Collections.emptyList();
+		SqlSession session = this.sqlSessionFactory.openSession();
+		try {
+			lessonAttachs = session.selectList("com.spring.mapper.LessonAttachMapper.getLessonAttachByLessonID",
+					lessonID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return lessonAttachs;
 	}
 
 	@Override

@@ -6,18 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.spring.domain.json.LessonAttachUpdate;
-import com.spring.service.PermissionCheck;
+import com.spring.service.LessonAttachService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AppTest {
 	@Autowired
-	PermissionCheck permissionCheck;
-		
+	LessonAttachService lessonAttachService;
+	
 	@Test
 	public void testA() {
-		LessonAttachUpdate attachUpdate = new LessonAttachUpdate(1, null, null);
-		System.err.println(attachUpdate.getNonNullFieldCount());
+	int a=	lessonAttachService.getLessonAttachByLessonID("KH5CH10BH22").size();
+		System.err.println(a);
 	}
 }

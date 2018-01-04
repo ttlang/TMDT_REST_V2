@@ -1,5 +1,6 @@
 package com.spring.controller.rest;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -55,6 +56,21 @@ public class LessonAttachRest {
 			Map<String, Object> result = lessonAttachService.getLessonAttachByLessonIDWithPaging(page, size, lessonID);
 			return new ResponseEntity<Object>(result, HttpStatus.OK);
 		}
+
+	}
+
+	@RequestMapping(value = "/lesson/{lessonID}/lesson_attach", method = RequestMethod.GET)
+	@PreAuthorize("IsCourseAuthorOrIsRegisteredCourse(#lessonID)||hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> getLessonAttachByLessonID(@PathVariable("lessonID") String lessonID) {
+
+		Optional<Lesson> lesson = this.lessonService.getLessonByLessonID(lessonID);
+		if (!lesson.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "lesson not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+
+		List<LessonAttach> lessonAttach = this.lessonAttachService.getLessonAttachByLessonID(lessonID);
+		return new ResponseEntity<Object>(lessonAttach, HttpStatus.OK);
 
 	}
 
@@ -126,7 +142,7 @@ public class LessonAttachRest {
 		return new ResponseEntity<Object>(lessonAttachAfterUpdate.get(), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/lesson/lesson_attach/{lessonAttachID}",method=RequestMethod.DELETE)
+	@RequestMapping(value = "/lesson/lesson_attach/{lessonAttachID}", method = RequestMethod.DELETE)
 	@PreAuthorize("hasRole('ROLE_USER')||hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteLessonAttach(@PathVariable("lessonAttachID") int lessonAttachID,
 			HttpServletRequest request) {
