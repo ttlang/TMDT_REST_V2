@@ -20,11 +20,6 @@ public interface LessonService {
 	
 	public int addViewForlesson(int numberOfviews,String lessonID);
 
-<<<<<<< HEAD
 	public boolean lessonIsNonCommercial(String lessonID);
-
-=======
 	public int deleteLesson(String lessonID);
->>>>>>> master
-
 }
