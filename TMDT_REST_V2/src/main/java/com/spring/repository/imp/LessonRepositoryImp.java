@@ -161,13 +161,19 @@ public class LessonRepositoryImp implements LessonRepository {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public boolean lessonIsNonCommercial(String lessonID) {
 		SqlSession session = this.sessionFactory.openSession();
 		byte result = 0;
 		try {
 			result = session.selectOne("com.spring.mapper.LessonMapper.lessonIsNonCommercial", lessonID);
-=======
+			} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+	 return  result == 1;
+	}
+
 	public int updateViewForlesson(int numberOfviews, String lessonID) {
 		SqlSession session = this.sessionFactory.openSession();
 		Map<String, Object> param = new HashMap<>();
@@ -193,16 +199,13 @@ public class LessonRepositoryImp implements LessonRepository {
 		int resultOfDel = 0;
 		try {
 			resultOfDel = session.delete("com.spring.mapper.LessonMapper.deleteLesson", lessonID);
->>>>>>> master
+
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
 			session.close();
 		}
-<<<<<<< HEAD
-		return result == 1;
-=======
 		return resultOfDel;
->>>>>>> master
+
 	}
 }
