@@ -6,12 +6,13 @@ import java.util.Optional;
 import com.spring.domain.CourseRegister;
 
 public interface CourseRegisterRepository {
-	public List<CourseRegister> getListCourseRegisterByCourseID(String CourseID);
-	
-	public Optional<CourseRegister>getCourseRegisterByCourseRegisterID(int CourseID);
+	public List<CourseRegister> getListCourseRegisterByCourseID(String courseID);
 
-	public String createCourseRegisterByCourse(String courseID, String userID);
+	public List<CourseRegister> getListCourseRegisterByUserID(String userID);
+
+	public Optional<CourseRegister> getCourseRegister(String userID, String courseID);
+
+	public int createCourseRegister(String courseID, String userID);
 	
-	public int deleteRegisterByCourse(int courseRegisterID);
 
 }

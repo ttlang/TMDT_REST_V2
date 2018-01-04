@@ -38,6 +38,10 @@
 		 inner join khoa_hoc k on c.ma_khoa_hoc = k.ma_khoa_hoc where b.ma_bai_hoc =#{lessonID});
 		</select>
 		
+		<select id="lessonIsNonCommercial"  parameterType="java.lang.String"  resultType="java.lang.Byte">
+		select  case ma_loai_khoa_hoc  when 'NCO' then 1 else 0 end as result from khoa_hoc where ma_khoa_hoc in (select  ma_khoa_hoc from chuong_muc  where ma_chuong_muc in (select ma_chuong_muc from bai_hoc where ma_bai_hoc=#{lessonID}))
+		</select>
+		
 		<insert id="insertLesson" statementType="CALLABLE" parameterType="java.util.Map">
 			{call insert_bai_hoc(#{lessonTitle}, #{lessonContent}, #{chapterID},#{result, mode=OUT,jdbcType=VARCHAR})}
 		</insert>
@@ -45,5 +49,11 @@
 		<update id="updateLesson" parameterType="java.util.Map">
 			update bai_hoc  set ${column} =#{value}  where ma_bai_hoc =#{lessonID}
 		</update>
+		
+		<delete id="deleteLesson" parameterType="java.lang.String">
+			delete from bai_hoc where  ma_bai_hoc =#{lessonID}
+		</delete>
+		
+			
 
 	</mapper>

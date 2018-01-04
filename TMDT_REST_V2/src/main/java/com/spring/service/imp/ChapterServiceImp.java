@@ -29,8 +29,14 @@ public class ChapterServiceImp implements ChapterService {
 	public int updateChapter(String chapterTitle, String chapterContent, String chapterSummary, String chapterID) {
 		return this.chapterRepository.updateChapter(chapterTitle, chapterContent, chapterSummary, chapterID);
 	}
+
 	@Override
 	public Optional<Chapter> getChapterByChapterID(String chapterID) {
 		return this.chapterRepository.getChapterByChapterID(chapterID);
+	}
+
+	@Override
+	public int deleteChapter(String chapterID) {
+		return this.chapterRepository.deleteChapter(chapterID);
 	}
 }

@@ -36,7 +36,7 @@ public class PaymentServiceImp implements PaymentService {
 			Course course = this.courseService.getCourseByCourseID(courseID).get();
 			this.userService.addScore(userID, -course.getPrice());
 			this.userService.addScore(course.getAuthor().getUserID(), course.getPrice());
-			this.courseRegisterSerivce.createCourseRegisterByCourse(courseID, userID);
+			this.courseRegisterSerivce.createCourseRegister(courseID, userID);
 			transactionHistoryID = transactionHistoryService.inserTransactionHistory("MKH", course.getPrice(), 0,
 					userID, courseID);
 		} catch (Exception e) {
