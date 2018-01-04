@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.expression.SecurityExpressionOperations;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +24,6 @@ import com.spring.config.api.ApiMessage;
 import com.spring.config.security.JwtTokenUtil;
 import com.spring.domain.Course;
 import com.spring.domain.User;
-import com.spring.domain.UserPrincipal;
 import com.spring.domain.custom.Author;
 import com.spring.domain.json.CourseCreate;
 import com.spring.domain.json.CourseStatus;
@@ -230,11 +228,12 @@ public class CourseRest {
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/users/is-registed/{courseID}", method = RequestMethod.GET)
-	public ResponseEntity<?> courseIsRegisted(@PathVariable("courseID") String courseID) {
+	@RequestMapping(value = "/user/is-registed/{courseID}", method = RequestMethod.GET)
+	public ResponseEntity<?> courseIsRegisted(@PathVariable("courseID") String courseID, HttpServletRequest request) {
+		String authToken = jwtTokenUtil.getToken(request);
+		User user = userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
 		Map<String, Object> map = new HashMap<>();
-		if (courseService.isRegisteredCourse(
-				"ND2", courseID))
+		if (courseService.isRegisteredCourse(user.getUserID(), courseID))
 			map.put("success", 1);
 		else
 			map.put("success", 0);

@@ -1,9 +1,9 @@
 package com.spring.controller.rest;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +73,15 @@ public class LessonRest {
 		} else {
 			return new ResponseEntity<Object>(lesson.get(), HttpStatus.OK);
 		}
+	}
+	@RequestMapping(value="/user/lesson-is-non-commercial/{lessonID}", method = RequestMethod.GET)
+	public ResponseEntity<?>  lessonIsNonCommercial(@PathVariable("lessonID")  String lessonID){
+		Map<String, Object> map = new HashMap<>();
+		if (lessonService.lessonIsNonCommercial(lessonID))
+			map.put("success", 1);
+		else
+			map.put("success", 0);
+		return new ResponseEntity<Object>(map, HttpStatus.OK);
 	}
 
 }

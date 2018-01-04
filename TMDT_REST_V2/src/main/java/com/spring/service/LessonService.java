@@ -18,5 +18,7 @@ public interface LessonService {
 
 	public Optional<Lesson> getFirstLessonInCourse(String courseID);
 
+	public boolean lessonIsNonCommercial(String lessonID);
+
 
 }

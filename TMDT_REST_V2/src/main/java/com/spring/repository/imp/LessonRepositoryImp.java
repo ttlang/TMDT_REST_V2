@@ -159,4 +159,18 @@ public class LessonRepositoryImp implements LessonRepository {
 		session.close();
 		return 0;
 	}
+
+	@Override
+	public boolean lessonIsNonCommercial(String lessonID) {
+		SqlSession session = this.sessionFactory.openSession();
+		byte result = 0;
+		try {
+			result = session.selectOne("com.spring.mapper.LessonMapper.lessonIsNonCommercial", lessonID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return result == 1;
+	}
 }

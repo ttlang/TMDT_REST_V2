@@ -44,4 +44,9 @@ public class LessonServiceImp implements LessonService {
 	public int updateLesson(String lessonTitle, String lessonContent, String chapterID, String lessonID) {
 		return this.lessonRepository.updateLesson(lessonTitle, lessonContent, chapterID, lessonID);
 	}
+
+	@Override
+	public boolean lessonIsNonCommercial(String lessonID) {
+		return this.lessonRepository.lessonIsNonCommercial(lessonID);
+	}
 }

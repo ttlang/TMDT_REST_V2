@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.spring.service.ChapterService;
 import com.spring.service.CourseService;
+import com.spring.service.LessonService;
 import com.spring.service.PermissionCheck;
 
 @RunWith(SpringRunner.class)
@@ -23,6 +24,8 @@ public class AppTest {
 	CourseService courseService;
 	@Autowired
 	PermissionCheck permissionCheck;
+	@Autowired
+	LessonService lessonService ;
 
 	@Test
 	public void testA() {
@@ -45,4 +48,8 @@ public class AppTest {
 	public void testGetCourseByLessonID() {
 		assertEquals(courseService.getCourseByLessonID("KH3CH6BH11").isPresent(), true);
 	}
+	 @Test
+	 public void testLessonIsNonCommercial() {
+		 assertEquals(lessonService.lessonIsNonCommercial("KH3CH6BH11"), true);
+	 }
 }
