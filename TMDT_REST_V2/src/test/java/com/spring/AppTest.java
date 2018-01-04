@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.spring.service.AccessRoleService;
 import com.spring.service.ChapterService;
 import com.spring.service.CourseService;
 import com.spring.service.PermissionCheck;
@@ -23,6 +24,8 @@ public class AppTest {
 	CourseService courseService;
 	@Autowired
 	PermissionCheck permissionCheck;
+	@Autowired
+	AccessRoleService accessRoleService;
 
 	@Test
 	public void testA() {
@@ -44,5 +47,10 @@ public class AppTest {
 	@Test
 	public void testGetCourseByLessonID() {
 		assertEquals(courseService.getCourseByLessonID("KH3CH6BH11").isPresent(), true);
+	}
+	
+	@Test
+	public void testAddUserRole() {
+		assertEquals(1, accessRoleService.addUserRole("ND3"));
 	}
 }
