@@ -16,7 +16,6 @@ public class AppTest {
 	
 	@Test
 	public void testA() {
-	int a=	lessonAttachService.getLessonAttachByLessonID("KH5CH10BH22").size();
-		System.err.println(a);
+	
 	}
 }

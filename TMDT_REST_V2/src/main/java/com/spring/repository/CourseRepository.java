@@ -35,5 +35,14 @@ public interface CourseRepository {
 
 	public Map<String, Object> getListCoursesFeatured(int page, int size);
 
+	public Map<String, Object> searchByCourseName(int page, int size, String keySearch);
+
+	public void updateViewByCourseID(String courseID);
+
+	public Optional<Course> getCourseByLessonID(String lessonID);
+
+
+
+
 	public int updateViewForCourse(int view,String courseID);
 }

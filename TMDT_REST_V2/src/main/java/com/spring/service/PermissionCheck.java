@@ -13,4 +13,7 @@ public interface PermissionCheck {
 	public boolean isCourseAuthorByChapterID(String accountID,String chapterID);
 	
 	public boolean isCourseAuthorByLessonID(String lessonID,String userID);
+
+	public boolean isRegisteredCourseFromLesson(String userID, String lessonID);
+
 }

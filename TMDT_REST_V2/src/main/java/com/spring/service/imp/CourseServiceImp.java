@@ -101,4 +101,19 @@ public class CourseServiceImp implements CourseService {
 		int oldView = course.get().getViews();
 		return this.courseRepository.updateViewForCourse(oldView + views, courseID);
 	}
+
+	public Map<String, Object> searchByCourseName(int page, int size, String keySearch) {
+		return this.courseRepository.searchByCourseName(page, size, keySearch);
+	}
+
+	@Override
+	public void updateViewByCourseID(String courseID) {
+		this.courseRepository.updateViewByCourseID(courseID);
+	}
+
+	@Override
+	public Optional<Course> getCourseByLessonID(String lessonID) {
+		return this.courseRepository.getCourseByLessonID(lessonID);
+	}
+
 }

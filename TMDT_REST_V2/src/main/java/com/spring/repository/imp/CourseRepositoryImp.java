@@ -300,6 +300,7 @@ public class CourseRepositoryImp implements CourseRepository {
 		try {
 			param.put("userID", userID);
 			param.put("courseID", courseID);
+
 			result = session.selectOne("com.spring.mapper.CourseMapper.isRegisteredCourse", param);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
@@ -343,13 +344,53 @@ public class CourseRepositoryImp implements CourseRepository {
 		param.put("coursePropertiesValue", view);
 		try {
 			resultOfUpdate = session.update("com.spring.mapper.CourseMapper.updateCourse", param);
+	public Map<String, Object> searchByCourseName(int page, int size, String keySearch) {
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			param.put("page", page);
+			param.put("size", size);
+			param.put("keySearch", keySearch);
+			List<Topic> listTopicResult = sqlSession.selectList("com.spring.mapper.CourseMapper.searchByCourseName",
+					param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+			result.put("listOfResult", listTopicResult);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
 
+	@Override
+	public void updateViewByCourseID(String courseID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		try {
+			session.update("com.spring.mapper.CourseMapper.updateViewByCourseID", courseID);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
 			session.close();
 		}
-		return resultOfUpdate;
+	}
+
+	@Override
+	public Optional<Course> getCourseByLessonID(String lessonID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Course course = new Course();
+		try {
+			course = session.selectOne("com.spring.mapper.CourseMapper.getCourseByLessonID", lessonID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return Optional.ofNullable(course);
 	}
 
 }
