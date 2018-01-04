@@ -45,5 +45,11 @@
 		<update id="updateLesson" parameterType="java.util.Map">
 			update bai_hoc  set ${column} =#{value}  where ma_bai_hoc =#{lessonID}
 		</update>
+		
+		<delete id="deleteLesson" parameterType="java.lang.String">
+			delete from bai_hoc where  ma_bai_hoc =#{lessonID}
+		</delete>
+		
+			
 
 	</mapper>

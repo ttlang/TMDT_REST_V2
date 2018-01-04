@@ -36,8 +36,8 @@ public class LessonAttachRepositoryImp implements LessonAttachRepository {
 			List<LessonAttach> listCourseResult = session
 					.selectList("com.spring.mapper.LessonAttachMapper.getLessonAttachByLessonIDWithPaging", param);
 			int numberOfPage = (int) param.get("sumPage");
-			int numberOfRecord =(int) param.get("sumRecord");
-			
+			int numberOfRecord = (int) param.get("sumRecord");
+
 			result.put("listOfResult", listCourseResult);
 			result.put("numberOfPage", numberOfPage);
 			result.put("numberOfRecord", numberOfRecord);
@@ -72,7 +72,8 @@ public class LessonAttachRepositoryImp implements LessonAttachRepository {
 		param.put("lesonAttachContent", lesonAttachContent);
 		int result = 0;
 		try {
-			result = session.insert("com.spring.mapper.LessonAttachMapper.insertLessonAttach", param);
+			session.insert("com.spring.mapper.LessonAttachMapper.insertLessonAttach", param);
+			result = (int) param.get("result");
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
@@ -122,10 +123,13 @@ public class LessonAttachRepositoryImp implements LessonAttachRepository {
 
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
+			session.rollback();
+			session.close();
 		}
 		if (resultUpdate[0] == (param.size() * -2147482646)) {
 			try {
 				session.commit();
+				session.close();
 				return param.size();
 
 			} catch (Exception e) {
@@ -133,6 +137,7 @@ public class LessonAttachRepositoryImp implements LessonAttachRepository {
 			}
 		}
 		session.rollback();
+		session.close();
 		return 0;
 	}
 }

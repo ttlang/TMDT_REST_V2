@@ -26,4 +26,20 @@ public class LessonAttachServiceImp implements LessonAttachService {
 	public Optional<LessonAttach> getLessonAttachByLessonAttachID(int lessonAttachID) {
 		return this.lessonAttachRepository.getLessonAttachByLessonAttachID(lessonAttachID);
 	}
+
+	@Override
+	public int insertLessonAttach(String lessonID, String lesonAttachContent) {
+		return this.lessonAttachRepository.insertLessonAttach(lessonID, lesonAttachContent);
+	}
+
+	@Override
+	public int deleteLessonAttachBylessonAttachID(int lessonAttachID) {
+		return this.lessonAttachRepository.deleteLessonAttachBylessonAttachID(lessonAttachID);
+	}
+
+	@Override
+	public int updateLessonAttach(int lessonAttachID, String lessonID, String lesonAttachContent) {
+		return this.lessonAttachRepository.updateLessonAttach(lessonAttachID, lessonID, lesonAttachContent);
+	}
+
 }

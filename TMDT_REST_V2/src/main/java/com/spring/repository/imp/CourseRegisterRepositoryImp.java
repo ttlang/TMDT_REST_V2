@@ -25,12 +25,12 @@ public class CourseRegisterRepositoryImp implements CourseRegisterRepository {
 	private SqlSessionFactory sessionFactory;
 
 	@Override
-	public List<CourseRegister> getListCourseRegisterByCourseID(String CourseID) {
+	public List<CourseRegister> getListCourseRegisterByCourseID(String courseID) {
 		SqlSession session = this.sessionFactory.openSession();
 		List<CourseRegister> result = Collections.emptyList();
 		try {
 			result = session.selectList("com.spring.mapper.CourseRegisterMapper.getListCourseRegisterByCourseID",
-					CourseID);
+					courseID);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
@@ -40,16 +40,11 @@ public class CourseRegisterRepositoryImp implements CourseRegisterRepository {
 	}
 
 	@Override
-	public String createCourseRegisterByCourse(String courseID, String userID) {
+	public List<CourseRegister> getListCourseRegisterByUserID(String userID) {
 		SqlSession session = this.sessionFactory.openSession();
-		Map<String, Object> param = new HashMap<>();
-		String result = null;
-		param.put("courseID", courseID);
-		param.put("userID", userID);
-		param.put("result", result);
+		List<CourseRegister> result = Collections.emptyList();
 		try {
-			session.insert("com.spring.mapper.CourseRegisterMapper.createCourseRegisterByCourse", param);
-			result = String.valueOf(param.get("result"));
+			result = session.selectList("com.spring.mapper.CourseRegisterMapper.getListCourseRegisterByUserID", userID);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
@@ -59,32 +54,37 @@ public class CourseRegisterRepositoryImp implements CourseRegisterRepository {
 	}
 
 	@Override
-	public int deleteRegisterByCourse(int courseRegisterID) {
-		SqlSession session = this.sessionFactory.openSession();
-		int result = 0;
-		try {
-			result = session.delete("com.spring.mapper.CourseRegisterMapper.deleteRegisterByCourse", courseRegisterID);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-		} finally {
-			session.close();
-		}
-		return result;
-	}
-
-	@Override
-	public Optional<CourseRegister> getCourseRegisterByCourseRegisterID(int CourseID) {
+	public Optional<CourseRegister> getCourseRegister(String userID, String courseID) {
 		SqlSession session = this.sessionFactory.openSession();
 		CourseRegister courseRegister = new CourseRegister();
+		Map<String, Object> param = new HashMap<>();
+		param.put("courseID", courseID);
+		param.put("userID", userID);
 		try {
-			courseRegister = session
-					.selectOne("com.spring.mapper.CourseRegisterMapper.getCourseRegisterByCourseRegisterID", CourseID);
-
+			courseRegister = session.selectOne("com.spring.mapper.CourseRegisterMapper.getCourseRegister", param);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
 		}
-
 		return Optional.ofNullable(courseRegister);
+	}
+
+	@Override
+	public int createCourseRegister(String courseID, String userID) {
+		SqlSession session = this.sessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		int result = 0;
+		param.put("courseID", courseID);
+		param.put("userID", userID);
+		try {
+			result = session.insert("com.spring.mapper.CourseRegisterMapper.createCourseRegister", param);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return result;
 	}
 
 }

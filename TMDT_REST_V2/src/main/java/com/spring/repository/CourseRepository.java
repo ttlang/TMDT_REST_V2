@@ -21,18 +21,19 @@ public interface CourseRepository {
 
 	public int updateCourse(String courseID, String courseTitle, String courseDescription, Integer price,
 			String courseTypeID, String topicID, String courseAvatar, String courseDetail, Integer newStatus);
-	
-	public Map<String, Object>getRelateCourse(int page,int size,String courseID);
-	
-	public Optional<Author>getAuthorInfo(String authorID);
-	
-	public List<Course>getCourseByAuthorIDSortByView(String authorID,String sortType,int limitRecord);
-	
-	public Map<String, Object>getAllCourseAuthorIdWithSortAndPaging(int page,int size,String authorID,String sortPropertie);
-	
-	public boolean isRegisteredCourse(String userID,String courseID);
+
+	public Map<String, Object> getRelateCourse(int page, int size, String courseID);
+
+	public Optional<Author> getAuthorInfo(String authorID);
+
+	public List<Course> getCourseByAuthorIDSortByView(String authorID, String sortType, int limitRecord);
+
+	public Map<String, Object> getAllCourseAuthorIdWithSortAndPaging(int page, int size, String authorID,
+			String sortPropertie);
+
+	public boolean isRegisteredCourse(String userID, String courseID);
 
 	public Map<String, Object> getListCoursesFeatured(int page, int size);
 
-
+	public int updateViewForCourse(int view,String courseID);
 }

@@ -114,4 +114,18 @@ public class ChapterRepositoryImp implements ChapterRepository {
 		session.close();
 		return 0;
 	}
+
+	@Override
+	public int deleteChapter(String chapterID) {
+		SqlSession session = this.sessionFactory.openSession();
+		int resultOfDelete = 0;
+		try {
+			resultOfDelete = session.delete("com.spring.mapper.ChapterMapper.deleteChapter", chapterID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return resultOfDelete;
+	}
 }

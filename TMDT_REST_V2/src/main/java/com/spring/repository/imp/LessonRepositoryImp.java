@@ -159,4 +159,38 @@ public class LessonRepositoryImp implements LessonRepository {
 		session.close();
 		return 0;
 	}
+
+	@Override
+	public int updateViewForlesson(int numberOfviews, String lessonID) {
+		SqlSession session = this.sessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		param.put("value", numberOfviews);
+		param.put("column", "luot_xem");
+		param.put("lessonID", lessonID);
+		int resultOfUpdate = 0;
+		try {
+			resultOfUpdate = session.update("com.spring.mapper.LessonMapper.updateLesson", param);
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return resultOfUpdate;
+	}
+
+	@Override
+	public int deleteLesson(String lessonID) {
+		SqlSession session = this.sessionFactory.openSession();
+		int resultOfDel = 0;
+		try {
+			resultOfDel = session.delete("com.spring.mapper.LessonMapper.deleteLesson", lessonID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return resultOfDel;
+	}
 }

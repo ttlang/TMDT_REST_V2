@@ -296,18 +296,18 @@ public class CourseRepositoryImp implements CourseRepository {
 	public boolean isRegisteredCourse(String userID, String courseID) {
 		SqlSession session = this.sqlSessionFactory.openSession();
 		Map<String, Object> param = new HashMap<>();
-		int result =  0 ;
+		int result = 0;
 		try {
 			param.put("userID", userID);
 			param.put("courseID", courseID);
-			 result = session.selectOne("com.spring.mapper.CourseMapper.isRegisteredCourse", param);
+			result = session.selectOne("com.spring.mapper.CourseMapper.isRegisteredCourse", param);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
 			session.close();
 		}
 
-		return result==1;
+		return result == 1;
 	}
 
 	@Override
@@ -331,6 +331,25 @@ public class CourseRepositoryImp implements CourseRepository {
 			sqlSession.close();
 		}
 		return result;
+	}
+
+	@Override
+	public int updateViewForCourse(int view, String courseID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		int resultOfUpdate = 0;
+		Map<String, Object> param = new HashMap<>();
+		param.put("courseID", courseID);
+		param.put("courseProperties", "luot_truy_cap");
+		param.put("coursePropertiesValue", view);
+		try {
+			resultOfUpdate = session.update("com.spring.mapper.CourseMapper.updateCourse", param);
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return resultOfUpdate;
 	}
 
 }

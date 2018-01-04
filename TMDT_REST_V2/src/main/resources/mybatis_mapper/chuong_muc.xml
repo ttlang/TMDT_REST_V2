@@ -33,6 +33,9 @@
 			update chuong_muc set ${column} =#{value} where ma_chuong_muc =#{chapterID}
 	</update>
 	
+	<delete id="deleteChapter" parameterType="java.lang.String">
+			delete from chuong_muc  where ma_chuong_muc =#{chapterID}
+	</delete>
 	
 
 </mapper>

@@ -45,6 +45,7 @@ public class CourseRest {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "cant find course");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
+		this.courseService.addViewForCourse(1, courseID);
 		return new ResponseEntity<Course>(result.get(), HttpStatus.OK);
 	}
 
