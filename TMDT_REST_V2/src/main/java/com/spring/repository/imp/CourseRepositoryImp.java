@@ -298,15 +298,16 @@ public class CourseRepositoryImp implements CourseRepository {
 		Map<String, Object> param = new HashMap<>();
 		int result = 0;
 		try {
-			param.put("userID", userID.trim());
-			param.put("courseID", courseID.trim());
+			param.put("userID", userID);
+			param.put("courseID", courseID);
+
 			result = session.selectOne("com.spring.mapper.CourseMapper.isRegisteredCourse", param);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
 			session.close();
 		}
-		LOGGER.error("userID: " + userID + "\tcourseID: " + courseID + "\t result: " + result);
+
 		return result == 1;
 	}
 
@@ -334,6 +335,15 @@ public class CourseRepositoryImp implements CourseRepository {
 	}
 
 	@Override
+	public int updateViewForCourse(int view, String courseID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		int resultOfUpdate = 0;
+		Map<String, Object> param = new HashMap<>();
+		param.put("courseID", courseID);
+		param.put("courseProperties", "luot_truy_cap");
+		param.put("coursePropertiesValue", view);
+		try {
+			resultOfUpdate = session.update("com.spring.mapper.CourseMapper.updateCourse", param);
 	public Map<String, Object> searchByCourseName(int page, int size, String keySearch) {
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> param = new HashMap<>();

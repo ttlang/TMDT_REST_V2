@@ -14,5 +14,7 @@ public interface ChapterRepository {
 	public String insertChappter(String courseID, String chapterTitle, String chapterContent, String chapterSummary);
 
 	public int updateChapter(String chapterTitle, String chapterContent, String chapterSummary, String chapterID);
+	
+	public int deleteChapter(String chapterID);
 
 }
