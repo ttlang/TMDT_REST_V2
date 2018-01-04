@@ -202,8 +202,6 @@ public class CourseRest {
 		}
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
-<<<<<<< HEAD
-
 	@RequestMapping(value = "/user/is-registed/{courseID}", method = RequestMethod.GET)
 	public ResponseEntity<?> courseIsRegisted(@PathVariable("courseID") String courseID, HttpServletRequest request) {
 		String authToken = jwtTokenUtil.getToken(request);
@@ -215,6 +213,5 @@ public class CourseRest {
 			map.put("success", 0);
 		return new ResponseEntity<Object>(map, HttpStatus.OK);
 	}
-=======
->>>>>>> master
+
 }
