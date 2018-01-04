@@ -1,9 +1,12 @@
 package com.spring.repository.imp;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
@@ -54,7 +57,7 @@ public class LessonRepositoryImp implements LessonRepository {
 		List<Lesson> result = Collections.emptyList();
 		SqlSession session = this.sessionFactory.openSession();
 		try {
-		result =session.selectList("com.spring.mapper.LessonMapper.getAllLessonRelate", lessonID);
+			result = session.selectList("com.spring.mapper.LessonMapper.getAllLessonRelate", lessonID);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
@@ -63,4 +66,97 @@ public class LessonRepositoryImp implements LessonRepository {
 		return result;
 	}
 
+	@Override
+	public Optional<Lesson> getFirstLessonInCourse(String courseID) {
+		Lesson result = null;
+		SqlSession session = this.sessionFactory.openSession();
+		try {
+			result = session.selectOne("com.spring.mapper.LessonMapper.getFirstLessonInCourse", courseID);
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return Optional.ofNullable(result);
+	}
+
+	public String getCourseIDByLessonID(String lessonID) {
+		SqlSession session = this.sessionFactory.openSession();
+		String courseID = null;
+		try {
+			courseID = session.selectOne("com.spring.mapper.LessonMapper.getCourseIDByLessonID", lessonID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return courseID;
+	}
+
+	@Override
+	public String insertLesson(String lessonTitle, String lessonContent, String chapterID) {
+		SqlSession session = this.sessionFactory.openSession();
+		String lessonID = null;
+		Map<String, Object> param = new HashMap<>();
+		param.put("lessonTitle", lessonTitle);
+		param.put("lessonContent", lessonContent);
+		param.put("chapterID", chapterID);
+		param.put("result", lessonID);
+		try {
+			session.insert("com.spring.mapper.LessonMapper.insertLesson", param);
+			lessonID = String.valueOf(param.get("result"));
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return lessonID;
+	}
+
+	@Override
+	public int updateLesson(String lessonTitle, String lessonContent, String chapterID, String lessonID) {
+		SqlSession session = this.sessionFactory.openSession(ExecutorType.BATCH, false);
+		Map<String, Object> param = new HashMap<>();
+		Map<String, String> columnName = new HashMap<>();
+		int resultUpdate = 0;
+		param.put("lessonTitle", lessonTitle);
+		param.put("lessonContent", lessonContent);
+		param.put("chapterID", chapterID);
+
+		columnName.put("lessonTitle", "tieu_de");
+		columnName.put("lessonContent", "noi_dung");
+		columnName.put("chapterID", "ma_chuong_muc");
+
+		try {
+			param.entrySet().removeIf(e -> e.getValue() == null);
+			for (Map.Entry<String, Object> p2 : param.entrySet()) {
+				Map<String, Object> p = new HashMap<>();
+				p.put("column", columnName.get(p2.getKey()));
+				p.put("value", p2.getValue());
+				p.put("lessonID", lessonID);
+
+				resultUpdate += session.update("com.spring.mapper.LessonMapper.updateLesson", p);
+			}
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			session.rollback();
+			session.close();
+		}
+
+		if (resultUpdate == (param.size() * -2147482646)) {
+			try {
+				session.commit();
+				session.close();
+				return param.size();
+
+			} catch (Exception e) {
+				LOGGER.error(e.getMessage());
+			}
+		}
+		session.rollback();
+		session.close();
+		return 0;
+	}
 }

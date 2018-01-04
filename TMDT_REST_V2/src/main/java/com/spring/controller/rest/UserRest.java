@@ -27,8 +27,10 @@ import com.spring.domain.custom.UserInfo;
 import com.spring.domain.json.PasswordReset;
 import com.spring.domain.json.RegisterKey;
 import com.spring.domain.json.UserCustom;
+import com.spring.domain.json.UserUpdate;
 import com.spring.service.AES;
 import com.spring.service.UserService;
+
 
 @RestController
 @RequestMapping(value = "/user")
@@ -135,7 +137,7 @@ public class UserRest {
 	 */
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> createUser(@RequestBody UserCustom userCustom ) {
+	public ResponseEntity<?> createUser(@RequestBody UserCustom userCustom) {
 		boolean resultOfCreate = false;
 		if (userCustom == null) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "request body is null");
@@ -210,7 +212,7 @@ public class UserRest {
 
 	}
 
-	@RequestMapping(value = "/info/{userID}",method=RequestMethod.GET)
+	@RequestMapping(value = "/info/{userID}", method = RequestMethod.GET)
 	public ResponseEntity<?> getUserInfo(@PathVariable("userID") String userID) {
 		Optional<UserInfo> userInfo = this.userService.getUserInfo(userID);
 		if (!userInfo.isPresent()) {
@@ -221,4 +223,28 @@ public class UserRest {
 			return new ResponseEntity<Object>(userInfo.get(), HttpStatus.OK);
 		}
 	}
+
+	/** quản lý danh sách người dùng
+	 * @param  page  & size
+	 * return danh sách người dùng
+	 **/
+	@RequestMapping(value="/danh-sach-nguoi-dung", method=  RequestMethod.GET, params= {"page", "size"})
+	public ResponseEntity<?>  getListUsers(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = false) int size){
+		Map<String, Object> result = this.userService.getUserWithPaging(page, size);
+		if (result.isEmpty()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no topic found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
+	}
+	@RequestMapping
+	(value="/cap-nhat-nguoi-dung", method = RequestMethod.PATCH)
+	public ResponseEntity<?> updateUser(@RequestBody UserUpdate user){
+		System.err.println(user.toString());
+		return null;
+	}
+	
+
+	
 }

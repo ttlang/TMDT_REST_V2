@@ -19,9 +19,29 @@ public class LessonServiceImp implements LessonService {
 	public Optional<Lesson> getLessonByLessonID(String lessonID) {
 		return lessonRepository.getLessonByLessonID(lessonID);
 	}
-	
+
 	@Override
 	public List<Lesson> getAllLessonRelate(String lessonID) {
 		return this.lessonRepository.getAllLessonRelate(lessonID);
+	}
+
+	@Override
+	public Optional<Lesson> getFirstLessonInCourse(String courseID) {
+		return this.lessonRepository.getFirstLessonInCourse(courseID);
+	}
+
+	@Override
+	public String getCourseIDByLessonID(String lessonID) {
+		return this.lessonRepository.getCourseIDByLessonID(lessonID);
+	}
+
+	@Override
+	public String insertLesson(String lessonTitle, String lessonContent, String chapterID) {
+		return this.lessonRepository.insertLesson(lessonTitle, lessonContent, chapterID);
+	}
+
+	@Override
+	public int updateLesson(String lessonTitle, String lessonContent, String chapterID, String lessonID) {
+		return this.lessonRepository.updateLesson(lessonTitle, lessonContent, chapterID, lessonID);
 	}
 }

@@ -32,5 +32,14 @@ public interface CourseRepository {
 	
 	public boolean isRegisteredCourse(String userID,String courseID);
 
+	public Map<String, Object> getListCoursesFeatured(int page, int size);
+
+	public Map<String, Object> searchByCourseName(int page, int size, String keySearch);
+
+	public void updateViewByCourseID(String courseID);
+
+	public Optional<Course> getCourseByLessonID(String lessonID);
+
+
 
 }

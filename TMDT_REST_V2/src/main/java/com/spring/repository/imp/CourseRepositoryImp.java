@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.domain.Course;
+import com.spring.domain.Topic;
 import com.spring.domain.custom.Author;
 import com.spring.repository.CourseRepository;
 
@@ -284,6 +285,8 @@ public class CourseRepositoryImp implements CourseRepository {
 			result.put("numberOfRecord", numberOfRecord);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
 		}
 
 		return result;
@@ -293,18 +296,91 @@ public class CourseRepositoryImp implements CourseRepository {
 	public boolean isRegisteredCourse(String userID, String courseID) {
 		SqlSession session = this.sqlSessionFactory.openSession();
 		Map<String, Object> param = new HashMap<>();
-		int result =  0 ;
+		int result = 0;
 		try {
-			param.put("userID", userID);
-			param.put("courseID", courseID);
-			 result = session.selectOne("com.spring.mapper.CourseMapper.isRegisteredCourse", param);
+			param.put("userID", userID.trim());
+			param.put("courseID", courseID.trim());
+			result = session.selectOne("com.spring.mapper.CourseMapper.isRegisteredCourse", param);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
 			session.close();
 		}
+		LOGGER.error("userID: " + userID + "\tcourseID: " + courseID + "\t result: " + result);
+		return result == 1;
+	}
 
-		return result==1;
+	@Override
+	public Map<String, Object> getListCoursesFeatured(int page, int size) {
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			param.put("page", page);
+			param.put("size", size);
+			List<Topic> listTopicResult = sqlSession.selectList("com.spring.mapper.CourseMapper.getListCoursesFeatured",
+					param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+			result.put("listOfResult", listTopicResult);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+
+	@Override
+	public Map<String, Object> searchByCourseName(int page, int size, String keySearch) {
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			param.put("page", page);
+			param.put("size", size);
+			param.put("keySearch", keySearch);
+			List<Topic> listTopicResult = sqlSession.selectList("com.spring.mapper.CourseMapper.searchByCourseName",
+					param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+			result.put("listOfResult", listTopicResult);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+
+	@Override
+	public void updateViewByCourseID(String courseID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		try {
+			session.update("com.spring.mapper.CourseMapper.updateViewByCourseID", courseID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public Optional<Course> getCourseByLessonID(String lessonID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Course course = new Course();
+		try {
+			course = session.selectOne("com.spring.mapper.CourseMapper.getCourseByLessonID", lessonID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return Optional.ofNullable(course);
 	}
 
 }

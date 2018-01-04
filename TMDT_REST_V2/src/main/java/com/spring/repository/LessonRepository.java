@@ -8,8 +8,16 @@ import com.spring.domain.Lesson;
 public interface LessonRepository {
 	List<Lesson> getLessonBychapterID(String chapterID);
 	
-	Optional<Lesson>getLessonByLessonID(String lessonID);
+	public Optional<Lesson>getLessonByLessonID(String lessonID);
 	
 	public List<Lesson>getAllLessonRelate(String lessonID);
+	
+	public String getCourseIDByLessonID(String lessonID);
+	
+	public String insertLesson(String lessonTitle, String lessonContent, String chapterID);
+	
+	public int updateLesson(String lessonTitle, String lessonContent, String chapterID,String lessonID);
+
+	public Optional<Lesson> getFirstLessonInCourse(String courseID);
 
 }

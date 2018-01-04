@@ -22,7 +22,7 @@
 
 			<select id="getTransactionHistoryByTraders" resultMap="transaction_history" statementType="CALLABLE" parameterType="java.util.Map">
 				{ call proc_paging_query(#{page}, #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER},
-				#{sumRecord, mode=OUT,jdbcType=INTEGER},"select * from lich_su_giao_dich l where l.ma_nguoi_dung='${userID}'")}
+				#{sumRecord, mode=OUT,jdbcType=INTEGER},"select * from lich_su_giao_dich l where l.ma_nguoi_dung='${userID}' order by l.ngay_giao_dich  desc ")}
 			</select>	
 			
 			<insert id="inserTransactionHistory" statementType="CALLABLE" parameterType="java.util.Map">

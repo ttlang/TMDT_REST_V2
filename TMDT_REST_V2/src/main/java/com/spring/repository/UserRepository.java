@@ -2,6 +2,7 @@ package com.spring.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.spring.domain.User;
@@ -15,12 +16,7 @@ public interface UserRepository {
 	public User getUserByEmail(String email);
 
 	public int CreateUser(String userName, String email, String password);
-	/**
-	 * change user's status 1:active 0:   2: block
-	 * @param userID 
-	 * @param newStatus
-	 * @return number of  row changed
-	 */
+	
 	public int changeUserStatus(String userID, int newStatus);
 	
 	public int changeUserPassword(String userID,String newPassword);
@@ -34,5 +30,13 @@ public interface UserRepository {
 	public Optional<UserInfo> getUserInfo(String userID);
 	
 	public int updateScore(String userID,double score);
+	
+	public Map<String, Object>getListUserInfo(int page,int size);
+	
+	public int updateUserInfo(String column,Object value,String userID);
+	
+	public int updateUserInfo(String userName,String avatar,String address,String phoneNumber,String userID);
+
+	public Map<String, Object> getUserWithPaging(int page, int size);
 
 }

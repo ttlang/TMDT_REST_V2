@@ -51,9 +51,11 @@ public interface CourseService {
 
 	/**
 	 * create course
+	 * 
 	 * @param courseTitle
 	 * @param courseDescription
-	 * @param author (userID)
+	 * @param author
+	 *            (userID)
 	 * @param price
 	 * @param courseTypeID
 	 * @param topicID
@@ -66,6 +68,7 @@ public interface CourseService {
 
 	/**
 	 * update course
+	 * 
 	 * @param courseID
 	 * @param courseTitle
 	 * @param courseDescription
@@ -75,32 +78,42 @@ public interface CourseService {
 	 * @param courseAvatar
 	 * @param courseDetail
 	 * @param newStatus
-	 * @return  The number of rows affected by the update
+	 * @return The number of rows affected by the update
 	 */
 	public int updateCourse(String courseID, String courseTitle, String courseDescription, Integer price,
 			String courseTypeID, String topicID, String courseAvatar, String courseDetail, Integer newStatus);
-	
+
 	/**
 	 * get relate course by courseID id with paging
+	 * 
 	 * @param page
 	 * @param size
 	 * @param courseID
 	 * @return Map<String, Object> with two key (listOfResult, numberOfPage)
 	 */
-	public Map<String, Object>getRelateCourse(int page,int size,String courseID);
-	
+	public Map<String, Object> getRelateCourse(int page, int size, String courseID);
+
 	/**
-	 *  get author by authorID 
+	 * get author by authorID
+	 * 
 	 * @param authorID
 	 * @return
 	 */
-	public Optional<Author>getAuthorInfo(String authorID);
-	
-	
-	public List<Course>getCourseByAuthorIDSortByView(String authorID,String sortType,int limitRecord);
-	
-	
-	public Map<String, Object>getAllCourseAuthorIdWithSortAndPaging(int page,int size,String authorID,String sortPropertie);
-	
-	public boolean isRegisteredCourse(String userID,String courseID);
+	public Optional<Author> getAuthorInfo(String authorID);
+
+	public List<Course> getCourseByAuthorIDSortByView(String authorID, String sortType, int limitRecord);
+
+	public Map<String, Object> getAllCourseAuthorIdWithSortAndPaging(int page, int size, String authorID,
+			String sortPropertie);
+
+	public boolean isRegisteredCourse(String userID, String courseID);
+
+	public Map<String, Object> getListCoursesFeatured(int page, int size);
+
+	public Map<String, Object> searchByCourseName(int page, int size, String keySearch);
+
+	public void updateViewByCourseID(String courseID);
+
+	public Optional<Course> getCourseByLessonID(String lessonID);
+
 }

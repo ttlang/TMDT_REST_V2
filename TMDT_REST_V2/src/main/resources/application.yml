@@ -28,6 +28,7 @@ front_end :
   server_port : 4200
   link_reset_password : "/pages/kich-hoat?key-change="
   link_register : "/pages/kich-hoat?key="
+  nap_the : "/home/nap-the"
   
 #google drive api
 google :
@@ -45,4 +46,9 @@ paypal:
       secret: ED3cyFA1zIpnzAruyGNrusBRfPxbmT9ZSBT_RbecZS3hdkaODrhPItM0iy0fcYIO7GyUDT-xT_5M8Prn
   success_url : pay/success
   cancle      : pay/cancel 
+  
+#currency
+vnd_to_score : 1000.0  
+
+
     

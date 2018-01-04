@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
@@ -203,6 +204,27 @@ public class UserRepositoryImp implements UserRepository {
 	}
 
 	@Override
+	public Map<String, Object> getUserWithPaging(int page, int size) {
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			param.put("page", page);
+			param.put("size", size);
+			List<User> listUserResult = sqlSession.selectList("com.spring.mapper.UserMapper.getUserWithPaging", param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+			result.put("listOfResult", listUserResult);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+
 	public int updateScore(String userID, double score) {
 		SqlSession session = this.sqlSessionFactory.openSession();
 		Map<String, Object> param = new HashMap<>();
@@ -217,5 +239,94 @@ public class UserRepositoryImp implements UserRepository {
 			session.close();
 		}
 		return resultUpdate;
+	}
+
+	@Override
+	public Map<String, Object> getListUserInfo(int page, int size) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+		param.put("page", page);
+		param.put("size", size);
+		try {
+			List<UserInfo> listOfResults = session.selectList("com.spring.mapper.UserMapper.getListUserInfo", param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+
+			result.put("listOfResult", listOfResults);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+
+	@Override
+	public int updateUserInfo(String column, Object value, String userID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		int result = 0;
+		param.put("column", column);
+		param.put("value", value);
+		param.put("userID", userID);
+		try {
+
+			result = session.update("com.spring.mapper.UserMapper.updateUserInfo", param);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+
+	@Override
+	public int updateUserInfo(String userName, String avatar, String address, String phoneNumber, String userID) {
+		SqlSession session = this.sqlSessionFactory.openSession(ExecutorType.BATCH, false);
+		Map<String, Object> param = new HashMap<>();
+		Map<String, String> columnName = new HashMap<>();
+		int resultUpdate = 0;
+		param.put("userName", userName);
+		param.put("avatar", avatar);
+		param.put("address", address);
+		param.put("phoneNumber", phoneNumber);
+
+		columnName.put("userName", "ten_nguoi_dung");
+		columnName.put("avatar", "anh_dai_dien");
+		columnName.put("address", "dia_chi");
+		columnName.put("phoneNumber", "sdt");
+		try {
+			param.entrySet().removeIf(e -> e.getValue() == null);
+			for (Map.Entry<String, Object> p2 : param.entrySet()) {
+				Map<String, Object> p = new HashMap<>();
+				p.put("column", columnName.get(p2.getKey()));
+				p.put("value", p2.getValue());
+				p.put("userID", userID);
+
+				resultUpdate += session.update("com.spring.mapper.UserMapper.updateUserInfo", p);
+			}
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			session.rollback();
+			session.close();
+		}
+		if (resultUpdate == (param.size() * -2147482646)) {
+			try {
+				session.commit();
+				session.close();
+				return param.size();
+
+			} catch (Exception e) {
+				LOGGER.error(e.getMessage());
+			}
+		}
+		session.rollback();
+		session.close();
+		return 0;
+
 	}
 }

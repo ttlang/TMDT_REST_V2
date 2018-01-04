@@ -11,7 +11,7 @@
 
 	<!-- Query Data -->
 		<select id="getCommentByLessonID" resultMap="comment_result_1" resultType="java.util.List" parameterType="java.lang.String">
-				select * from binh_luan b where b.ma_bai_hoc = #{lessonID}
+				select * from binh_luan b where b.ma_bai_hoc = #{lessonID} order by thoi_gian_binh_luan desc
 		</select>
 		
 		<select id="getCommentBycommentID" resultMap="comment_result_1" parameterType="int">
