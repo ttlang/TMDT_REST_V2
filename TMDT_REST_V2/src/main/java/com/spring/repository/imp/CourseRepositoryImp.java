@@ -344,6 +344,15 @@ public class CourseRepositoryImp implements CourseRepository {
 		param.put("coursePropertiesValue", view);
 		try {
 			resultOfUpdate = session.update("com.spring.mapper.CourseMapper.updateCourse", param);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return resultOfUpdate;
+	}
+
+	@Override
 	public Map<String, Object> searchByCourseName(int page, int size, String keySearch) {
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> param = new HashMap<>();
