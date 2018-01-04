@@ -202,4 +202,16 @@ public class CourseRest {
 		}
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
+	@RequestMapping(value = "/user/is-registed/{courseID}", method = RequestMethod.GET)
+	public ResponseEntity<?> courseIsRegisted(@PathVariable("courseID") String courseID, HttpServletRequest request) {
+		String authToken = jwtTokenUtil.getToken(request);
+		User user = userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
+		Map<String, Object> map = new HashMap<>();
+		if (courseService.isRegisteredCourse(user.getUserID(), courseID))
+			map.put("success", 1);
+		else
+			map.put("success", 0);
+		return new ResponseEntity<Object>(map, HttpStatus.OK);
+	}
+
 }

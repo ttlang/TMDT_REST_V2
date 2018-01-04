@@ -45,7 +45,6 @@ public class PaymentRest {
 	private CourseService courseService;
 
 	@RequestMapping(value = "/payment/donate", method = RequestMethod.POST)
-	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> donate(@RequestBody PaymentDonate donate, HttpServletRequest request) {
 		String email = this.tokenHelper.getUsernameFromToken(this.tokenHelper.getToken(request));
 		User user = this.userService.getUserByEmail(email);

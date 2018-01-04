@@ -24,4 +24,6 @@ public interface LessonRepository {
 	
 	public int deleteLesson(String lessonID);
 
+	public boolean lessonIsNonCommercial(String lessonID);
+
 }
