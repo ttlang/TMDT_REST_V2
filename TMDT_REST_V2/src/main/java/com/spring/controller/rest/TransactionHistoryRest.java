@@ -71,5 +71,21 @@ public class TransactionHistoryRest {
 		}
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/admin/transaction_history/{userID}", method = RequestMethod.GET, params = { "page", "size" })
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> getTransactionHistoryByTraders(@PathVariable("userID") String userID,
+			@RequestParam(value = "page", defaultValue = "1", required = true) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = true) int size) {
+		User user = this.userService.getUserByUserID(userID);
+		if (user == null) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "user not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}else {
+			Map<String, Object> result = this.transactionHistoryService.getTransactionHistoryByTraders(page, size, userID);
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		}
+		
+	}
 
 }
