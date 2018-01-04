@@ -46,10 +46,9 @@ public class LessonServiceImp implements LessonService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public boolean lessonIsNonCommercial(String lessonID) {
 		return this.lessonRepository.lessonIsNonCommercial(lessonID);
-=======
+	}
 	public int addViewForlesson(int numberOfviews, String lessonID) {
 		Optional<Lesson> lesson = this.lessonRepository.getLessonByLessonID(lessonID);
 		int oldView = lesson.get().getViews();
@@ -59,6 +58,5 @@ public class LessonServiceImp implements LessonService {
 	@Override
 	public int deleteLesson(String lessonID) {
 		return this.lessonRepository.deleteLesson(lessonID);
->>>>>>> master
 	}
 }
