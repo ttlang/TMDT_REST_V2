@@ -19,6 +19,10 @@ public interface LessonRepository {
 	public int updateLesson(String lessonTitle, String lessonContent, String chapterID,String lessonID);
 
 	public Optional<Lesson> getFirstLessonInCourse(String courseID);
+	
+	public int updateViewForlesson(int numberOfviews,String lessonID);
+	
+	public int deleteLesson(String lessonID);
 
 	public boolean lessonIsNonCommercial(String lessonID);
 

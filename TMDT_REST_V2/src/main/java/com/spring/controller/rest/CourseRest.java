@@ -1,8 +1,6 @@
 package com.spring.controller.rest;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -47,7 +45,7 @@ public class CourseRest {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "cant find course");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
-		courseService.updateViewByCourseID(courseID);
+		this.courseService.addViewForCourse(1, courseID);
 		return new ResponseEntity<Course>(result.get(), HttpStatus.OK);
 	}
 
@@ -199,34 +197,12 @@ public class CourseRest {
 			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
 		Map<String, Object> result = this.courseService.getListCoursesFeatured(page, size);
 		if (result.isEmpty()) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no course found");
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no topic found");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
-
-	@RequestMapping(value = "/users/search-by-course-name", params = { "page", "size",
-			"key-search" }, method = RequestMethod.GET)
-	public ResponseEntity<?> searchByCourseName(
-			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			@RequestParam(value = "size", defaultValue = "1", required = false) int size,
-
-			@RequestParam(value = "key-search", defaultValue = "", required = false) String keySearch) {
-		keySearch = keySearch.trim();
-		if (keySearch.isEmpty()) {
-			Map<String, Object> map = new HashMap<>();
-			map.put("listOfResult", new ArrayList<Course>());
-			map.put("numberOfPage", 0);
-			map.put("numberOfRecord", 0);
-			return new ResponseEntity<Object>(map, HttpStatus.OK);
-		}
-		Map<String, Object> result = this.courseService.searchByCourseName(page, size, keySearch);
-		if (result.isEmpty()) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no course found");
-			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
-		}
-		return new ResponseEntity<Object>(result, HttpStatus.OK);
-	}
+<<<<<<< HEAD
 
 	@RequestMapping(value = "/user/is-registed/{courseID}", method = RequestMethod.GET)
 	public ResponseEntity<?> courseIsRegisted(@PathVariable("courseID") String courseID, HttpServletRequest request) {
@@ -239,4 +215,6 @@ public class CourseRest {
 			map.put("success", 0);
 		return new ResponseEntity<Object>(map, HttpStatus.OK);
 	}
+=======
+>>>>>>> master
 }

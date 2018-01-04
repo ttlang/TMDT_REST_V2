@@ -21,9 +21,12 @@
 		<select  id="getLessonAttachByLessonID"  parameterType="java.lang.String" resultType="java.util.List"  resultMap="lesson_attach">
 		 select * from dinh_kem_bai_hoc d where d.ma_bai_hoc = #{lessonID}
 		</select>
-		<insert id="insertLessonAttach" parameterType="java.util.Map">
-			insert into dinh_kem_bai_hoc(ma_bai_hoc,noi_dung) values(#{lessonID},#{lesonAttachContent})
+		
+		
+		<insert id="insertLessonAttach" parameterType="java.util.Map" statementType="CALLABLE">
+			{call insert_dinh_kem_bai_hoc(#{lessonID},#{lesonAttachContent},#{result, mode=OUT,jdbcType=INTEGER})}
 		</insert>
+	
 	
 		<delete id="deleteLessonAttachBylessonAttachID" parameterType="int">
 				delete from dinh_kem_bai_hoc  where ma_dinh_kem_bai_hoc =#{lessonAttachID}	

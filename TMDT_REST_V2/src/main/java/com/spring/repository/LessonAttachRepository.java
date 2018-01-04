@@ -1,5 +1,6 @@
 package com.spring.repository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -10,6 +11,8 @@ public interface LessonAttachRepository {
 	public Map<String, Object>getLessonAttachByLessonIDWithPaging(int page,int size,String lessonID);
 	
 	public Optional<LessonAttach>getLessonAttachByLessonAttachID(int lessonAttachID);
+	
+	public List<LessonAttach> getLessonAttachByLessonID(String lessonID);
 	
 	public int insertLessonAttach(String lessonID,String lesonAttachContent);
 	

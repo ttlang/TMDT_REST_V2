@@ -75,6 +75,7 @@ public class PaymentRest {
 			HttpServletRequest request) {
 		String email = this.tokenHelper.getUsernameFromToken(this.tokenHelper.getToken(request));
 		User user = this.userService.getUserByEmail(email);
+		
 
 		List<Optional<Course>> listCourse = new ArrayList<>();
 		for (CourseRegisterInfo r : registerInfo) {
@@ -83,7 +84,9 @@ public class PaymentRest {
 				ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "course not found");
 				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 			} else {
-				listCourse.add(course);
+				if(!this.courseService.isRegisteredCourse(user.getUserID(),course.get().getCourseID())) {
+					listCourse.add(course);
+				}
 			}
 
 		}

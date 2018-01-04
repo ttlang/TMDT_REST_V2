@@ -17,8 +17,14 @@ public interface LessonService {
 	public int updateLesson(String lessonTitle, String lessonContent, String chapterID,String lessonID);
 
 	public Optional<Lesson> getFirstLessonInCourse(String courseID);
+	
+	public int addViewForlesson(int numberOfviews,String lessonID);
 
+<<<<<<< HEAD
 	public boolean lessonIsNonCommercial(String lessonID);
 
+=======
+	public int deleteLesson(String lessonID);
+>>>>>>> master
 
 }
