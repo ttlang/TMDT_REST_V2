@@ -3,6 +3,8 @@ package com.spring.controller.rest;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +16,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.config.api.ApiMessage;
+import com.spring.config.security.JwtTokenUtil;
 import com.spring.domain.TransactionHistory;
+import com.spring.domain.User;
 import com.spring.service.TransactionHistoryService;
+import com.spring.service.UserService;
 
 @RestController
 public class TransactionHistoryRest {
 	@Autowired
 	TransactionHistoryService transactionHistoryService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	JwtTokenUtil jwtTokenUtil;
 
 	@RequestMapping(value = "/admin/transaction_history", method = RequestMethod.GET, params = { "page", "size" })
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -47,6 +56,39 @@ public class TransactionHistoryRest {
 		}
 		return new ResponseEntity<Object>(th.get(), HttpStatus.OK);
 
+	}
+	
+	@RequestMapping(value = "/admin/transaction_history/{userID}", method = RequestMethod.GET, params = { "page", "size" })
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> getTransactionHistoryByTraders(@PathVariable("userID") String userID,
+			@RequestParam(value = "page", defaultValue = "1", required = true) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = true) int size) {
+		User user = this.userService.getUserByUserID(userID);
+		if (user == null) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "user not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}else {
+			Map<String, Object> result = this.transactionHistoryService.getTransactionHistoryByTraders(page, size, userID);
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		}
+		
+	}
+	
+	@RequestMapping(value = "/users/transaction_history", method = RequestMethod.GET, params = { "page", "size" })
+	@PreAuthorize("hasRole('ROLE_USER')")
+	public ResponseEntity<?> getTransactionHistoryByTraders(HttpServletRequest request,
+			@RequestParam(value = "page", defaultValue = "1", required = true) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = true) int size) {
+		String authToken = this.jwtTokenUtil.getToken(request);
+		User user = this.userService.getUserByEmail(this.jwtTokenUtil.getUsernameFromToken(authToken));
+		if (user == null) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "user not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}else {
+			Map<String, Object> result = this.transactionHistoryService.getTransactionHistoryByTraders(page, size, user.getUserID());
+			return new ResponseEntity<Object>(result, HttpStatus.OK);
+		}
+		
 	}
 
 }
