@@ -229,4 +229,14 @@ public class UserServiceImp implements UserService {
 	public int updateUserInfo(String userName, String avatar, String address, String phoneNumber, String userID) {
 		return this.userRepository.updateUserInfo(userName, avatar, address, phoneNumber, userID);
 	}
+
+	@Override
+	public int saveKey(String userID, String key) {
+		return this.userRepository.saveKeyReset(userID, key);
+	}
+
+	@Override
+	public int deleteKey(String userID, String key) {
+		return this.userRepository.removeKeyReset(userID, key);
+	}
 }

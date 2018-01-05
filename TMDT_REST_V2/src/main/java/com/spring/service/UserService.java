@@ -71,6 +71,7 @@ public interface UserService {
 	public int removeKeyReset(String userID, String keyReset);
 
 	public Optional<UserInfo> getUserInfo(String userID);
+
 	public Map<String, Object> getUserWithPaging(int page, int size);
 
 	public int addScore(String userID, double score);
@@ -78,7 +79,11 @@ public interface UserService {
 	public boolean checkBalance(String userID, double banlance);
 
 	public Map<String, Object> getListUserInfo(int page, int size);
-	
-	public int updateUserInfo(String userName,String avatar,String address,String phoneNumber,String userID);
+
+	public int updateUserInfo(String userName, String avatar, String address, String phoneNumber, String userID);
+
+	public int saveKey(String userID, String key);
+
+	public int deleteKey(String userID, String key);
 
 }
