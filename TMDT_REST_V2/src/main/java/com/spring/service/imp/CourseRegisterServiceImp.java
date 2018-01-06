@@ -16,23 +16,28 @@ public class CourseRegisterServiceImp implements CourseRegisterSerivce {
 	private CourseRegisterRepository courseRegisterRepository;
 
 	@Override
-	public List<CourseRegister> getListCourseRegisterByCourseID(String CourseID) {
-		return this.courseRegisterRepository.getListCourseRegisterByCourseID(CourseID);
+	public List<CourseRegister> getListCourseRegisterByCourseID(String courseID) {
+		return this.courseRegisterRepository.getListCourseRegisterByCourseID(courseID);
 	}
 
 	@Override
-	public Optional<CourseRegister> getCourseRegisterByCourseRegisterID(int CourseID) {
-		return this.courseRegisterRepository.getCourseRegisterByCourseRegisterID(CourseID);
+	public List<CourseRegister> getListCourseRegisterByUserID(String userID) {
+		return this.courseRegisterRepository.getListCourseRegisterByUserID(userID);
 	}
 
 	@Override
-	public String createCourseRegisterByCourse(String courseID, String userID) {
-		return this.courseRegisterRepository.createCourseRegisterByCourse(courseID, userID);
+	public Optional<CourseRegister> getCourseRegister(String userID, String courseID) {
+		return this.courseRegisterRepository.getCourseRegister(userID, courseID);
 	}
 
 	@Override
-	public int deleteRegisterByCourse(int courseRegisterID) {
-		return this.courseRegisterRepository.deleteRegisterByCourse(courseRegisterID);
+	public int createCourseRegister(String courseID, String userID) {
+		return this.courseRegisterRepository.createCourseRegister(courseID, userID);
+	}
+
+	@Override
+	public int deleteRegisterByCourse(String courseID, String userID) {
+		return 0;
 	}
 
 }
