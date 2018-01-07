@@ -48,8 +48,7 @@ public class PaypalRest {
 	private String serverPort;
 	@Value("${front_end.nap_the}")
 	private String paySuccessURL;
-	
-	
+
 	public static final String PAYPAL_SUCCESS_URL = "pay/success";
 	public static final String PAYPAL_CANCEL_URL = "pay/cancel";
 	@Autowired
@@ -59,15 +58,20 @@ public class PaypalRest {
 	@Autowired
 	private CurrencyService currencyService;
 	@Autowired
-	private JwtTokenUtil tokenHelper;
+	private JwtTokenUtil jwtTokenUtil;
 	@Autowired
 	private UserService userService;
 
 	@RequestMapping(value = "pay", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> pay(HttpServletRequest request, @RequestBody PayInfo payInfo) {
-		String cancelUrl = this.scheme + "://" + this.serverName + ":" + this.serverPort+ paySuccessURL;
-		String successUrl = this.scheme + "://" + this.serverName + ":" + this.serverPort+ paySuccessURL;
+		
+		
+		String authToken = jwtTokenUtil.getToken(request);
+		User user = userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
+		
+		String cancelUrl = this.scheme + "://" + this.serverName + ":" + this.serverPort + paySuccessURL;
+		String successUrl = this.scheme + "://" + this.serverName + ":" + this.serverPort + paySuccessURL;
 		if (payInfo.getTotal() < 0) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.BAD_REQUEST, "total must be greater than 0");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
@@ -77,6 +81,10 @@ public class PaypalRest {
 
 		for (Links links : payment.getLinks()) {
 			if (links.getRel().equals("approval_url")) {
+				String link = links.getHref();
+				String tokenParam = "token=";
+				String token =link.substring(link.indexOf(tokenParam) + tokenParam.length());
+				this.userService.saveKey(user.getUserID(), token);
 				ApiMessage apiMessage = new ApiMessage(HttpStatus.OK, links.getHref());
 				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 			}
@@ -85,12 +93,19 @@ public class PaypalRest {
 		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 	}
 
-
 	@RequestMapping(method = RequestMethod.GET, value = PAYPAL_SUCCESS_URL)
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> successPay(@RequestParam("paymentId") String paymentId,
-			@RequestParam("PayerID") String payerId, HttpServletRequest request) {
+			@RequestParam("PayerID") String payerId,@RequestParam("token") String token , HttpServletRequest request) {
 		Payment payment = null;
+		String authToken = this.jwtTokenUtil.getToken(request);
+		User user = userService.getUserByEmail(this.jwtTokenUtil.getUsernameFromToken(authToken));
+		
+		if(!this.userService.checkResetKeyIsExists(user.getUserID(), token)) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "paypal token already used");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+		
 		try {
 			payment = paypalService.executePayment(paymentId, payerId);
 		} catch (PayPalRESTException e) {
@@ -98,16 +113,15 @@ public class PaypalRest {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.FORBIDDEN, "transaction failure");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
+		
 		Map<String, Object> result = new HashMap<>();
 		result.put("paymentId", payerId);
 		result.put("payerId", payerId);
 		if (payment.getState().equals("approved")) {
 			Double total = Double.valueOf(payment.getTransactions().get(0).getAmount().getTotal());
-			Double score = Double
-					.valueOf(this.currencyService.moneyToScore(this.currencyService.currencyConvert(total,"USD","VND")));
-			String authToken = this.tokenHelper.getToken(request);
-			if (authToken != null && this.tokenHelper.getUsernameFromToken(authToken) != null) {
-				User user = userService.getUserByEmail(this.tokenHelper.getUsernameFromToken(authToken));
+			Double score = Double.valueOf(
+					this.currencyService.moneyToScore(this.currencyService.currencyConvert(total, "USD", "VND")));
+			if (authToken != null && this.jwtTokenUtil.getUsernameFromToken(authToken) != null) {
 				this.userService.addScore(user.getUserID(), score);
 				String transactionHistoryID = this.transactionHistoryService.inserTransactionHistory("NT", 0, score,
 						user.getUserID(), "Nạp vào tài khoản" + user.getEmail() + " " + score + " điểm");
@@ -117,6 +131,8 @@ public class PaypalRest {
 				result.put("transactionHistory", th.get());
 				result.put("total", total);
 
+				this.userService.removeKeyReset(user.getUserID(), token);
+				
 				return new ResponseEntity<Object>(result, HttpStatus.OK);
 			} else {
 
