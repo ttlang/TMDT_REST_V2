@@ -32,10 +32,10 @@ front_end :
   
 #google drive api
 google :
-  service_account_email : ttlang@ttlang-171013.iam.gserviceaccount.com
-  application_name : ttlang
-  folder_id : 0B27mfRY62YKZaU9Yby1EdGJ5cjg
-  service_account_key : ttlang-f98aaa157b45.p12  
+  service_account_email : ttlang162@tmdt-189904.iam.gserviceaccount.com
+  application_name : TMDT
+  folder_id : 1uq3Fto8B34DuhNDPAR1hUn3mAbh2u6yT
+  service_account_key : TMDT-6c5d7e57b3b6.p12
   
 
 #paypal
