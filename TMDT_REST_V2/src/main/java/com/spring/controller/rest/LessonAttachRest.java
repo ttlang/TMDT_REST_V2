@@ -158,7 +158,7 @@ public class LessonAttachRest {
 			String lessonIDByLessonAttachID = lessonAttach.get().getLessonID();
 
 			if (!permissionCheck.isCourseAuthorByChapterID(user.getUserID(), lessonIDByLessonAttachID)
-					|| user.getPermission().stream().anyMatch(e -> e.getRoleName().equals("ROLE_ADMIN"))) {
+					|| !user.getPermission().stream().anyMatch(e -> e.getRoleName().equals("ROLE_ADMIN"))) {
 				ApiMessage apiMessage = new ApiMessage(HttpStatus.METHOD_NOT_ALLOWED,
 						"Invalid lessonAttachID you are not course author or registered course");
 				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
