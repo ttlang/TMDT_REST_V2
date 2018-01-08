@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +20,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.config.api.ApiMessage;
+import com.spring.config.security.JwtTokenUtil;
 import com.spring.domain.Chapter;
 import com.spring.domain.Lesson;
+import com.spring.domain.User;
 import com.spring.domain.json.LessonCreate;
+import com.spring.domain.json.LessonUpdate;
 import com.spring.service.ChapterService;
 import com.spring.service.LessonService;
+import com.spring.service.PermissionCheck;
+import com.spring.service.UserService;
 
 @RestController
 public class LessonRest {
@@ -30,6 +38,12 @@ public class LessonRest {
 	private LessonService lessonService;
 	@Autowired
 	private ChapterService chapterService;
+	@Autowired
+	private PermissionCheck permissionCheck;
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value = "/lesson/{lessonID}", method = RequestMethod.GET)
 	@PreAuthorize("IsCourseAuthorOrIsRegisteredCourse(#lessonID)||hasRole('ROLE_ADMIN')")
@@ -71,8 +85,9 @@ public class LessonRest {
 			return new ResponseEntity<Object>(lesson.get(), HttpStatus.OK);
 		}
 	}
-	@RequestMapping(value="/user/lesson-is-non-commercial/{lessonID}", method = RequestMethod.GET)
-	public ResponseEntity<?>  lessonIsNonCommercial(@PathVariable("lessonID")  String lessonID){
+
+	@RequestMapping(value = "/user/lesson-is-non-commercial/{lessonID}", method = RequestMethod.GET)
+	public ResponseEntity<?> lessonIsNonCommercial(@PathVariable("lessonID") String lessonID) {
 		Map<String, Object> map = new HashMap<>();
 		if (lessonService.lessonIsNonCommercial(lessonID))
 			map.put("success", 1);
@@ -100,8 +115,8 @@ public class LessonRest {
 		return new ResponseEntity<Object>(lesson.get(), HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/lesson/{lessonID}",method=RequestMethod.DELETE)
-	@PreAuthorize("isCourseAuthorByChapterID(#lessonCreate.chapterID)||hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/lesson/{lessonID}", method = RequestMethod.DELETE)
+	@PreAuthorize("isCourseAuthorByLessonID(#lessonID)||hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteLesson(@PathVariable("lessonID") String lessonID) {
 		Optional<Lesson> lesson = this.lessonService.getLessonByLessonID(lessonID);
 		if (!lesson.isPresent()) {
@@ -114,7 +129,36 @@ public class LessonRest {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "delete lesson failed");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
-		ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "delete lesson successfully");
+		ApiMessage apiMessage = new ApiMessage(HttpStatus.OK, "delete lesson successfully");
+		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+
+	}
+
+	@RequestMapping(value = "/lesson", method = RequestMethod.PATCH)
+	@PreAuthorize("isCourseAuthorByLessonID(#lessonUpdate.lessonID)||hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> updateChapter(@RequestBody LessonUpdate lessonUpdate, HttpServletRequest request) {
+		Optional<Chapter> chapter = this.chapterService.getChapterByChapterID(lessonUpdate.getChapterID());
+		String authToken = jwtTokenUtil.getToken(request);
+		User user = userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
+		if (!chapter.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "chapter not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+
+		if (!permissionCheck.isCourseAuthorByChapterID(user.getUserID(), lessonUpdate.getChapterID())) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.METHOD_NOT_ALLOWED,
+					"Invalid Chapter ID you are not course author");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+
+		int resultOfUpdate = this.lessonService.updateLesson(lessonUpdate.getLessonTitle(),
+				lessonUpdate.getLessonContent(), lessonUpdate.getChapterID(), lessonUpdate.getLessonID());
+		if (resultOfUpdate < 0) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "update lesson failed");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+
+		}
+		ApiMessage apiMessage = new ApiMessage(HttpStatus.OK, "update lesson successfully");
 		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 
 	}

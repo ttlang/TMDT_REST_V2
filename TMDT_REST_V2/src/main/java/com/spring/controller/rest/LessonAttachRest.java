@@ -157,7 +157,8 @@ public class LessonAttachRest {
 
 			String lessonIDByLessonAttachID = lessonAttach.get().getLessonID();
 
-			if (!permissionCheck.isCourseAuthorByChapterID(user.getUserID(), lessonIDByLessonAttachID)) {
+			if (!permissionCheck.isCourseAuthorByChapterID(user.getUserID(), lessonIDByLessonAttachID)
+					|| !user.getPermission().stream().anyMatch(e -> e.getRoleName().equals("ROLE_ADMIN"))) {
 				ApiMessage apiMessage = new ApiMessage(HttpStatus.METHOD_NOT_ALLOWED,
 						"Invalid lessonAttachID you are not course author or registered course");
 				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
@@ -169,8 +170,8 @@ public class LessonAttachRest {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "delete lesson attach failed");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
-
-		return new ResponseEntity<Object>("delete lesson attach successfully", HttpStatus.OK);
+		ApiMessage apiMessage = new ApiMessage(HttpStatus.OK, "delete lesson attach successfully");
+		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 
 	}
 
