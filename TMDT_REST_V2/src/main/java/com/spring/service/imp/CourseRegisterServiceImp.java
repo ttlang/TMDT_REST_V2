@@ -1,6 +1,7 @@
 package com.spring.service.imp;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class CourseRegisterServiceImp implements CourseRegisterSerivce {
 	}
 
 	@Override
-	public List<CourseRegister> getListCourseRegisterByUserID(String userID) {
-		return this.courseRegisterRepository.getListCourseRegisterByUserID(userID);
+	public Map<String, Object> getListCourseRegisterByUserID(int page, int size, String userID) {
+		return this.courseRegisterRepository.getListCourseRegisterByUserID(page, size, userID);
 	}
 
 	@Override

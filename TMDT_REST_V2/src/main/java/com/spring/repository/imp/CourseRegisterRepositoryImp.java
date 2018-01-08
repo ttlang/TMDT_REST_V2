@@ -40,11 +40,22 @@ public class CourseRegisterRepositoryImp implements CourseRegisterRepository {
 	}
 
 	@Override
-	public List<CourseRegister> getListCourseRegisterByUserID(String userID) {
+	public Map<String, Object> getListCourseRegisterByUserID(int page, int size, String userID) {
 		SqlSession session = this.sessionFactory.openSession();
-		List<CourseRegister> result = Collections.emptyList();
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
 		try {
-			result = session.selectList("com.spring.mapper.CourseRegisterMapper.getListCourseRegisterByUserID", userID);
+			param.put("page", page);
+			param.put("size", size);
+			param.put("userID", userID);
+			List<CourseRegister> listTopicResult = 
+					session.selectList("com.spring.mapper.CourseRegisterMapper.getListCourseRegisterByUserID", param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+
+			result.put("listOfResult", listTopicResult);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
