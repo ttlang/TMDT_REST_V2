@@ -13,6 +13,14 @@ public class ChapterUpdate {
 		this.chapterContent = chapterContent;
 		this.chapterSummary = chapterSummary;
 	}
+	
+	
+
+	public ChapterUpdate() {
+		super();
+	}
+
+
 
 	public String getChapterID() {
 		return chapterID;
