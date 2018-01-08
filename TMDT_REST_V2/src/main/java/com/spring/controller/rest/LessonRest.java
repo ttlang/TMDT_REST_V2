@@ -101,7 +101,7 @@ public class LessonRest {
 	}
 
 	@RequestMapping(value = "/lesson/{lessonID}",method=RequestMethod.DELETE)
-	@PreAuthorize("isCourseAuthorByChapterID(#lessonCreate.chapterID)||hasRole('ROLE_ADMIN')")
+	@PreAuthorize("isCourseAuthorByLessonID(#lessonID)||hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteLesson(@PathVariable("lessonID") String lessonID) {
 		Optional<Lesson> lesson = this.lessonService.getLessonByLessonID(lessonID);
 		if (!lesson.isPresent()) {
@@ -114,7 +114,7 @@ public class LessonRest {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "delete lesson failed");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
-		ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "delete lesson successfully");
+		ApiMessage apiMessage = new ApiMessage(HttpStatus.OK, "delete lesson successfully");
 		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 
 	}
