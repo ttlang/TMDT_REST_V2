@@ -13,8 +13,11 @@
 				select * from dang_ky_khoa_hoc d where d.ma_khoa_hoc =#{courseID}
 		</select>
 		
-		<select id="getListCourseRegisterByUserID" parameterType="java.lang.String"  resultMap="course_register">
-				select * from dang_ky_khoa_hoc d where d.ma_nguoi_dung =#{userID}
+		<select id="getListCourseRegisterByUserID" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_register">
+		{call proc_paging_query(#{page},#{size},#{sumPage,
+		mode=OUT,jdbcType=INTEGER},
+		#{sumRecord, mode=OUT,jdbcType=INTEGER},"select * from dang_ky_khoa_hoc d where
+		d.ma_nguoi_dung ='${userID}'")}
 		</select>
 		
 		<select id="getCourseRegister" parameterType="java.util.Map" resultMap="course_register">
