@@ -402,4 +402,28 @@ public class CourseRepositoryImp implements CourseRepository {
 		return Optional.ofNullable(course);
 	}
 
+	@Override
+	public Map<String, Object> coursesRegistedByUserID(int page, int size, String userID) {
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		try {
+			param.put("page", page);
+			param.put("size", size);
+			param.put("userID",userID);
+			List<Topic> listTopicResult = sqlSession.selectList("com.spring.mapper.CourseMapper.coursesRegistedByUserID",
+					param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+			result.put("listOfResult", listTopicResult);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+
 }
