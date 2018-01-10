@@ -203,6 +203,7 @@ public class CourseRest {
 		}
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
+
 	@RequestMapping(value = "/user/is-registed/{courseID}", method = RequestMethod.GET)
 	public ResponseEntity<?> courseIsRegisted(@PathVariable("courseID") String courseID, HttpServletRequest request) {
 		String authToken = jwtTokenUtil.getToken(request);
@@ -213,6 +214,21 @@ public class CourseRest {
 		else
 			map.put("success", 0);
 		return new ResponseEntity<Object>(map, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/user/cousrses-registed", params = { "page", "size" }, method = RequestMethod.GET)
+	public ResponseEntity<?> coursesRegisted(HttpServletRequest request,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
+		String authToken = jwtTokenUtil.getToken(request);
+		User user = userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
+		Map<String, Object> result = this.courseService.coursesRegistedByUserID(page, size, user.getUserID());
+		if (result.isEmpty()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no course found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 
 }

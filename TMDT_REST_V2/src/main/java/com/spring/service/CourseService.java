@@ -119,5 +119,7 @@ public interface CourseService {
 
 	public Optional<Course> getCourseByLessonID(String lessonID);
 
+	public Map<String, Object> coursesRegistedByUserID(int page, int size, String userID);
+
 
 }
