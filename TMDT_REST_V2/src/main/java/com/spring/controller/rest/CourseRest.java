@@ -216,6 +216,20 @@ public class CourseRest {
 		return new ResponseEntity<Object>(map, HttpStatus.OK);
 	}
 
+
+	@RequestMapping(value = "/users/course/searching/{key_search}", params = { "page",
+			"size" }, method = RequestMethod.GET)
+	public ResponseEntity<?> searchCourse(@PathVariable("key_search") String keySearch,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
+		Map<String, Object> result = this.courseService.searchByCourseName(page, size, keySearch);
+		int numberOfRecord = Integer.valueOf(String.valueOf(result.get("numberOfRecord")));
+		if (numberOfRecord == 0) {
+			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/user/cousrses-registed", params = { "page", "size"}, method = RequestMethod.GET)
 	public ResponseEntity<?> coursesRegisted(HttpServletRequest request,
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
@@ -230,16 +244,6 @@ public class CourseRest {
 
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
-	 @RequestMapping(value="/users/search-by-course-name" , params =  { "page", "size", "key-search" }, method = RequestMethod.GET)
-	 public  ResponseEntity<?>  searchCoursesByName (@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-				@RequestParam(value = "size", defaultValue = "1", required = false) int size, @RequestParam("key-search") String keySearch){
-		 Map<String, Object> result = this.courseService.searchByCourseName(page, size, keySearch);
-			if (result.isEmpty()) {
-				ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no result found");
-				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
-			}
-
-			return new ResponseEntity<Object>(result, HttpStatus.OK);
-	 }
+	
 
 }

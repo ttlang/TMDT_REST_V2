@@ -361,11 +361,11 @@ public class CourseRepositoryImp implements CourseRepository {
 			param.put("page", page);
 			param.put("size", size);
 			param.put("keySearch", keySearch);
-			List<Topic> listTopicResult = sqlSession.selectList("com.spring.mapper.CourseMapper.searchByCourseName",
+			List<Course> listCourseResult = sqlSession.selectList("com.spring.mapper.CourseMapper.searchByCourseName",
 					param);
 			int numberOfPage = (int) param.get("sumPage");
 			int numberOfRecord = (int) param.get("sumRecord");
-			result.put("listOfResult", listTopicResult);
+			result.put("listOfResult", listCourseResult);
 			result.put("numberOfPage", numberOfPage);
 			result.put("numberOfRecord", numberOfRecord);
 		} catch (Exception e) {
