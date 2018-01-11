@@ -203,6 +203,7 @@ public class CourseRest {
 		}
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
+
 	@RequestMapping(value = "/user/is-registed/{courseID}", method = RequestMethod.GET)
 	public ResponseEntity<?> courseIsRegisted(@PathVariable("courseID") String courseID, HttpServletRequest request) {
 		String authToken = jwtTokenUtil.getToken(request);
@@ -213,6 +214,19 @@ public class CourseRest {
 		else
 			map.put("success", 0);
 		return new ResponseEntity<Object>(map, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/users/course/searching/{key_search}", params = { "page",
+			"size" }, method = RequestMethod.GET)
+	public ResponseEntity<?> searchCourse(@PathVariable("key_search") String keySearch,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
+		Map<String, Object> result = this.courseService.searchByCourseName(page, size, keySearch);
+		int numberOfRecord = Integer.valueOf(String.valueOf(result.get("numberOfRecord")));
+		if (numberOfRecord == 0) {
+			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 
 }
