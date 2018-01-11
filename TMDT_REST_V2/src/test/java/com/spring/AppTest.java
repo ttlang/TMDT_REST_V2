@@ -1,5 +1,6 @@
 package com.spring;
 
+
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.spring.domain.Course;
+
 import com.spring.service.CourseService;
 import com.spring.service.GoogleDriveApiService;
 
@@ -23,23 +24,15 @@ public class AppTest {
 	@Autowired
 	GoogleDriveApiService driveApiService;
 	@Autowired
-	CourseService courseService;
-	
+	private CourseService courseService;
+
 	@Test
-	public void test() {
-		File file = new File("C:\\Users\\ttlang\\Downloads\\pic\\1483254.png");
-		if(file.exists()) {
-			try {
-				com.google.api.services.drive.model.File a=	driveApiService.upLoadFile(file.getName(), file.getAbsolutePath(),"1uq3Fto8B34DuhNDPAR1hUn3mAbh2u6yT","image/jpg");
-				System.err.println(a.toPrettyString());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}else {
-			System.err.println("file not found");
-		}
-		
-	
+	public void testcoursesRegistedByUserID() {
+
+		this.courseService.coursesRegistedByUserID(1, 1, "ND1").forEach((k, v) -> {
+			System.out.println(k + " : " + v);
+		});
+
 	}
 	
 	@Test
