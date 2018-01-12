@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.config.api.ApiMessage;
 import com.spring.domain.User;
 import com.spring.domain.custom.UserInfo;
+import com.spring.domain.json.RoleDeleting;
 import com.spring.domain.json.UserInfoUpdate;
 import com.spring.service.AccessRoleService;
 import com.spring.service.UserService;
@@ -60,13 +61,13 @@ public class UserManageRest {
 	
 	@RequestMapping(value = "/admin/access_role", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?> addUserRole(@RequestParam(value = "userID", required = true) String userID) {
-		User user = this.userService.getUserByUserID(userID);
+	public ResponseEntity<?> addUserRole(@RequestBody RoleDeleting roleDel) {
+		User user = this.userService.getUserByUserID(roleDel.getUserID());
 		if (user == null) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "user not found");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
 		}
-		int rowInserted = this.accessRoleService.addUserRole(userID);
+		int rowInserted = this.accessRoleService.addUserRole(roleDel.getUserID());
 		if (rowInserted == 0) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "This user already have this role");
 			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
