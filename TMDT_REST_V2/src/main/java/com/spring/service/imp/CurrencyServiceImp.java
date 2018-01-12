@@ -51,8 +51,8 @@ public class CurrencyServiceImp implements CurrencyService {
 		try {
 			Map<String, Object> result = new ObjectMapper().readValue(output, HashMap.class);
 
-			Map<String, Object> a = (Map<String, Object>) result.get("USD_VND");
-			rate = (int) a.get("val");
+			Map<String, Object> a = (Map<String, Object>) result.get(tranfer);
+			rate = (double) a.get("val");
 
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
