@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -119,7 +120,7 @@ public class PaypalRest {
 		result.put("payerId", payerId);
 		if (payment.getState().equals("approved")) {
 			Double total = Double.valueOf(payment.getTransactions().get(0).getAmount().getTotal());
-			Double score = Double.valueOf(
+			Integer score = Integer.valueOf( (int)
 					this.currencyService.moneyToScore(this.currencyService.currencyConvert(total, "USD", "VND")));
 			if (authToken != null && this.jwtTokenUtil.getUsernameFromToken(authToken) != null) {
 				this.userService.addScore(user.getUserID(), score);
@@ -130,6 +131,7 @@ public class PaypalRest {
 
 				result.put("transactionHistory", th.get());
 				result.put("total", total);
+				result.put("score", score);
 
 				this.userService.removeKeyReset(user.getUserID(), token);
 				
@@ -144,5 +146,12 @@ public class PaypalRest {
 		}
 		ApiMessage apiMessage = new ApiMessage(HttpStatus.FORBIDDEN, "failed");
 		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+	}
+	@RequestMapping(value = "users/currencyconverterapi/{from}/{to}", method = RequestMethod.GET)
+	public ResponseEntity<?> currencyconverterapi(@PathVariable("from") String from, @PathVariable("to") String to) {
+		 Map<String, Double>  map = new HashMap<>();
+		 map.put("val", this.currencyService.getRate(from, to));
+		 return  new ResponseEntity<Object>(map,  HttpStatus.OK ) ; 
+		
 	}
 }

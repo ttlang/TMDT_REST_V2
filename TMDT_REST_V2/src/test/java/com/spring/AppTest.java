@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
+import com.spring.domain.Course;
 import com.spring.service.CourseService;
+import com.spring.service.CurrencyService;
 import com.spring.service.GoogleDriveApiService;
 
 @RunWith(SpringRunner.class)
@@ -24,6 +27,12 @@ public class AppTest {
 		this.courseService.coursesRegistedByUserID(1, 1, "ND1").forEach((k, v) -> {
 			System.out.println(k + " : " + v);
 		});
+
+
+	CurrencyService currencyService;
+	@Test
+	public void testCurrency () {
+		System.out.println(this.currencyService.getRate("VND", "USD"));;
 
 	}
 
