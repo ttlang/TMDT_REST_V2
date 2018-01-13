@@ -244,6 +244,13 @@ public class CourseRest {
 
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
+ @RequestMapping(value="/users/count-number-user-in-course/{courseID}", method = RequestMethod.GET)
+ public ResponseEntity<?> countNumberUserInCourse(@PathVariable("courseID" )  String courseID){
+	 int  numberUserInCourse = this.courseService.numberUserInCourse(courseID);
+	 Map<String, Integer>  map  = new HashMap<>();
+	 map.put("number_user", numberUserInCourse);
+	 return new ResponseEntity<Object>(map, HttpStatus.OK);
+ }
 
 	
 	

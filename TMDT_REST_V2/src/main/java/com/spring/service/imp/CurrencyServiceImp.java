@@ -21,7 +21,7 @@ public class CurrencyServiceImp implements CurrencyService {
 
 	@Value("${vnd_to_score}")
 	private Double vndToScore;
-	private static final double USD_VND =22000;
+	private static final double USD_VND = 22000;
 
 	@Override
 	public double moneyToScore(double amount) {
@@ -30,7 +30,7 @@ public class CurrencyServiceImp implements CurrencyService {
 
 	@Override
 	public double currencyConvert(double amount, String from, String to) {
-		return USD_VND * amount;
+		return this.getRate(from, to) * amount;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -52,8 +52,9 @@ public class CurrencyServiceImp implements CurrencyService {
 			Map<String, Object> result = new ObjectMapper().readValue(output, HashMap.class);
 
 			Map<String, Object> a = (Map<String, Object>) result.get(tranfer);
-			rate = (double) a.get("val");
-
+			rate = Double.valueOf(  a.get("val").toString());
+			
+			System.err.println(rate);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		}

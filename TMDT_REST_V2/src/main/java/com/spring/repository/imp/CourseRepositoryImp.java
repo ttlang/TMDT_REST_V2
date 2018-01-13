@@ -426,4 +426,19 @@ public class CourseRepositoryImp implements CourseRepository {
 		return result;
 	}
 
+	@Override
+	public int numberUserInCourse(String courseID) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		 int result = 0;
+		try {
+			 result = sqlSession.selectOne("com.spring.mapper.CourseMapper.countNumberUserInCourse",
+					courseID);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+
 }
