@@ -38,7 +38,10 @@ public class CourseRest {
 	private JwtTokenUtil jwtTokenUtil;
 	@Autowired
 	private UserService userService;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> master
 
 	@RequestMapping(value = "/users/course/{courseID}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCourseByID(@PathVariable("courseID") String courseID) {
