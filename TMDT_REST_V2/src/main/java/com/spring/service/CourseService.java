@@ -121,5 +121,7 @@ public interface CourseService {
 
 	public Map<String, Object> coursesRegistedByUserID(int page, int size, String userID);
 
+	public int numberUserInCourse(String courseID);
+
 
 }

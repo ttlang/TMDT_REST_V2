@@ -1,6 +1,5 @@
 package com.spring;
 
-
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -24,9 +23,22 @@ import com.spring.service.GoogleDriveApiService;
 public class AppTest {
 	@Autowired
 	CurrencyService currencyService;
+
+	@Autowired
+	private CourseService courseService;
+
 	@Test
-	public void testCurrency () {
-		System.out.println(this.currencyService.getRate("VND", "USD"));;
+	public void testCurrency() {
+		System.err.println(this.currencyService.getRate("VND", "USD") * 100000);
 	}
 
+	@Test
+	public void testNumberUserInCourse() {
+		assertEquals(this.courseService.numberUserInCourse("KH3"), 1);
+		assertEquals(this.courseService.numberUserInCourse("KH17"), 0);
+	}
+	@Test
+	 public void testCure() {
+		
+	}
 }
