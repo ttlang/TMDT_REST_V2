@@ -125,8 +125,8 @@ public class PaypalRest {
 		result.put("payerId", payerId);
 		if (payment.getState().equals("approved")) {
 			Double total = Double.valueOf(payment.getTransactions().get(0).getAmount().getTotal());
-			Integer score = Integer.valueOf( (int)
-					this.currencyService.moneyToScore(this.currencyService.currencyConvert(total, "USD", "VND")));
+			Double score = 
+					(this.currencyService.moneyToScore(this.currencyService.currencyConvert(total, "USD", "VND")));
 			if (authToken != null && this.jwtTokenUtil.getUsernameFromToken(authToken) != null) {
 				this.userService.addScore(user.getUserID(), score);
 				String transactionHistoryID = this.transactionHistoryService.inserTransactionHistory("NT", 0, score,
