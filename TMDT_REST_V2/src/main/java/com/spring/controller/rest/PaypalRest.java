@@ -71,6 +71,11 @@ public class PaypalRest {
 		String authToken = jwtTokenUtil.getToken(request);
 		User user = userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
 		
+		
+		double newUSDAmount = this.currencyService.currencyConvert(payInfo.getTotal(), "VND", "USD");
+		payInfo.setTotal(newUSDAmount);
+		
+		
 		String cancelUrl = this.scheme + "://" + this.serverName + ":" + this.serverPort + paySuccessURL;
 		String successUrl = this.scheme + "://" + this.serverName + ":" + this.serverPort + paySuccessURL;
 		if (payInfo.getTotal() < 0) {
