@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 import java.util.Map;
-
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,6 +19,7 @@ import com.spring.service.StatisticsService;
 @SpringBootTest
 public class AppTest {
 	
+<<<<<<< HEAD
 	@Autowired
 	GoogleDriveApiService driveApiService;
 	@Autowired
@@ -63,14 +62,7 @@ public class AppTest {
 		assertEquals(5, listOfResult.size());
 >>>>>>> master
 	}
+=======
+>>>>>>> 6c46f077d61cddcb6bcea8338cba39a4dd1f4085
 
-	@Test
-	public void testNumberUserInCourse() {
-		assertEquals(this.courseService.numberUserInCourse("KH3"), 1);
-		assertEquals(this.courseService.numberUserInCourse("KH17"), 0);
-	}
-	@Test
-	 public void testCure() {
-		
-	}
 }
