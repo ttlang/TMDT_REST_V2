@@ -21,7 +21,7 @@ public class CurrencyServiceImp implements CurrencyService {
 
 	@Value("${vnd_to_score}")
 	private Double vndToScore;
-	private static final double USD_VND = 22000;
+//	private static final double USD_VND = 22000;
 
 	@Override
 	public double moneyToScore(double amount) {
