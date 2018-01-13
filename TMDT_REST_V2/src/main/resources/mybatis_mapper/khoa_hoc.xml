@@ -30,7 +30,11 @@
 		<result column="sdt" javaType="java.lang.String" property="phoneNumber" />
 		<result column="number_of_course" javaType="int" property="numberOfCourses" />
 	</resultMap>
-
+	
+	<resultMap type="com.spring.domain.TopicStatistics" id="topic_statistics">
+		<result column="tieu_de" javaType="java.lang.String" property="topicName"/>
+		<result column="SL" javaType="java.lang.Integer" property="courseQuantity"/>
+	</resultMap>
 
 	<!-- query data -->
 	<select id="getCourseByCourseID" resultMap="course_result_1">
@@ -132,7 +136,10 @@
 	<update id="updateViewByCourseID" parameterType="java.lang.String">
 		UPDATE KHOA_HOC  SET LUOT_TRUY_CAP = (LUOT_TRUY_CAP + 1) WHERE MA_KHOA_HOC = #{courseID}
 	</update>
-
+	
+	<select id="statisticsByTopic" statementType="CALLABLE" parameterType="java.util.Map" resultMap="topic_statistics">
+		{call proc_thong_ke_theo_chu_de(#{rowsLimit}, #{totalCourse, mode=OUT, jdbcType=INTEGER})}
+	</select>
 
 </mapper>
 
