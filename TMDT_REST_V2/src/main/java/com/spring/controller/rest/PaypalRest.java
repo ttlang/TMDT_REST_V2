@@ -71,6 +71,11 @@ public class PaypalRest {
 		String authToken = jwtTokenUtil.getToken(request);
 		User user = userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
 		
+		
+		double newUSDAmount = this.currencyService.currencyConvert(payInfo.getTotal(), "VND", "USD");
+		payInfo.setTotal(newUSDAmount);
+		
+		
 		String cancelUrl = this.scheme + "://" + this.serverName + ":" + this.serverPort + paySuccessURL;
 		String successUrl = this.scheme + "://" + this.serverName + ":" + this.serverPort + paySuccessURL;
 		if (payInfo.getTotal() < 0) {
@@ -120,8 +125,8 @@ public class PaypalRest {
 		result.put("payerId", payerId);
 		if (payment.getState().equals("approved")) {
 			Double total = Double.valueOf(payment.getTransactions().get(0).getAmount().getTotal());
-			Integer score = Integer.valueOf( (int)
-					this.currencyService.moneyToScore(this.currencyService.currencyConvert(total, "USD", "VND")));
+			Double score = 
+					(this.currencyService.moneyToScore(this.currencyService.currencyConvert(total, "USD", "VND")));
 			if (authToken != null && this.jwtTokenUtil.getUsernameFromToken(authToken) != null) {
 				this.userService.addScore(user.getUserID(), score);
 				String transactionHistoryID = this.transactionHistoryService.inserTransactionHistory("NT", 0, score,

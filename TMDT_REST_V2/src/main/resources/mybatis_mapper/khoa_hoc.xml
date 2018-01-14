@@ -129,7 +129,9 @@
 		"select k.* from khoa_hoc k where k.ma_khoa_hoc  in (select  d.ma_khoa_hoc from dang_ky_khoa_hoc d where d.ma_nguoi_dung= '${userID}')")}
 	</select>
 	
-	
+	<select id="countNumberUserInCourse"  parameterType="java.lang.String" resultType="java.lang.Integer">
+	select count(*) as result from dang_ky_khoa_hoc where ma_khoa_hoc = #{courseID}
+	</select>
 	<update id="updateCourse" parameterType="java.util.Map">
 		update khoa_hoc set ${courseProperties} = #{coursePropertiesValue} where ma_khoa_hoc =#{courseID}
 	</update>

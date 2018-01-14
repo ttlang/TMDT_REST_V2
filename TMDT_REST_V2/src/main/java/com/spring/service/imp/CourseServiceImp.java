@@ -117,8 +117,13 @@ public class CourseServiceImp implements CourseService {
 	}
 
 	@Override
-	public Map<String, Object> coursesRegistedByUserID(int page, int size,String userID) {
-		return  this.courseRepository.coursesRegistedByUserID(page, size, userID) ;
+	public Map<String, Object> coursesRegistedByUserID(int page, int size, String userID) {
+		return this.courseRepository.coursesRegistedByUserID(page, size, userID);
+	}
+
+	@Override
+	public int numberUserInCourse(String courseID) {
+		return this.courseRepository.numberUserInCourse(courseID);
 	}
 
 }

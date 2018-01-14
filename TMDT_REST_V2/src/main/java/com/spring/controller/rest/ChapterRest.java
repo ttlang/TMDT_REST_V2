@@ -30,7 +30,6 @@ public class ChapterRest {
 	private CourseService courseService;
 
 	@RequestMapping(value = "/users/course/{courseID}/chapter", method = RequestMethod.GET)
-	@PreAuthorize("canEditCourse(#courseID)||hasRole('ROLE_ADMIN')||isRegisteredCourse(#courseID)")
 	public ResponseEntity<?> getChapterByCourseID(@PathVariable("courseID") String courseID) {
 		if (!courseService.getCourseByCourseID(courseID).isPresent()) {
 			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "course not found");

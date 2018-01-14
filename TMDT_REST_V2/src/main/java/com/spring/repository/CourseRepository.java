@@ -41,11 +41,9 @@ public interface CourseRepository {
 
 	public Optional<Course> getCourseByLessonID(String lessonID);
 
-
-
-
 	public int updateViewForCourse(int view,String courseID);
 
 	public Map<String, Object> coursesRegistedByUserID(int page, int size, String userID);
-	
+
+	public int numberUserInCourse(String courseID);
 }

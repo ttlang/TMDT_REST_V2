@@ -75,7 +75,6 @@ public class LessonRest {
 	}
 
 	@RequestMapping(value = "/users/lesson/first-lesson-course/{courseID}", method = RequestMethod.GET)
-	@PreAuthorize("isRegisteredCourse(#courseID)||hasRole('ROLE_ADMIN')||canEditCourse(#courseID)")
 	public ResponseEntity<?> getFirstLessonInCourse(@PathVariable("courseID") String courseID) {
 		Optional<Lesson> lesson = lessonService.getFirstLessonInCourse(courseID);
 		if (!lesson.isPresent()) {

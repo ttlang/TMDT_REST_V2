@@ -38,6 +38,13 @@ public class CourseRest {
 	private JwtTokenUtil jwtTokenUtil;
 	@Autowired
 	private UserService userService;
+<<<<<<< HEAD
+<<<<<<< HEAD
+	
+=======
+>>>>>>> master
+=======
+>>>>>>> 6c46f077d61cddcb6bcea8338cba39a4dd1f4085
 
 	@RequestMapping(value = "/users/course/{courseID}", method = RequestMethod.GET)
 	public ResponseEntity<?> getCourseByID(@PathVariable("courseID") String courseID) {
@@ -244,6 +251,13 @@ public class CourseRest {
 
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
+ @RequestMapping(value="/users/count-number-user-in-course/{courseID}", method = RequestMethod.GET)
+ public ResponseEntity<?> countNumberUserInCourse(@PathVariable("courseID" )  String courseID){
+	 int  numberUserInCourse = this.courseService.numberUserInCourse(courseID);
+	 Map<String, Integer>  map  = new HashMap<>();
+	 map.put("number_user", numberUserInCourse);
+	 return new ResponseEntity<Object>(map, HttpStatus.OK);
+ }
 
 	
 	
