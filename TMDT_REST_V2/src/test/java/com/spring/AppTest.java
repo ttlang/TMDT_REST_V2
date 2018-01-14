@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.spring.domain.TopicStatistics;
+import com.spring.domain.Statistics;
 import com.spring.service.CourseService;
 import com.spring.service.CurrencyService;
 import com.spring.service.GoogleDriveApiService;
@@ -50,9 +50,27 @@ public class AppTest {
 		Map<String, Object> reMap = this.statisticsService.statisticsByTopic(5);
 		int totalCourse = (int) reMap.get("totalCourse");
 		@SuppressWarnings("unchecked")
-		List<TopicStatistics> listOfResult = (List<TopicStatistics>) reMap.get("listOfResult");
+		List<Statistics> listOfResult = (List<Statistics>) reMap.get("listOfResult");
 		assertEquals(18, totalCourse);
 		assertEquals(5, listOfResult.size());
+		
+		this.statisticsService.statisticsByTopic(5).forEach((k, v) -> {
+			System.out.println(k + ": " + v);
+		});
+	}
+	
+	@Test
+	public void testStatisticsByCourse() {
+		Map<String, Object> reMap = this.statisticsService.statisticsByCourse(2);
+		int totalView = (int) reMap.get("totalView");
+		@SuppressWarnings("unchecked")
+		List<Statistics> listOfResult = (List<Statistics>) reMap.get("listOfResult");
+		assertEquals(55, totalView);
+		assertEquals(2, listOfResult.size());
+		
+		this.statisticsService.statisticsByCourse(2).forEach((k, v) -> {
+			System.out.println(k + ": " + v);
+		});
 	}
 
 }

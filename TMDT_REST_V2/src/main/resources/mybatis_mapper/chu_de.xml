@@ -8,7 +8,10 @@
 		<result column="trang_thai" javaType="java.lang.Integer" property="topicStatus"/>
 	</resultMap>
 
-
+	<resultMap type="com.spring.domain.Statistics" id="topicStatistics">
+		<result column="tenChuDe" javaType="java.lang.String" property="name"/>
+		<result column="soLuongKhoaHoc" javaType="java.lang.Integer" property="value"/>
+	</resultMap>
 
 	<select id="getTopicByTopicID" resultMap="topic_result_1" parameterType="java.lang.String">
 		select * from chu_de c where c.ma_chu_de=#{topicID} 
@@ -65,6 +68,8 @@
 		where ma_chu_de =#{topicID}
 	</update>
 	
-	
+	<select id="statisticsByTopic" statementType="CALLABLE" parameterType="java.util.Map" resultMap="topicStatistics">
+		{call proc_thong_ke_theo_chu_de(#{rowsLimit}, #{totalCourse, mode=OUT, jdbcType=INTEGER})}
+	</select>
 	
 </mapper>

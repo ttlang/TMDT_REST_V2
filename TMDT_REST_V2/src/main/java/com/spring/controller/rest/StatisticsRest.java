@@ -24,12 +24,24 @@ public class StatisticsRest {
 	/** 
 	 * statisticsByTopic
 	 * @param rowsLimit
-	 * @return List<TopicStatistics>, totalCourse 
+	 * @return List<Statistics>, totalCourseOfTopicList 
 	 */
 	@RequestMapping(value="/topic", method = RequestMethod.GET, params={ "rowsLimit" })
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> statisticsByTopic(@RequestParam("rowsLimit") int rowsLimit) {
 		Map<String, Object> result = this.statisticsService.statisticsByTopic(rowsLimit);
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
+	}
+	
+	/** 
+	 * statisticsByCouse
+	 * @param rowsLimit
+	 * @return List<Statistics>, totalViewOfCourseList
+	 */
+	@RequestMapping(value="/course", method = RequestMethod.GET, params={ "rowsLimit" })
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> statisticsByCouse(@RequestParam("rowsLimit") int rowsLimit) {
+		Map<String, Object> result = this.statisticsService.statisticsByCourse(rowsLimit);
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 	

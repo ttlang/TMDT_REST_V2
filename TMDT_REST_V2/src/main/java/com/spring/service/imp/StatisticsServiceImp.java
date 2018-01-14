@@ -10,11 +10,17 @@ import com.spring.service.StatisticsService;
 
 @Service
 public class StatisticsServiceImp implements StatisticsService{
+	
 	@Autowired
 	private StatisticsRepository statisticsRepository;
+	
 	@Override
 	public Map<String, Object> statisticsByTopic(int rowsLimit) {
 		return this.statisticsRepository.statisticsByTopic(rowsLimit);
+	}
+	@Override
+	public Map<String, Object> statisticsByCourse(int rowsLimit) {
+		return this.statisticsRepository.statisticsByCourse(rowsLimit);
 	}
 
 }
