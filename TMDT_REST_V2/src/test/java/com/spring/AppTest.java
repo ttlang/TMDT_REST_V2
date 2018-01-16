@@ -15,11 +15,12 @@ import com.spring.service.CourseService;
 import com.spring.service.CurrencyService;
 import com.spring.service.GoogleDriveApiService;
 import com.spring.service.StatisticsService;
+import com.spring.service.TransactionHistoryService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AppTest {
-	
+
 	@Autowired
 	GoogleDriveApiService driveApiService;
 	@Autowired
@@ -28,7 +29,9 @@ public class AppTest {
 	CurrencyService currencyService;
 	@Autowired
 	private StatisticsService statisticsService;
-	
+	@Autowired
+	private TransactionHistoryService historyService;
+
 	@Test
 	public void testcoursesRegistedByUserID() {
 
@@ -36,13 +39,13 @@ public class AppTest {
 			System.out.println(k + " : " + v);
 		});
 	}
-	
+
 	@Test
-	public void testCurrency () {
+	public void testCurrency() {
 		assertEquals(0.000044, this.currencyService.getRate("VND", "USD"), 0.000001);
 
 	}
-	
+
 	@Test
 	public void testStatisticsByTopic() {
 		Map<String, Object> reMap = this.statisticsService.statisticsByTopic(5);
@@ -51,12 +54,12 @@ public class AppTest {
 		List<Statistics> listOfResult = (List<Statistics>) reMap.get("listOfResult");
 		assertEquals(18, totalCourse);
 		assertEquals(5, listOfResult.size());
-		
+
 		this.statisticsService.statisticsByTopic(5).forEach((k, v) -> {
 			System.out.println(k + ": " + v);
 		});
 	}
-	
+
 	@Test
 	public void testStatisticsByCourse() {
 		Map<String, Object> reMap = this.statisticsService.statisticsByCourse(2);
@@ -65,11 +68,19 @@ public class AppTest {
 		List<Statistics> listOfResult = (List<Statistics>) reMap.get("listOfResult");
 		assertEquals(55, totalView);
 		assertEquals(2, listOfResult.size());
-		
+
 		this.statisticsService.statisticsByCourse(2).forEach((k, v) -> {
 			System.out.println(k + ": " + v);
 		});
 
 	}
+
+	@Test
+	 public void   testTranSactionByID() {
+		 this.historyService
+				  .getTransactionHistoryByTradersAndTransactionID(1, 4, "ND1", "DN").forEach( (k, v) -> {
+					  System.out.println("key: " +k+", value: " +v );
+				  });
+	 }
 
 }

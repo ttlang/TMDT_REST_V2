@@ -24,6 +24,10 @@
 				{ call proc_paging_query(#{page}, #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER},
 				#{sumRecord, mode=OUT,jdbcType=INTEGER},"select * from lich_su_giao_dich l where l.ma_nguoi_dung='${userID}' order by l.ngay_giao_dich  desc ")}
 			</select>	
+				<select id="getTransactionHistoryByTradersAndTransactionID" resultMap="transaction_history" statementType="CALLABLE" parameterType="java.util.Map">
+				{ call proc_paging_query(#{page}, #{size}, #{sumPage, mode=OUT, jdbcType=INTEGER},
+				#{sumRecord, mode=OUT,jdbcType=INTEGER},"select * from lich_su_giao_dich l where l.ma_nguoi_dung='${userID}' and l.ma_hinh_thuc_giao_dich ='${transactionID}' order by l.ngay_giao_dich  desc ")}
+			</select>	
 			
 			<insert id="inserTransactionHistory" statementType="CALLABLE" parameterType="java.util.Map">
 				{call insert_lich_su_giao_dich(#{transactionFormID}, #{debt}, #{balance}, #{userID}, #{transactionDescription},#{result, mode=OUT, jdbcType=VARCHAR} )}

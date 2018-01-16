@@ -11,5 +11,8 @@
 		<select id="getTransactionFormByID" resultMap="transaction_form_result">
 			select * from hinh_thuc_giao_dich h where h.ma_hinh_thuc_giao_dich=#{transactionFormID}
 		</select>
+		 <select id="getTransactionForm" resultMap="transaction_form_result">
+		 select *  from hinh_thuc_giao_dich h
+		 </select>
 		
 	</mapper>

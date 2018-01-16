@@ -1,5 +1,5 @@
 package com.spring.repository.imp;
-
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.spring.domain.TransactionForm;
 import com.spring.domain.TransactionHistory;
 import com.spring.repository.TransactionHistoryRepository;
 
@@ -108,5 +109,47 @@ public class TransactionHistoryRepositoryImp implements TransactionHistoryReposi
 			session.close();
 		}
 		return result;
+	}
+
+	@Override
+	public List<TransactionForm> getTransactionForm() {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		List<TransactionForm> transactionForm = Collections.emptyList();
+		try {
+			transactionForm = session.selectList(
+					"com.spring.mapper.TransactionFormMapper.getTransactionForm");
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return  transactionForm;
+	}
+
+	@Override
+	public Map<String, Object> getTransactionHistoryByTradersAndTransactionID(int page, int size, String userID,
+			String transactionID) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		Map<String, Object> param = new HashMap<>();
+		Map<String, Object> result = new HashMap<>();
+		param.put("page", page);
+		param.put("size", size);
+		param.put("userID", userID);
+		param.put("transactionID", transactionID);
+		try {
+			List<TransactionHistory> listCourseResult = session
+					.selectList("com.spring.mapper.TransactionHistoryMapper.getTransactionHistoryByTradersAndTransactionID", param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+
+			result.put("listOfResult", listCourseResult);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		} finally {
+			session.close();
+		}
+		return result; 
 	}
 }
