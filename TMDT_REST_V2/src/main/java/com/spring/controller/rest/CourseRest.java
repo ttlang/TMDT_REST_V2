@@ -216,7 +216,6 @@ public class CourseRest {
 		return new ResponseEntity<Object>(map, HttpStatus.OK);
 	}
 
-
 	@RequestMapping(value = "/users/course/searching/{key_search}", params = { "page",
 			"size" }, method = RequestMethod.GET)
 	public ResponseEntity<?> searchCourse(@PathVariable("key_search") String keySearch,
@@ -230,7 +229,7 @@ public class CourseRest {
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/user/cousrses-registed", params = { "page", "size"}, method = RequestMethod.GET)
+	@RequestMapping(value = "/user/cousrses-registed", params = { "page", "size" }, method = RequestMethod.GET)
 	public ResponseEntity<?> coursesRegisted(HttpServletRequest request,
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
@@ -244,13 +243,47 @@ public class CourseRest {
 
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
-	
-	 @RequestMapping(value="/users/count-number-user-in-course/{courseID}", method = RequestMethod.GET)
-	 public ResponseEntity<?> countNumberUserInCourse(@PathVariable("courseID" )  String courseID){
-		 int  numberUserInCourse = this.courseService.numberUserInCourse(courseID);
-		 Map<String, Integer>  map  = new HashMap<>();
-		 map.put("number_user", numberUserInCourse);
-		 return new ResponseEntity<Object>(map, HttpStatus.OK);
-	 }
+
+	@RequestMapping(value = "/users/count-number-user-in-course/{courseID}", method = RequestMethod.GET)
+	public ResponseEntity<?> countNumberUserInCourse(@PathVariable("courseID") String courseID) {
+		int numberUserInCourse = this.courseService.numberUserInCourse(courseID);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("number_user", numberUserInCourse);
+		return new ResponseEntity<Object>(map, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/course/status/{status}", params = { "page", "size" }, method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> getAllCourseByStatutWithPaging(@PathVariable("status") int status,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
+		Map<String, Object> result = this.courseService.getAllCourseByStatutWithPaging(page, size, status);
+
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/admin/course/status/confirmed", method = RequestMethod.PATCH)
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> updateCourseStatusForAdmin(HttpServletRequest request,
+			@RequestBody CourseStatus courseStatus) {
+		String authToken = jwtTokenUtil.getToken(request);
+		User user = userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
+
+		Optional<Course> result = courseService.getCourseByCourseID(courseStatus.getCourseID());
+
+		if (!result.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "cant find course");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		} else {
+			int resultOfUpdate = this.courseService.updateCourseStatusForAdmin(user.getUserID(),
+					courseStatus.getCourseID(), courseStatus.getNewStatus());
+			if (resultOfUpdate <= 0) {
+				ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "update status failed");
+				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+			}
+			return new ResponseEntity<Course>(this.courseService.getCourseByCourseID(result.get().getCourseID()).get(),
+					HttpStatus.OK);
+		}
+	}
 
 }

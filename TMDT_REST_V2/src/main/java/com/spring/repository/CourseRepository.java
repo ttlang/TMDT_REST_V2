@@ -1,5 +1,6 @@
 package com.spring.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -46,4 +47,14 @@ public interface CourseRepository {
 	public Map<String, Object> coursesRegistedByUserID(int page, int size, String userID);
 
 	public int numberUserInCourse(String courseID);
+	
+	public Map<String, Object>getAllCourseByStatutWithPaging(int page, int size,int status);
+	
+	
+	
+	
+	public int UpdateConfirmedBy(String courseID,String adminID,LocalDateTime confirmedDate);
+
+
+
 }

@@ -122,6 +122,11 @@ public interface CourseService {
 	public Map<String, Object> coursesRegistedByUserID(int page, int size, String userID);
 
 	public int numberUserInCourse(String courseID);
-
+	
+	public Map<String, Object>getAllCourseByStatutWithPaging(int page, int size,int status);
+	
+	
+	public int updateCourseStatusForAdmin(String AdminID,String courseID,int newStatus);
+	
 
 }

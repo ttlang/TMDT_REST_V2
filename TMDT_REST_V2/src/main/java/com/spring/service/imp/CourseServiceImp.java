@@ -1,5 +1,6 @@
 package com.spring.service.imp;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -124,6 +125,22 @@ public class CourseServiceImp implements CourseService {
 	@Override
 	public int numberUserInCourse(String courseID) {
 		return this.courseRepository.numberUserInCourse(courseID);
+	}
+
+	@Override
+	public Map<String, Object> getAllCourseByStatutWithPaging(int page, int size, int status) {
+		return this.courseRepository.getAllCourseByStatutWithPaging(page, size, status);
+	}
+
+	@Override
+	public int updateCourseStatusForAdmin(String AdminID, String courseID, int newStatus) {
+		int resultOfUpdate = this.courseRepository.updateCourseStatus(courseID, newStatus);
+		if (resultOfUpdate <= 0) {
+			return 0;
+		} else {
+			this.courseRepository.UpdateConfirmedBy(courseID, AdminID, LocalDateTime.now());
+			return resultOfUpdate;
+		}
 	}
 
 }
