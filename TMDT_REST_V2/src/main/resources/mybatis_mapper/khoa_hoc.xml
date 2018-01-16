@@ -143,5 +143,24 @@
 		{call proc_thong_ke_theo_khoa_hoc(#{rowsLimit}, #{totalView, mode=OUT, jdbcType=INTEGER})}
 	</select>
 	
+	
+	
+
+
+		
+	<select id="getAllCourseByStatusWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
+		{call
+		proc_paging_query(#{page},#{size},#{sumPage,
+		mode=OUT,jdbcType=INTEGER},
+		#{sumRecord, mode=OUT,jdbcType=INTEGER},
+		"select * from khoa_hoc k where trang_thai =${status}")}
+	</select>
+	
+	
+	<update id="UpdateConfirmedBy" parameterType="java.util.Map">
+		update khoa_hoc set id_admin_duyet =#{adminID},ngay_duyet=#{confirmedDate} where ma_khoa_hoc =#{courseID}
+	</update>
+
+
 </mapper>
 

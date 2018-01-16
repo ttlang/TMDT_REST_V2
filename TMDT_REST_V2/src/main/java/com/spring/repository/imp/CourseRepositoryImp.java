@@ -1,5 +1,7 @@
 package com.spring.repository.imp;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -410,9 +412,9 @@ public class CourseRepositoryImp implements CourseRepository {
 		try {
 			param.put("page", page);
 			param.put("size", size);
-			param.put("userID",userID);
-			List<Topic> listTopicResult = sqlSession.selectList("com.spring.mapper.CourseMapper.coursesRegistedByUserID",
-					param);
+			param.put("userID", userID);
+			List<Course> listTopicResult = sqlSession
+					.selectList("com.spring.mapper.CourseMapper.coursesRegistedByUserID", param);
 			int numberOfPage = (int) param.get("sumPage");
 			int numberOfRecord = (int) param.get("sumRecord");
 			result.put("listOfResult", listTopicResult);
@@ -429,10 +431,9 @@ public class CourseRepositoryImp implements CourseRepository {
 	@Override
 	public int numberUserInCourse(String courseID) {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
-		 int result = 0;
+		int result = 0;
 		try {
-			 result = sqlSession.selectOne("com.spring.mapper.CourseMapper.countNumberUserInCourse",
-					courseID);
+			result = sqlSession.selectOne("com.spring.mapper.CourseMapper.countNumberUserInCourse", courseID);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 		} finally {
@@ -441,4 +442,56 @@ public class CourseRepositoryImp implements CourseRepository {
 		return result;
 	}
 
+	@Override
+	public Map<String, Object> getAllCourseByStatutWithPaging(int page, int size, int status) {
+		SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+
+		try {
+			param.put("page", page);
+			param.put("size", size);
+			param.put("status", status);
+
+			List<Course> listTopicResult = sqlSession
+					.selectList("com.spring.mapper.CourseMapper.getAllCourseByStatusWithPaging", param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+			result.put("listOfResult", listTopicResult);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+
+		} finally {
+			sqlSession.close();
+		}
+
+		return result;
+	}
+
+	@Override
+	public int UpdateConfirmedBy(String courseID, String adminID, LocalDateTime confirmedDate) {
+		SqlSession session = this.sqlSessionFactory.openSession();
+			int resultOfUpdate = 0;
+			Map<String,Object> param  = new HashMap<>();
+			try {
+				DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+				String confirmedDateToString = confirmedDate.format(dateTimeFormatter);
+				
+				param.put("courseID",courseID);
+				param.put("adminID", adminID);
+				param.put("confirmedDate", confirmedDateToString);
+	
+				resultOfUpdate = session.update("com.spring.mapper.CourseMapper.UpdateConfirmedBy",param);
+				
+			} catch (Exception e) {
+				LOGGER.error(e.getMessage());
+			}finally {
+				session.close();
+			}
+		return resultOfUpdate;
+	}
+	
 }
