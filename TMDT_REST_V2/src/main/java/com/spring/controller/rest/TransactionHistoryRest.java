@@ -1,9 +1,11 @@
 package com.spring.controller.rest;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Path;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.config.api.ApiMessage;
 import com.spring.config.security.JwtTokenUtil;
+import com.spring.domain.TransactionForm;
 import com.spring.domain.TransactionHistory;
 import com.spring.domain.User;
 import com.spring.service.TransactionHistoryService;
@@ -87,5 +90,33 @@ public class TransactionHistoryRest {
 		}
 		
 	}
+	
+	@RequestMapping(value="/users/list-transaction-form", method = RequestMethod.GET)
+	public  ResponseEntity<?>  getListTransactionForm(){
+		List<TransactionForm>  forms  =  this.transactionHistoryService.getListTransactionForm();
+		if (forms.isEmpty()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "Transaction form is not found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+		return  new ResponseEntity<List<TransactionForm>>(forms, HttpStatus.OK);
+	}
+	@RequestMapping(value = "/user/transaction_history/{transactionID}", method = RequestMethod.GET, params = { "page", "size" })
+	public ResponseEntity<?> getAllTransactionHistory3(
+			@RequestParam(value = "page", defaultValue = "1", required = true) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = true) int size, HttpServletRequest request,
+			@PathVariable("transactionID") String transactionID) {
+		String authToken = jwtTokenUtil.getToken(request);
+		User user = userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
+		Map<String, Object> result = this.transactionHistoryService.getTransactionHistoryByTradersAndTransactionID(page, size,
+				user.getUserID(), transactionID);
+		if (result.isEmpty()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NO_CONTENT, "no transaction history found");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		}
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
+	}
+	
+	
+	
 
 }
