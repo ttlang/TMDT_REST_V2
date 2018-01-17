@@ -172,5 +172,14 @@
 		{call tmdt.thong_ke_top_khoa_hoc(#{rowsLimit} ,  #{totalCourse, mode=OUT,jdbcType=INTEGER})}
 	</select>
 
+
+	<select id="getAllCourseByAuthorID" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
+		{call
+		proc_paging_query(#{page},#{size},#{sumPage,
+		mode=OUT,jdbcType=INTEGER},
+		#{sumRecord, mode=OUT,jdbcType=INTEGER},
+		"select * from khoa_hoc k where ma_nguoi_dung ='${authorID}'")}
+	</select>
+	
 </mapper>
 

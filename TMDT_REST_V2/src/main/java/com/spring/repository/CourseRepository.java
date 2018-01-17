@@ -54,6 +54,8 @@ public interface CourseRepository {
 	
 	
 	public int UpdateConfirmedBy(String courseID,String adminID,LocalDateTime confirmedDate);
+	
+	public Map<String, Object> getAllCourseByAuthorID(int page, int size, String authorID);
 
 
 
