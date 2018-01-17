@@ -493,5 +493,32 @@ public class CourseRepositoryImp implements CourseRepository {
 			}
 		return resultOfUpdate;
 	}
-	
+	@Override
+	public Map<String, Object> getAllCourseByAuthorID(int page, int size, String authorID) {
+		
+		SqlSession sqlSession = this.sqlSessionFactory.openSession();
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
+		try {
+			param.put("page", page);
+			param.put("size", size);
+			param.put("authorID", authorID);
+
+			List<Course> listTopicResult = sqlSession
+					.selectList("com.spring.mapper.CourseMapper.getAllCourseByAuthorID", param);
+			int numberOfPage = (int) param.get("sumPage");
+			int numberOfRecord = (int) param.get("sumRecord");
+			result.put("listOfResult", listTopicResult);
+			result.put("numberOfPage", numberOfPage);
+			result.put("numberOfRecord", numberOfRecord);
+
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+
+		} finally {
+			sqlSession.close();
+		}
+
+		return result;
+	}
 }

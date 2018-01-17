@@ -128,5 +128,8 @@ public interface CourseService {
 	
 	public int updateCourseStatusForAdmin(String AdminID,String courseID,int newStatus);
 	
+	public Map<String, Object> getAllCourseByAuthorID(int page, int size, String authorID);
+
+	
 
 }

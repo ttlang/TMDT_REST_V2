@@ -61,26 +61,6 @@ public class CourseRest {
 		return new ResponseEntity<Object>(result, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/admin/course/status", method = RequestMethod.PATCH)
-	@PreAuthorize("canEditCourse(#courseStatus.courseID)||hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?> updateCourseStatus(@RequestBody CourseStatus courseStatus) {
-
-		Optional<Course> result = courseService.getCourseByCourseID(courseStatus.getCourseID());
-		if (!result.isPresent()) {
-			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "cant find course");
-			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
-		} else {
-			if (this.courseService.updateCourseStatut(courseStatus.getCourseID(), courseStatus.getNewStatus()) <= 0) {
-				ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "update status failed");
-				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
-			}
-			return new ResponseEntity<Course>(this.courseService.getCourseByCourseID(result.get().getCourseID()).get(),
-					HttpStatus.OK);
-
-		}
-
-	}
-
 	@RequestMapping(value = "/users/course", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> createCourse(@RequestBody CourseCreate courseCreate, HttpServletRequest request) {
@@ -99,6 +79,26 @@ public class CourseRest {
 		}
 		ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "create course failed");
 		return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+	}
+
+	@RequestMapping(value = "/admin/course/status", method = RequestMethod.PATCH)
+	@PreAuthorize("canEditCourse(#courseStatus.courseID)||hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> updateCourseStatus(@RequestBody CourseStatus courseStatus) {
+
+		Optional<Course> result = courseService.getCourseByCourseID(courseStatus.getCourseID());
+		if (!result.isPresent()) {
+			ApiMessage apiMessage = new ApiMessage(HttpStatus.NOT_FOUND, "cant find course");
+			return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+		} else {
+			if (this.courseService.updateCourseStatut(courseStatus.getCourseID(), courseStatus.getNewStatus()) <= 0) {
+				ApiMessage apiMessage = new ApiMessage(HttpStatus.CONFLICT, "update status failed");
+				return new ResponseEntity<Object>(apiMessage, apiMessage.getStatus());
+			}
+			return new ResponseEntity<Course>(this.courseService.getCourseByCourseID(result.get().getCourseID()).get(),
+					HttpStatus.OK);
+
+		}
+
 	}
 
 	@RequestMapping(value = "/user/course", method = RequestMethod.PATCH)
@@ -284,6 +284,22 @@ public class CourseRest {
 			return new ResponseEntity<Course>(this.courseService.getCourseByCourseID(result.get().getCourseID()).get(),
 					HttpStatus.OK);
 		}
+	}
+
+	@RequestMapping(value = "/user/course", params = { "page", "size" }, method = RequestMethod.GET)
+	public ResponseEntity<?> getAllCourseByAuthorID(HttpServletRequest request,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value = "size", defaultValue = "1", required = false) int size) {
+
+		String authToken = jwtTokenUtil.getToken(request);
+		User user = userService.getUserByEmail(jwtTokenUtil.getUsernameFromToken(authToken));
+		Map<String, Object> result = this.courseService.getAllCourseByAuthorID(page, size, user.getUserID());
+		int numberOfRecord = Integer.valueOf(String.valueOf(result.get("numberOfRecord")));
+		if (numberOfRecord == 0) {
+			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Object>(result, HttpStatus.OK);
+
 	}
 
 }

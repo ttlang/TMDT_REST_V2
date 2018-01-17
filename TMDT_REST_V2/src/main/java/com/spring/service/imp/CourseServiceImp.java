@@ -143,4 +143,9 @@ public class CourseServiceImp implements CourseService {
 		}
 	}
 
+	@Override
+	public Map<String, Object> getAllCourseByAuthorID(int page, int size, String authorID) {
+		return this.courseRepository.getAllCourseByAuthorID(page, size, authorID);
+	}
+
 }
