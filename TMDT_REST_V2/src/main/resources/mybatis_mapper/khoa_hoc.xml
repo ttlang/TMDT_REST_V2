@@ -31,11 +31,11 @@
 		<result column="number_of_course" javaType="int" property="numberOfCourses" />
 	</resultMap>
 	
+	
 	<resultMap type="com.spring.domain.Statistics" id="courseStatistics">
 		<result column="tenKH" javaType="java.lang.String" property="name"/>
 		<result column="luotXem" javaType="java.lang.Integer" property="value"/>
 	</resultMap>
-	
 	<!-- query data -->
 	<select id="getCourseByCourseID" resultMap="course_result_1">
 		select * from khoa_hoc k where k.ma_khoa_hoc =#{courseID}
@@ -139,13 +139,13 @@
 		UPDATE KHOA_HOC  SET LUOT_TRUY_CAP = (LUOT_TRUY_CAP + 1) WHERE MA_KHOA_HOC = #{courseID}
 	</update>
 	
-	<select id="statisticsByCourse" statementType="CALLABLE" parameterType="java.util.Map" resultMap="courseStatistics">
-		{call proc_thong_ke_theo_khoa_hoc(#{rowsLimit}, #{totalView, mode=OUT, jdbcType=INTEGER})}
-	</select>
+<!-- 	<select id="statisticsByCourse" statementType="CALLABLE" parameterType="java.util.Map" resultMap="courseStatistics"> -->
+<!-- 		{call proc_thong_ke_theo_khoa_hoc(#{rowsLimit}, #{totalView, mode=OUT, jdbcType=INTEGER})} -->
+<!-- 	</select> -->
 	
 	
 	
-
+	
 
 		
 	<select id="getAllCourseByStatusWithPaging" statementType="CALLABLE" parameterType="java.util.Map" resultMap="course_result_1">
@@ -161,6 +161,16 @@
 		update khoa_hoc set id_admin_duyet =#{adminID},ngay_duyet=#{confirmedDate} where ma_khoa_hoc =#{courseID}
 	</update>
 
+
+	<resultMap type="com.spring.domain.Statistics" id="topicStatisticsCources">
+		<result column="tieu_de" javaType="java.lang.String" property="name"/>
+		<result column="luot_truy_cap" javaType="java.lang.Integer" property="value"/>
+	</resultMap>
+	
+	
+	<select id="statisticsByCourse" statementType="CALLABLE" parameterType="java.util.Map" resultMap="topicStatisticsCources">
+		{call tmdt.thong_ke_top_khoa_hoc(#{rowsLimit} ,  #{totalCourse, mode=OUT,jdbcType=INTEGER})}
+	</select>
 
 </mapper>
 

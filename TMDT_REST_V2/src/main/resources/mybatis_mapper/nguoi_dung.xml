@@ -32,6 +32,8 @@
 		<collection property="permission" column="ma_nguoi_dung" select="com.spring.mapper.RoleMapper.getListRoleByUserID"></collection>
 		</resultMap>
 		
+		
+		
 		<!-- QUERY data -->
 		
 		<select id="getListUserInfo" resultMap="user_result_2" statementType="CALLABLE" parameterType="java.util.Map">
@@ -73,5 +75,16 @@
 		<update id="updateUserInfo" parameterType="java.util.Map">
 			update nguoi_dung set ${column} =#{value} where ma_nguoi_dung = #{userID}
 		</update>
+		
+	
+		<resultMap type="com.spring.domain.Statistics" id="topicStatisticsGuests">
+		<result column="ten_nguoi_dung" javaType="java.lang.String" property="name"/>
+		<result column="diem" javaType="java.lang.Integer" property="value"/>
+		</resultMap>
+		
+		<select id="statisticsByGuest" statementType="CALLABLE" parameterType="java.util.Map" resultMap="topicStatisticsGuests">
+		{call thong_ke_diem_nguoi_dunng(#{rowsLimit, mode=IN,jdbcType=INTEGER}, #{totalCourse, mode=OUT,jdbcType=INTEGER})}
+		</select>
+		
 		
 		</mapper>
