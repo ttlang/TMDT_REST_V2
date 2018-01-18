@@ -76,7 +76,7 @@
 		proc_paging_query(#{page},#{size},#{sumPage,
 		mode=OUT,jdbcType=INTEGER},
 		#{sumRecord, mode=OUT,jdbcType=INTEGER},
-		" select  * from khoa_hoc k where k.tieu_de like \'%${keySearch}%\'")}
+		" select  * from khoa_hoc k where k.tieu_de like '%${keySearch}%'")}
 	</select>
 	
 	<update id="updateCourseStatus" parameterType="java.util.Map">
