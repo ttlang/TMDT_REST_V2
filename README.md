@@ -1,5 +1,5 @@
 # TMDT_REST_V2
-Đồ án môn Thương mại điện tử
+Đồ án môn Thương mại điện tử (API)
 ## Built With
 * Spring framework
   * Spring Web Services
